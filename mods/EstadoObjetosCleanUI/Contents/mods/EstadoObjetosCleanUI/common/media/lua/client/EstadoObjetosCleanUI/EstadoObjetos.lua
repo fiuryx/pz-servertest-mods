@@ -8,9 +8,13 @@
 --       guarda un segundo por fila y se miran como mucho 200 objetos por pila.
 -- v1.6: iconos de estado en la esquina del icono: sangre, suciedad, mojado y manchado
 --       por el mod Defecation (sustituye a la barra marron de la v1.4). Cada uno con su opcion.
+-- v1.7: al pasar el raton por una barra o un icono sale un recuadro con el estado y su
+--       porcentaje (y los dias que le quedan a la comida). Opcion para quitarlo.
 -- Mod propio para el servidor de FiuRy. Solo dibuja: no cambia objetos ni guarda nada.
 -- Se engancha al final de renderdetails() de los dos modos de inventario de CleanUI
 -- (y del vanilla si se usa sin CleanUI), sin sustituir a otros mods que ya lo envuelvan.
+
+require "ISUI/ISUIElement"
 
 local MOD = "EstadoObjetosCleanUI"
 local failedOnce = false
@@ -34,6 +38,7 @@ local function setupOptions()
     o:addTickBox("dirt", getText("UI_EOC_Dirt"), true, getText("UI_EOC_Dirt_tooltip"))
     o:addTickBox("wet", getText("UI_EOC_Wet"), true, getText("UI_EOC_Wet_tooltip"))
     o:addTickBox("soiled", getText("UI_EOC_Soiled"), true, getText("UI_EOC_Soiled_tooltip"))
+    o:addTickBox("tooltips", getText("UI_EOC_Tooltips"), true, getText("UI_EOC_Tooltips_tooltip"))
     local pos = o:addComboBox("position", getText("UI_EOC_Position"), getText("UI_EOC_Position_tooltip"))
     pos:addItem("UI_EOC_Pos_Bottom", true)
     pos:addItem("UI_EOC_Pos_Top", false)
@@ -199,39 +204,48 @@ end
 --  * Mojado: ropa (0-100) y objetos que se mojan, como libros o papel (si/no).
 local ICON_MIN_ALPHA = 0.45
 local function getFlags(item, cfg)
+    -- f._pct guarda el valor real (0-100) para el recuadro de informacion
     local f = nil
+    local function set(kind, v, pct)
+        f = f or { _pct = {} }
+        f[kind] = clamp(v)
+        f._pct[kind] = pct
+    end
     if cfg.blood and call(item, "hasBlood") == true then
-        local v
         if instanceof(item, "Clothing") then
-            v = (call(item, "getBloodlevel") or 25) / 25
+            local b = call(item, "getBloodlevel") or 25
+            set("blood", b / 25, b)
         else
-            v = (call(item, "getBloodLevel") or 0.5) / 0.5
+            local b = call(item, "getBloodLevel") or 0.5
+            set("blood", b / 0.5, b * 100)
         end
-        f = f or {}; f.blood = clamp(v)
     end
     if cfg.dirt and call(item, "hasDirt") == true then
-        local d = call(item, "getDirtiness")
-        f = f or {}; f.dirt = clamp((d or 15) / 15)
+        local d = call(item, "getDirtiness") or 15
+        set("dirt", d / 15, d)
     end
     if cfg.wet then
         local w = instanceof(item, "Clothing") and call(item, "getWetness") or nil
         if w and w > 0 then
-            f = f or {}; f.wet = clamp(w / 50)
+            set("wet", w / 50, w)
         elseif call(item, "isWet") == true then
-            f = f or {}; f.wet = 1
+            set("wet", 1, nil)
         end
     end
     if cfg.soiled and instanceof(item, "Clothing") and isSoiled(item) then
-        f = f or {}; f.soiled = 1
+        set("soiled", 1, nil)
     end
     return f
 end
 
 local function mergeFlags(a, b)
     if not b then return a end
-    a = a or {}
+    a = a or { _pct = {} }
     for k, v in pairs(b) do
-        if a[k] == nil or v > a[k] then a[k] = v end
+        if k ~= "_pct" and (a[k] == nil or v > a[k]) then a[k] = v end
+    end
+    for k, v in pairs(b._pct) do
+        if a._pct[k] == nil or v > a._pct[k] then a._pct[k] = v end
     end
     return a
 end
@@ -321,10 +335,125 @@ local function worstOfStack(data, cfg, now)
     return item, bars, flags
 end
 
+----------------------------------------------------------------------
+-- Recuadro de informacion al pasar el raton por una barra o un icono
+----------------------------------------------------------------------
+-- Mientras se dibujan las filas se mira si el raton esta encima de alguna barra o
+-- icono; si lo esta se guarda que hay debajo y un elemento de UI aparte (por encima
+-- de todo, de tamano cero) dibuja el recuadro junto al raton.
+local hover = nil       -- { info, t }
+local probe = nil       -- { mx, my } posicion del raton en la fila, solo si hay que mirar
+
+local function hit(x, y, w, h, info)
+    if probe and probe.mx >= x and probe.mx < x + w and probe.my >= y and probe.my < y + h then
+        hover = { info = info, t = nowMs() }
+    end
+end
+
+local function pctText(v)
+    return tostring(math.floor(v + 0.5)) .. "%"
+end
+
+local function daysText(d)
+    local txt = string.format("%.1f", math.max(0, d))
+    local sep = getTextOrNull("UI_EOC_Tip_DecimalSep")
+    if sep and sep ~= "." then txt = txt:gsub("%.", sep) end
+    return txt
+end
+
+local KIND_TEXT = {
+    cond = "UI_EOC_Tip_Condition", head = "UI_EOC_Tip_Head", fill = "UI_EOC_Tip_Contents",
+    fresh = "UI_EOC_Tip_Fresh", stale = "UI_EOC_Tip_Stale", rot = "UI_EOC_Tip_Rotten",
+    frozen = "UI_EOC_Tip_Frozen", blood = "UI_EOC_Tip_Blood", dirt = "UI_EOC_Tip_Dirt",
+    wet = "UI_EOC_Tip_Wet", soiled = "UI_EOC_Tip_Soiled",
+}
+
+-- Lineas de texto del recuadro (se calculan solo cuando se va a dibujar)
+local function tipLines(info)
+    local lines = {}
+    local item = info.item
+    if info.stack and item then
+        local ok, name = pcall(function() return item:getDisplayName() end)
+        if ok and name then table.insert(lines, getText("UI_EOC_Tip_Stack", name)) end
+    end
+    local kind = info.kind
+    local label = getText(KIND_TEXT[kind] or "UI_EOC_Tip_Condition")
+    if kind == "cond" or kind == "head" or kind == "fill" then
+        table.insert(lines, label .. ": " .. pctText(info.ratio * 100))
+    elseif kind == "fresh" or kind == "stale" or kind == "rot" or kind == "frozen" then
+        table.insert(lines, label)
+        if kind ~= "rot" then
+            table.insert(lines, getText("UI_EOC_Tip_ShelfLife") .. ": " .. pctText(info.ratio * 100))
+            local age = item and call(item, "getAge")
+            local off = item and call(item, "getOffAge")
+            local offMax = item and call(item, "getOffAgeMax")
+            if age and off and off > 0 and age < off and off < offMax then
+                table.insert(lines, getText("UI_EOC_Tip_StaleIn", daysText(off - age)))
+            end
+            if age and offMax and age < offMax then
+                table.insert(lines, getText("UI_EOC_Tip_RotsIn", daysText(offMax - age)))
+            end
+        end
+    elseif kind == "soiled" then
+        table.insert(lines, label)
+        table.insert(lines, getText("UI_EOC_Tip_SoiledHint"))
+    elseif kind == "wet" and info.pct == nil then
+        table.insert(lines, getText("UI_EOC_Tip_WetYes"))
+    else
+        table.insert(lines, label .. ": " .. pctText(info.pct or 0))
+    end
+    return lines
+end
+
+local Tip = ISUIElement:derive("EstadoObjetosCleanUITip")
+function Tip:new()
+    local o = ISUIElement.new(self, 0, 0, 0, 0)
+    o.anchorLeft = true
+    o.anchorTop = true
+    return o
+end
+function Tip:render()
+    local h = hover
+    if not h or nowMs() - h.t > 150 then return end
+    local ok, lines = pcall(tipLines, h.info)
+    if not ok or not lines or #lines == 0 then return end
+    local font = UIFont.Small
+    local tm = getTextManager()
+    local lh = tm:getFontHeight(font)
+    local w = 0
+    for _, l in ipairs(lines) do w = math.max(w, tm:MeasureStringX(font, l)) end
+    local pad = 4
+    local bw, bh = w + pad * 2, #lines * lh + pad * 2
+    -- arriba a la izquierda del raton, para no tapar el tooltip del objeto
+    local mx, my = getMouseX(), getMouseY()
+    local x = mx - bw - 12
+    local y = my - bh - 8
+    if x < 0 then x = mx + 16 end
+    if y < 0 then y = my + 20 end
+    -- coordenadas relativas a este elemento
+    x = x - self:getAbsoluteX()
+    y = y - self:getAbsoluteY()
+    self:drawRect(x, y, bw, bh, 0.85, 0.05, 0.05, 0.05)
+    self:drawRectBorder(x, y, bw, bh, 0.9, 0.5, 0.5, 0.5)
+    for i, l in ipairs(lines) do
+        self:drawText(l, x + pad, y + pad + (i - 1) * lh, 1, 1, 1, 1, font)
+    end
+end
+
+local tipElement = nil
+local function ensureTip()
+    if tipElement then return end
+    local t = Tip:new()
+    t:initialise()
+    t:addToUIManager()
+    t:setAlwaysOnTop(true)
+    tipElement = t
+end
+
 -- Iconos en fila en una esquina del icono del objeto, lejos de las barras:
 -- arriba a la derecha; abajo a la derecha si las barras van arriba; arriba a la
 -- izquierda si las barras van a la derecha.
-local function drawFlags(pane, x, y, iconSize, pos, flags)
+local function drawFlags(pane, x, y, iconSize, pos, flags, item, stack)
     local s = math.max(8, math.floor(iconSize * 0.4))
     local n = 0
     for _, kind in ipairs(ICON_ORDER) do if flags[kind] then n = n + 1 end end
@@ -343,6 +472,9 @@ local function drawFlags(pane, x, y, iconSize, pos, flags)
                 local cx = fromLeft and (x + i * step) or (x + iconSize - s - i * step)
                 local a = ICON_MIN_ALPHA + (1 - ICON_MIN_ALPHA) * clamp(v)
                 pane:drawTextureScaled(tex, cx, cy, s, s, a, 1, 1, 1)
+                if probe then
+                    hit(cx, cy, s, s, { kind = kind, pct = flags._pct and flags._pct[kind], item = item, stack = stack })
+                end
                 i = i + 1
             end
         end
@@ -369,6 +501,11 @@ local function drawBars(pane, doDragged)
     local now = nowMs()
     local pos = optNum("position", POS_BOTTOM)
     if pos < POS_BOTTOM or pos > POS_RIGHT then pos = POS_BOTTOM end
+    probe = nil
+    if not doDragged and opt("tooltips", true) and pane:isMouseOver() then
+        probe = { mx = pane:getMouseX(), my = pane:getMouseY() - scroll }
+        ensureTip()
+    end
     local dx, dy = 0, 0
     if doDragged then
         dx = pane:getMouseX() - pane.draggingX
@@ -412,7 +549,7 @@ local function drawBars(pane, doDragged)
                     local iconY = row * rowH + pane.headerHgt + inset + dy
                     if flags then
                         if doDragged then pane:suspendStencil() end
-                        drawFlags(pane, iconX + dx, iconY, iconSize, pos, flags)
+                        drawFlags(pane, iconX + dx, iconY, iconSize, pos, flags, item, stacked)
                         if doDragged then pane:resumeStencil() end
                     end
                     if n > 0 then
@@ -422,14 +559,19 @@ local function drawBars(pane, doDragged)
                         if doDragged then pane:suspendStencil() end
                         for i = 1, n do
                             local off = (i - 1) * (barH - 1)
+                            local bx, by, bw, bh, vert
                             if pos == POS_TOP then
-                                drawBar(pane, x, y + off, iconSize, barH, bars[i][1], bars[i][2], false)
+                                bx, by, bw, bh, vert = x, y + off, iconSize, barH, false
                             elseif pos == POS_LEFT then
-                                drawBar(pane, x + off, y, barH, iconSize, bars[i][1], bars[i][2], true)
+                                bx, by, bw, bh, vert = x + off, y, barH, iconSize, true
                             elseif pos == POS_RIGHT then
-                                drawBar(pane, x + iconSize - span + off, y, barH, iconSize, bars[i][1], bars[i][2], true)
+                                bx, by, bw, bh, vert = x + iconSize - span + off, y, barH, iconSize, true
                             else
-                                drawBar(pane, x, y + iconSize - span + off, iconSize, barH, bars[i][1], bars[i][2], false)
+                                bx, by, bw, bh, vert = x, y + iconSize - span + off, iconSize, barH, false
+                            end
+                            drawBar(pane, bx, by, bw, bh, bars[i][1], bars[i][2], vert)
+                            if probe then
+                                hit(bx, by, bw, bh, { kind = bars[i][2], ratio = bars[i][1], item = item, stack = stacked })
                             end
                         end
                         if doDragged then pane:resumeStencil() end
@@ -451,6 +593,7 @@ local function wrap(paneClass)
     paneClass.renderdetails = function(self, doDragged, ...)
         local r = original(self, doDragged, ...)
         local ok, err = pcall(drawBars, self, doDragged)
+        probe = nil
         if not ok and not failedOnce then
             failedOnce = true
             print("[" .. MOD .. "] error al dibujar: " .. tostring(err))
