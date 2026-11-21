@@ -1,0 +1,7 @@
+name=Debug Menu - MP Role Fix (B42)
+id=DebugMenuMPRoleFix
+require=\QNWDebugMenuB42
+loadModAfter=\QNWDebugMenuB42
+description=Stops Debug Menu from giving you its singleplayer "SP_DebugMenu" role in multiplayer, which shows that text over your name and replaces your real role on your game. Requires Debug Menu.
+poster=poster.png
+versionMin=42.0

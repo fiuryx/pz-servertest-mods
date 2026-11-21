@@ -1,0 +1,14 @@
+version=1
+title=Debug Menu - MP Role Fix (B42)
+description=[h1]Debug Menu - MP Role Fix (B42)[/h1]
+description=Small patch for [b]Debug Menu[/b] (required) on multiplayer servers.
+description=
+description=[list]
+description=[*]Debug Menu gives the player a local role called [i]SP_DebugMenu[/i] with every capability when it thinks the game is singleplayer. On dedicated servers that check also passes, so every time an admin right-clicks the world the role is replaced: [i]SP_DebugMenu[/i] appears over the name and the real role (Admin, with its colour and title) is lost on that game.
+description=[*]In multiplayer this patch puts the real role back right after the menu is built, and removes the "override need" note that only makes sense in singleplayer.
+description=[*]Singleplayer is not touched. Everything else in Debug Menu works as before.
+description=[/list]
+description=
+description=Client-side, no texts, can be added or removed at any time. If the tag is already showing, it goes away within a game minute. All credit for Debug Menu goes to its author.
+tags=Build 42;Multiplayer;Misc
+visibility=public
