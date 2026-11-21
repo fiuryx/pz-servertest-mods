@@ -38,7 +38,7 @@ local function setupOptions()
     o:addTickBox("dirt", getText("UI_EOC_Dirt"), true, getText("UI_EOC_Dirt_tooltip"))
     o:addTickBox("wet", getText("UI_EOC_Wet"), true, getText("UI_EOC_Wet_tooltip"))
     o:addTickBox("soiled", getText("UI_EOC_Soiled"), true, getText("UI_EOC_Soiled_tooltip"))
-    o:addTickBox("tooltips", getText("UI_EOC_Tooltips"), true, getText("UI_EOC_Tooltips_tooltip"))
+    o:addTickBox("tooltips", getText("UI_EOC_Tooltips"), false, getText("UI_EOC_Tooltips_tooltip"))
     local pos = o:addComboBox("position", getText("UI_EOC_Position"), getText("UI_EOC_Position_tooltip"))
     pos:addItem("UI_EOC_Pos_Bottom", true)
     pos:addItem("UI_EOC_Pos_Top", false)
@@ -502,7 +502,7 @@ local function drawBars(pane, doDragged)
     local pos = optNum("position", POS_BOTTOM)
     if pos < POS_BOTTOM or pos > POS_RIGHT then pos = POS_BOTTOM end
     probe = nil
-    if not doDragged and opt("tooltips", true) and pane:isMouseOver() then
+    if not doDragged and opt("tooltips", false) and pane:isMouseOver() then
         probe = { mx = pane:getMouseX(), my = pane:getMouseY() - scroll }
         ensureTip()
     end
