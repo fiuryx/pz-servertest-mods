@@ -7,7 +7,7 @@
     "UI_EOC_Clothing": "Mostrar también en la ropa",
     "UI_EOC_Clothing_tooltip": "Dibuja también la barra de estado en la ropa (baja con el desgaste, los agujeros y los rotos).",
     "UI_EOC_Soiled": "Marcar la ropa manchada (mod Defecation)",
-    "UI_EOC_Soiled_tooltip": "Si el mod Defecation está activo, la ropa manchada muestra su barra de estado en marrón, aunque las barras de la ropa estén desactivadas. Al lavar la prenda se quita la marca.",
+    "UI_EOC_Soiled_tooltip": "Si el mod Defecation está activo, la ropa manchada muestra un icono marrón sobre el objeto. Al lavar la prenda se quita la marca.",
     "UI_EOC_Head": "Mostrar el estado de la cabeza del arma",
     "UI_EOC_Head_tooltip": "En armas con cabeza (hachas, lanzas, martillos...) dibuja una segunda barra con el estado de la cabeza.",
     "UI_EOC_HideFull": "Ocultar si está en perfecto estado",
@@ -23,5 +23,11 @@
     "UI_EOC_Pos_Bottom": "Abajo (horizontal)",
     "UI_EOC_Pos_Top": "Arriba (horizontal)",
     "UI_EOC_Pos_Left": "Lado izquierdo (vertical)",
-    "UI_EOC_Pos_Right": "Lado derecho (vertical)"
+    "UI_EOC_Pos_Right": "Lado derecho (vertical)",
+    "UI_EOC_Blood": "Marcar objetos con sangre",
+    "UI_EOC_Blood_tooltip": "Muestra una gota roja sobre el icono cuando el objeto tiene sangre: ropa, armas y herramientas, y bolsas que se llevan puestas. Cuanta más sangre, más intenso el color.",
+    "UI_EOC_Dirt": "Marcar objetos sucios",
+    "UI_EOC_Dirt_tooltip": "Muestra una mancha de barro sobre el icono cuando la ropa o una bolsa está sucia. Cuanto más sucia, más intenso el color.",
+    "UI_EOC_Wet": "Marcar objetos mojados",
+    "UI_EOC_Wet_tooltip": "Muestra una gota azul sobre el icono cuando la ropa está mojada, o cuando un objeto como un libro o un papel se ha mojado."
 }

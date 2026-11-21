@@ -7,7 +7,7 @@
     "UI_EOC_Clothing": "Also show clothing",
     "UI_EOC_Clothing_tooltip": "Also draws the condition bar on clothing (wear, holes and tears lower it).",
     "UI_EOC_Soiled": "Mark soiled clothing (Defecation mod)",
-    "UI_EOC_Soiled_tooltip": "If the Defecation mod is active, soiled clothing shows its condition bar in brown, even when clothing bars are turned off. Washing the item removes the mark.",
+    "UI_EOC_Soiled_tooltip": "If the Defecation mod is active, soiled clothing shows a brown icon on the item. Washing the item removes the mark.",
     "UI_EOC_Head": "Show weapon head condition",
     "UI_EOC_Head_tooltip": "On weapons with a head (axes, spears, hammers...), draws a second bar with the head condition.",
     "UI_EOC_HideFull": "Hide when in perfect condition",
@@ -23,5 +23,11 @@
     "UI_EOC_Pos_Bottom": "Bottom (horizontal)",
     "UI_EOC_Pos_Top": "Top (horizontal)",
     "UI_EOC_Pos_Left": "Left side (vertical)",
-    "UI_EOC_Pos_Right": "Right side (vertical)"
+    "UI_EOC_Pos_Right": "Right side (vertical)",
+    "UI_EOC_Blood": "Mark bloody items",
+    "UI_EOC_Blood_tooltip": "Shows a red drop on the item icon when it has blood: clothing, weapons and tools, and bags you wear. The more blood, the stronger the colour.",
+    "UI_EOC_Dirt": "Mark dirty items",
+    "UI_EOC_Dirt_tooltip": "Shows a mud stain on the item icon when clothing or a bag is dirty. The dirtier, the stronger the colour.",
+    "UI_EOC_Wet": "Mark wet items",
+    "UI_EOC_Wet_tooltip": "Shows a blue drop on the item icon when clothing is wet, or when an item such as a book or paper got wet."
 }

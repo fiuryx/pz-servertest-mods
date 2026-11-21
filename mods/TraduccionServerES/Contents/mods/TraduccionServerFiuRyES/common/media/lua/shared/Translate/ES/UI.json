@@ -8032,5 +8032,11 @@
     "UI_BCIMF_Fabric_rubber": "Goma",
     "UI_BCIMF_Fabric_fur": "Piel",
     "UI_EOC_Soiled": "Marcar la ropa manchada (mod Defecation)",
-    "UI_EOC_Soiled_tooltip": "Si el mod Defecation está activo, la ropa manchada muestra su barra de estado en marrón, aunque las barras de la ropa estén desactivadas. Al lavar la prenda se quita la marca."
+    "UI_EOC_Soiled_tooltip": "Si el mod Defecation está activo, la ropa manchada muestra un icono marrón sobre el objeto. Al lavar la prenda se quita la marca.",
+    "UI_EOC_Blood": "Marcar objetos con sangre",
+    "UI_EOC_Blood_tooltip": "Muestra una gota roja sobre el icono cuando el objeto tiene sangre: ropa, armas y herramientas, y bolsas que se llevan puestas. Cuanta más sangre, más intenso el color.",
+    "UI_EOC_Dirt": "Marcar objetos sucios",
+    "UI_EOC_Dirt_tooltip": "Muestra una mancha de barro sobre el icono cuando la ropa o una bolsa está sucia. Cuanto más sucia, más intenso el color.",
+    "UI_EOC_Wet": "Marcar objetos mojados",
+    "UI_EOC_Wet_tooltip": "Muestra una gota azul sobre el icono cuando la ropa está mojada, o cuando un objeto como un libro o un papel se ha mojado."
 }

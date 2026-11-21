@@ -6,6 +6,8 @@
 -- v1.4: ropa manchada por el mod Defecation: barra marron (solo si ese mod esta activo).
 -- v1.5: las pilas cerradas ya no se recorren enteras en cada fotograma: el resultado se
 --       guarda un segundo por fila y se miran como mucho 200 objetos por pila.
+-- v1.6: iconos de estado en la esquina del icono: sangre, suciedad, mojado y manchado
+--       por el mod Defecation (sustituye a la barra marron de la v1.4). Cada uno con su opcion.
 -- Mod propio para el servidor de FiuRy. Solo dibuja: no cambia objetos ni guarda nada.
 -- Se engancha al final de renderdetails() de los dos modos de inventario de CleanUI
 -- (y del vanilla si se usa sin CleanUI), sin sustituir a otros mods que ya lo envuelvan.
@@ -23,12 +25,15 @@ local function setupOptions()
     o:addTickBox("enabled", getText("UI_EOC_Enabled"), true, getText("UI_EOC_Enabled_tooltip"))
     o:addTickBox("weapons", getText("UI_EOC_Weapons"), true, getText("UI_EOC_Weapons_tooltip"))
     o:addTickBox("clothing", getText("UI_EOC_Clothing"), true, getText("UI_EOC_Clothing_tooltip"))
-    o:addTickBox("soiled", getText("UI_EOC_Soiled"), true, getText("UI_EOC_Soiled_tooltip"))
     o:addTickBox("head", getText("UI_EOC_Head"), true, getText("UI_EOC_Head_tooltip"))
     o:addTickBox("contents", getText("UI_EOC_Contents"), true, getText("UI_EOC_Contents_tooltip"))
     o:addTickBox("fresh", getText("UI_EOC_Fresh"), true, getText("UI_EOC_Fresh_tooltip"))
     o:addTickBox("stacks", getText("UI_EOC_Stacks"), true, getText("UI_EOC_Stacks_tooltip"))
     o:addTickBox("hideFull", getText("UI_EOC_HideFull"), false, getText("UI_EOC_HideFull_tooltip"))
+    o:addTickBox("blood", getText("UI_EOC_Blood"), true, getText("UI_EOC_Blood_tooltip"))
+    o:addTickBox("dirt", getText("UI_EOC_Dirt"), true, getText("UI_EOC_Dirt_tooltip"))
+    o:addTickBox("wet", getText("UI_EOC_Wet"), true, getText("UI_EOC_Wet_tooltip"))
+    o:addTickBox("soiled", getText("UI_EOC_Soiled"), true, getText("UI_EOC_Soiled_tooltip"))
     local pos = o:addComboBox("position", getText("UI_EOC_Position"), getText("UI_EOC_Position_tooltip"))
     pos:addItem("UI_EOC_Pos_Bottom", true)
     pos:addItem("UI_EOC_Pos_Top", false)
@@ -151,8 +156,7 @@ local function getBars(item, cfg)
     local bars = {}
     local isWeapon = instanceof(item, "HandWeapon")
     local isClothing = instanceof(item, "Clothing")
-    local soiled = isClothing and cfg.soiled and isSoiled(item)
-    local showCond = (isWeapon and cfg.weapons) or (isClothing and (cfg.clothing or soiled))
+    local showCond = (isWeapon and cfg.weapons) or (isClothing and cfg.clothing)
     local wantHead = isWeapon and cfg.head
     if showCond or wantHead then
         local ratio = nil
@@ -168,8 +172,8 @@ local function getBars(item, cfg)
             local h = call(item, "getHeadCondition")
             if hMax and hMax > 0 and h then head = clamp(h / hMax) end
         end
-        if soiled or not (cfg.hideFull and (ratio == nil or ratio >= 1) and (head == nil or head >= 1)) then
-            if ratio ~= nil then table.insert(bars, { ratio, soiled and "soiled" or "cond" }) end
+        if not (cfg.hideFull and (ratio == nil or ratio >= 1) and (head == nil or head >= 1)) then
+            if ratio ~= nil then table.insert(bars, { ratio, "cond" }) end
             if head ~= nil then table.insert(bars, { head, "head" }) end
         end
     end
@@ -184,12 +188,76 @@ local function getBars(item, cfg)
     return bars
 end
 
+----------------------------------------------------------------------
+-- Iconos de estado: sangre, suciedad, mojado, manchado (Defecation)
+----------------------------------------------------------------------
+-- Devuelve { blood = 0..1, dirt = 0..1, wet = 0..1, soiled = 1 } (solo los que tiene).
+-- El valor es la intensidad: decide la opacidad del icono.
+--  * Sangre: ropa (media 0-100, el juego la llama "ensangrentada" desde 25), armas y
+--    herramientas (0-1) y bolsas que se llevan puestas. hasBlood() cubre los tres.
+--  * Suciedad: ropa y bolsas (0-100, "sucia" desde 15).
+--  * Mojado: ropa (0-100) y objetos que se mojan, como libros o papel (si/no).
+local ICON_MIN_ALPHA = 0.45
+local function getFlags(item, cfg)
+    local f = nil
+    if cfg.blood and call(item, "hasBlood") == true then
+        local v
+        if instanceof(item, "Clothing") then
+            v = (call(item, "getBloodlevel") or 25) / 25
+        else
+            v = (call(item, "getBloodLevel") or 0.5) / 0.5
+        end
+        f = f or {}; f.blood = clamp(v)
+    end
+    if cfg.dirt and call(item, "hasDirt") == true then
+        local d = call(item, "getDirtiness")
+        f = f or {}; f.dirt = clamp((d or 15) / 15)
+    end
+    if cfg.wet then
+        local w = instanceof(item, "Clothing") and call(item, "getWetness") or nil
+        if w and w > 0 then
+            f = f or {}; f.wet = clamp(w / 50)
+        elseif call(item, "isWet") == true then
+            f = f or {}; f.wet = 1
+        end
+    end
+    if cfg.soiled and instanceof(item, "Clothing") and isSoiled(item) then
+        f = f or {}; f.soiled = 1
+    end
+    return f
+end
+
+local function mergeFlags(a, b)
+    if not b then return a end
+    a = a or {}
+    for k, v in pairs(b) do
+        if a[k] == nil or v > a[k] then a[k] = v end
+    end
+    return a
+end
+
+local ICON_ORDER = { "blood", "dirt", "wet", "soiled" }
+local ICON_FILES = {
+    blood = "media/ui/EstadoObjetosCleanUI/eoc_blood.png",
+    dirt = "media/ui/EstadoObjetosCleanUI/eoc_dirt.png",
+    wet = "media/ui/EstadoObjetosCleanUI/eoc_wet.png",
+    soiled = "media/ui/EstadoObjetosCleanUI/eoc_soiled.png",
+}
+local iconTex = {}
+local function texFor(kind)
+    local t = iconTex[kind]
+    if t == nil then
+        t = getTexture(ICON_FILES[kind]) or false
+        iconTex[kind] = t
+    end
+    return t or nil
+end
+
 local function colorFor(r, kind)
     if kind == "fresh" then return 0.20, 0.80, 0.20 end   -- verde: fresca
     if kind == "stale" then return 0.95, 0.55, 0.10 end   -- naranja: pasada
     if kind == "rot" then return 0.90, 0.15, 0.15 end     -- rojo: podrida
     if kind == "frozen" then return 0.55, 0.85, 1.00 end  -- azul claro: congelada
-    if kind == "soiled" then return 0.45, 0.28, 0.10 end  -- marron: ropa manchada (Defecation)
     if kind == "fill" then
         if r >= 0.25 then return 0.25, 0.60, 1.00 end   -- azul: contenido
         return 0.90, 0.15, 0.15                          -- rojo: casi vacio
@@ -236,20 +304,49 @@ end
 
 local function worstOfStack(data, cfg, now)
     local c = stackCache[data]
-    if c and now - c.t < STACK_TTL then return c.item, c.bars end
-    local worst, item, bars = nil, nil, nil
+    if c and now - c.t < STACK_TTL then return c.item, c.bars, c.flags end
+    local worst, item, bars, flags = nil, nil, nil, nil
     local last = math.min(#data.items, STACK_SCAN + 1)
     for i = 2, last do
         local it = data.items[i]
-        local b = it and getBars(it, cfg)
+        if it then flags = mergeFlags(flags, getFlags(it, cfg)) end
+        local b = cfg.stacks and it and getBars(it, cfg)
         if b and #b > 0 then
             local r = b[1][1]
             for j = 2, #b do r = math.min(r, b[j][1]) end
             if worst == nil or r < worst then worst = r; item = it; bars = b end
         end
     end
-    stackCache[data] = { t = now, item = item, bars = bars }
-    return item, bars
+    stackCache[data] = { t = now, item = item, bars = bars, flags = flags }
+    return item, bars, flags
+end
+
+-- Iconos en fila en una esquina del icono del objeto, lejos de las barras:
+-- arriba a la derecha; abajo a la derecha si las barras van arriba; arriba a la
+-- izquierda si las barras van a la derecha.
+local function drawFlags(pane, x, y, iconSize, pos, flags)
+    local s = math.max(8, math.floor(iconSize * 0.4))
+    local n = 0
+    for _, kind in ipairs(ICON_ORDER) do if flags[kind] then n = n + 1 end end
+    if n == 0 then return end
+    -- que quepan dentro del ancho del icono (se solapan un poco si hay muchos)
+    local step = s - 1
+    if n > 1 then step = math.min(step, math.floor((iconSize - s) / (n - 1))) end
+    local fromLeft = (pos == POS_RIGHT)
+    local cy = (pos == POS_TOP) and (y + iconSize - s) or y
+    local i = 0
+    for _, kind in ipairs(ICON_ORDER) do
+        local v = flags[kind]
+        if v then
+            local tex = texFor(kind)
+            if tex then
+                local cx = fromLeft and (x + i * step) or (x + iconSize - s - i * step)
+                local a = ICON_MIN_ALPHA + (1 - ICON_MIN_ALPHA) * clamp(v)
+                pane:drawTextureScaled(tex, cx, cy, s, s, a, 1, 1, 1)
+                i = i + 1
+            end
+        end
+    end
 end
 
 ----------------------------------------------------------------------
@@ -262,7 +359,7 @@ local function drawBars(pane, doDragged)
     local rowH = pane.itemHgt
     if not map or not rowH or rowH <= 0 then return end
 
-    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true) }
+    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true) }
     local scroll = pane:getYScroll()
     local first = math.max(0, math.floor(-scroll / rowH) - 1)
     local last = math.max(first, math.ceil((pane:getHeight() - scroll) / rowH) + 1)
@@ -288,21 +385,37 @@ local function drawBars(pane, doDragged)
                 local grouped = data.items ~= nil
                 local item = nil
                 local bars = nil
+                local flags = nil
+                local stacked = false
                 if grouped then
                     if data.count == nil or data.count <= 2 then
                         item = data.items[1]
-                    elseif cfg.stacks then
-                        item, bars = worstOfStack(data, cfg, now)
+                    else
+                        stacked = true
+                        local sItem, sBars, sFlags = worstOfStack(data, cfg, now)
+                        flags = sFlags
+                        if cfg.stacks then item, bars = sItem, sBars end
+                        if not item then item = data.items[1] end
                     end
                 else
                     item = data
                 end
                 if item and item.getTex and item:getTex() then
-                    bars = bars or getBars(item, cfg)
+                    if stacked then
+                        bars = bars or {}
+                    else
+                        bars = getBars(item, cfg)
+                        flags = getFlags(item, cfg)
+                    end
                     local n = #bars
+                    local iconX = grouped and (pane.column2 - iconSize - inset) or 26
+                    local iconY = row * rowH + pane.headerHgt + inset + dy
+                    if flags then
+                        if doDragged then pane:suspendStencil() end
+                        drawFlags(pane, iconX + dx, iconY, iconSize, pos, flags)
+                        if doDragged then pane:resumeStencil() end
+                    end
                     if n > 0 then
-                        local iconX = grouped and (pane.column2 - iconSize - inset) or 26
-                        local iconY = row * rowH + pane.headerHgt + inset + dy
                         local x = iconX + dx
                         local y = iconY
                         local span = n * barH - (n - 1)   -- grosor total de las barras juntas
