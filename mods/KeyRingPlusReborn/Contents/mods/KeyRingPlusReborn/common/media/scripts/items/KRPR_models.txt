@@ -1,0 +1,9 @@
+module Base
+{
+    model PFKeyRing
+    {
+        mesh = WorldItems/PFKeyRing,
+        texture = itemTextures/PFKeyRing,
+        scale = 0.004,
+    }
+}

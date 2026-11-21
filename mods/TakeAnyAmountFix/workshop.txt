@@ -1,0 +1,14 @@
+version=1
+title=Take Any Amount - Fix (B42)
+description=[h1]Take Any Amount - Fix (B42)[/h1]
+description=Small patch for [b]Take Any Amount[/b] (required).
+description=
+description=[list]
+description=[*]Fixes the error [i]attempted index: isInCharacterInventory of non-table[/i] when right-clicking items that have no container (CleanUI, Proximity Inventory).
+description=[*]Adds the translations in the B42 JSON format, so the menu shows "Grab amount" instead of [i]ContextMenu_GrabAmount[/i] (English and Spanish).
+description=[*]Replaces only takeAnyAmount.lua with the same code plus a nil check. Remove this patch when the original mod gets fixed.
+description=[/list]
+description=
+description=Client-side, multiplayer safe, can be added or removed at any time. All credit for Take Any Amount goes to its author.
+tags=Build 42;Interface;Multiplayer
+visibility=public

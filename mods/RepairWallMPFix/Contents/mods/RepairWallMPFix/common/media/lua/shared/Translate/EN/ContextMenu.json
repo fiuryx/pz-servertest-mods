@@ -1,0 +1,9 @@
+{
+  "ContextMenu_Kamer_RepairWall_Repair": "Repair",
+  "ContextMenu_Kamer_RepairWall_RepairOption": "Repair %1",
+  "ContextMenu_Kamer_RepairWall_ToolTip1": "%1 Potentially repairs: %2%% <LINE> <LINE> <RGB:1,1,1>Needs:",
+  "ContextMenu_RWFix_WallObject": "Wall / Object",
+  "ContextMenu_RWFix_Door": "Door",
+  "ContextMenu_RWFix_Unknown": "Unknown object",
+  "ContextMenu_RWFix_Missing": "I don't have the materials anymore."
+}

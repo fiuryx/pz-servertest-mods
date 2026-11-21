@@ -1,0 +1,7 @@
+name=Proximity Inventory - Remember Force Selected (B42)
+id=ProxInvRememberForce
+require=\ProximityInventory
+loadModAfter=\ProximityInventory
+description=Proximity Inventory forgets the Force Selected option every time the game starts. This small patch remembers it for each player. Requires Proximity Inventory.
+poster=poster.png
+versionMin=42.0

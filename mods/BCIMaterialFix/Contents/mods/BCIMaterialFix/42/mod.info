@@ -1,0 +1,7 @@
+name=Better Clothing Info - Material Translation Fix (B42)
+id=BCIMaterialFix
+require=\EURY_CLOTHINGINFO
+loadModAfter=\EURY_CLOTHINGINFO
+description=Translates the clothing material shown by Better Clothing Info (it shows the raw value, e.g. "cotton"). Client side only.
+poster=poster.png
+versionMin=42.0

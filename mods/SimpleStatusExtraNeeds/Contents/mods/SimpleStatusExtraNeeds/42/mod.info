@@ -1,0 +1,7 @@
+name=Simple Status - Extra Needs (B42)
+id=SimpleStatusExtraNeeds
+require=\simpleStatus
+loadModAfter=\simpleStatus;\Defecation;\EvolvingTraitsWorld;\LifestyleHobbies
+description=Adds extra bars to Simple Status for needs from other mods: defecate (Defecation), bladder and hygiene (Lifestyle: Hobbies), alcohol withdrawal and sleep schedule (Evolving Traits World). Each bar only appears if its mod is active. Client side only.
+poster=poster.png
+versionMin=42.0

@@ -1,0 +1,5 @@
+{
+    "UI_PIRF_Title": "Proximity Inventory - Recordar pestaña fijada",
+    "UI_PIRF_Remember": "Recordar la pestaña fijada",
+    "UI_PIRF_Remember_tooltip": "Guarda la opción de fijar la pestaña de proximidad de Proximity Inventory y la vuelve a activar cada vez que entras en la partida. Si se desactiva, no se guarda ni se restaura."
+}

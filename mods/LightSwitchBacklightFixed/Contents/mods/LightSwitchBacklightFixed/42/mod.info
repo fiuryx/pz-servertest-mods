@@ -1,0 +1,6 @@
+name=Light Switch Backlight - Fixed (B42)
+id=LightSwitchBacklightFixed
+poster=poster.png
+versionMin=42.0
+modversion=1.0.0
+description=Fixed version of Light Switch Backlight for Build 42: highlights nearby light switches (green = on, red = off) without flickering. Keeps working after death and respawn, and never leaves switches highlighted when you walk away. Client-side, multiplayer safe.

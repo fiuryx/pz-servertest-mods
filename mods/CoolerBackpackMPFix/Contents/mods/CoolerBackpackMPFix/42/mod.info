@@ -1,0 +1,7 @@
+name=Cooler Backpack - MP Fix (B42)
+id=CoolerBackpackMPFix
+require=\CoolerBackpack
+loadModAfter=\CoolerBackpack
+description=Multiplayer fix for Cooler Backpack: upgrades dropped by zombies can be taken again (no more ghost items on corpses). Requires Cooler Backpack.
+poster=poster.png
+versionMin=42.0

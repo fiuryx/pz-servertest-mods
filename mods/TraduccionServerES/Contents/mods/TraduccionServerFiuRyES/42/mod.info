@@ -1,0 +1,5 @@
+name=Traduccion ES - Servidor FiuRy (pack unificado)
+id=TraduccionServerFiuRyES
+description=Pack unificado de traducción al español de España para el servidor de FiuRy. Sustituye a traducciones, ETW ES, TraduccionES_B42, MODSFALT, DebugMenu ES y Stackable Planks ES. Debe cargar el último.
+poster=poster.png
+versionMin=42.0

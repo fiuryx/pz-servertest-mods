@@ -1,0 +1,5 @@
+{
+    "UI_PIRF_Title": "Proximity Inventory - Remember Force Selected",
+    "UI_PIRF_Remember": "Remember Force Selected",
+    "UI_PIRF_Remember_tooltip": "Saves the Force Selected option of Proximity Inventory and turns it back on every time you enter the game. If disabled, the option is not saved or restored."
+}

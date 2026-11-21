@@ -1,0 +1,6 @@
+name=Container Button Drag (B42)
+id=ContainerButtonDrag
+loadModAfter=\CleanUI;\ProximityInventory;\EQUIPMENT_UI_B42;\NestedContainersB42
+description=Drag a bag straight from its button in the container column and drop it into your inventory, another container or the ground. Works with the vanilla UI and CleanUI.
+poster=poster.png
+versionMin=42.0

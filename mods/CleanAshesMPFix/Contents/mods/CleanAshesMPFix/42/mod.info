@@ -1,0 +1,7 @@
+name=Clean Ashes - MP Fix (B42)
+id=CleanAshesMPFix
+require=\cleanashes
+loadModAfter=\cleanashes
+description=Multiplayer fix for Clean Ashes: ashes are removed only by the server (vanilla B42 behaviour), not locally on the client first. Requires Clean Ashes.
+poster=poster.png
+versionMin=42.0

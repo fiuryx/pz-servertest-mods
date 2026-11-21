@@ -1,0 +1,15 @@
+version=1
+title=Sorted Mod Options (B42)
+description=[h1]Sorted Mod Options (B42)[/h1]
+description=Sorts the [b]Mods[/b] tab of the Options screen alphabetically, using the name each mod shows in [b]your game language[/b].
+description=
+description=[h2]Details[/h2]
+description=[list]
+description=[*]Works in the main menu and in game, with any language.
+description=[*]Leading tags like [B42] or (B42) and symbols are ignored when sorting, and accented letters sort with their base letter (á with a, ñ after n).
+description=[*]It only changes the order the menu shows. Option values, saving and the mods themselves are untouched.
+description=[*]Client side only. Safe to add or remove at any time, also on servers.
+description=[/list]
+description=Only affects mods that use the built-in B42 mod options (PZAPI.ModOptions).
+tags=Build 42;Interface;Multiplayer;Misc
+visibility=public

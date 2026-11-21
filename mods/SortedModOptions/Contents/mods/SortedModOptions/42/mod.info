@@ -1,0 +1,5 @@
+name=Sorted Mod Options (B42)
+id=SortedModOptions
+description=Sorts the Mods tab of the Options screen alphabetically by each mod's name in your game language. Client side only.
+poster=poster.png
+versionMin=42.0

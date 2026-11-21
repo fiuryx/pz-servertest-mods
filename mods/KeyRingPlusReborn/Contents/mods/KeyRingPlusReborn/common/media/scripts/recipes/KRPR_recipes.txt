@@ -1,0 +1,18 @@
+module Base
+{
+    craftRecipe BuyPFKeyRing
+    {
+        timedAction = Making,
+        time = 20,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 150 [Base.Money] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.KeyRing_ProduktFrosch,
+        }
+    }
+}

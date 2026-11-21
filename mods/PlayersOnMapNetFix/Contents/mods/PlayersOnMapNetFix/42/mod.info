@@ -1,0 +1,7 @@
+name=Players On Map - Network Fix (B42)
+id=PlayersOnMapNetFix
+require=\POM
+loadModAfter=\POM
+description=Cuts the network traffic of Players On Map: positions are sent once per second instead of ten times, with the same dots on the map. Requires Players On Map.
+poster=poster.png
+versionMin=42.0

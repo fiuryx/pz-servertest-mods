@@ -1,0 +1,7 @@
+name=Key Ring Plus - Reborn (B42)
+id=KeyRingPlusReborn
+icon=icon.png
+poster=poster.png
+versionMin=42.13
+modversion=2.0.0
+description=Updated remake of ProduktFrosch's Key Ring Plus for Build 42.13+: a memento key ring that also holds small survival tools. Rewritten with the current item and recipe format, fixes the door crash and no longer overrides vanilla items. In memory of ProduktFrosch.

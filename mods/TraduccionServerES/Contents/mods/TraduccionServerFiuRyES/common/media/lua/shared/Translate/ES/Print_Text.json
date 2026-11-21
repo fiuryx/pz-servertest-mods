@@ -1,0 +1,16 @@
+{
+    "Print_Text_MSC_DipstickQuickGuide_info": "Folleto I: usa una varilla de nivel para comprobar la calidad del aceite, el refrigerante y el líquido de transmisión.",
+    "Print_Text_MSC_RoadsideServiceChecklist_info": "Folleto II: rellena y vacía los tres depósitos de líquidos del vehículo.",
+    "Print_Text_MSC_RoadsideRepairGuide_info": "Folleto III: reparación provisional de manguitos, correa y bobina de encendido.",
+    "Print_Text_MSC_CoolingSystemGuide_info": "Folleto IV: fallos en el circuito de refrigeración y sobrecalentamiento.",
+    "Print_Text_MSC_StartingChargingGuide_info": "Folleto V: batería de arranque, motor de arranque, alternador y correa.",
+    "Print_Text_MSC_EngineComponentsGuide_info": "Folleto VI: inspecciona, desmonta e instala componentes del motor.",
+    "Print_Text_MSC_WorkshopRebuildGuide_info": "Folleto VII: desmantela y reconstruye piezas desmontadas.",
+    "Print_Text_MSC_EngineLiftGuide_info": "Folleto VIII: trabajo completo con el conjunto del motor en el elevador.",
+    "Print_Text_MSC_TransmissionSetupGuide_info": "Folleto IX: parejas correctas de caja de cambios y acoplamiento.",
+    "Print_Text_MSC_ComponentClassesGuide_info": "Folleto X: clases de ajuste de componentes y estrés por incompatibilidad.",
+    "Print_Text_MSC_ECUDiagnosticsGuide_info": "Folleto XI: diagnóstico en directo controlado por la ECU.",
+    "Print_Text_MSC_DrivingLoadGuide_info": "Folleto XII: sobrecarga del vehículo durante la conducción.",
+    "Print_Text_MSC_VehiclePushingGuide_info": "Folleto XIII: Fuerza, forma física (Fitness), masa, agotamiento y tiempo de recuperación al empujar un vehículo.",
+    "Print_Text_MSC_CabinClimateGuide_info": "Folleto XIV: requisitos de la calefacción y el aire acondicionado."
+}

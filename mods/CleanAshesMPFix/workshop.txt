@@ -1,0 +1,14 @@
+version=1
+title=Clean Ashes - MP Fix (B42)
+description=[h1]Clean Ashes - MP Fix (B42)[/h1]
+description=Small multiplayer patch for [b]Clean Ashes[/b] (required).
+description=
+description=[list]
+description=[*]Clean Ashes removes the ashes on the client before the server does it. In Build 42 the vanilla action already removes them on the server, so the extra client-side removal is redundant and can leave the square out of sync between players.
+description=[*]This patch restores the vanilla [i]perform()[/i] of the Clear Ashes action. The ashes are removed once, by the server, for everyone.
+description=[*]Everything else from Clean Ashes stays the same: the cursor, the supported tools (broom, twig broom, trowel, shovel, entrenching tool) and the animations.
+description=[/list]
+description=
+description=Client-side, works in singleplayer and multiplayer, can be added or removed at any time. Load it after Clean Ashes. All credit for Clean Ashes goes to its author.
+tags=Build 42;Multiplayer;Misc
+visibility=public

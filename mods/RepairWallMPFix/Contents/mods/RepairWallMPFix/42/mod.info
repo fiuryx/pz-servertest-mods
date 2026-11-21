@@ -1,0 +1,7 @@
+name=Repair Wall - MP Fix (B42)
+id=RepairWallMPFix
+require=\KAMER_RepairWall
+loadModAfter=\KAMER_RepairWall;\KAMER_WallHealth
+description=Multiplayer fix for [K] Repair Wall: per-player repairs, materials taken from the right player, tools found in your bags, working metal repairs. Requires [K] Repair Wall.
+poster=poster.png
+versionMin=42.0

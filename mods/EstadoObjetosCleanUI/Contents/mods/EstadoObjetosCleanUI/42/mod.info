@@ -1,0 +1,7 @@
+name=Item Status CleanUI (B42)
+id=EstadoObjetosCleanUI
+require=\CleanUI
+loadModAfter=\CleanUI
+description=Shows a coloured condition bar under the icon of weapons and tools in the CleanUI inventory (green, yellow, orange, red), plus bars for weapon head condition, remaining contents of consumables and food freshness. Client-side drawing only: nothing is saved, safe to add or remove at any time. Options in Options > Mods.
+poster=poster.png
+versionMin=42.0
