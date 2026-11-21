@@ -1,0 +1,7 @@
+name=Fast Forward - Network Desync Fix (B42)
+id=FastForwardNetFix
+require=\FastForward
+loadModAfter=\FastForward
+description=Fixes the vehicle and player position desync in multiplayer caused by Fast Forward moving the server network clock. Timed actions still speed up and pause with the game speed. Server side.
+poster=poster.png
+versionMin=42.0

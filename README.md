@@ -17,6 +17,7 @@ Cada carpeta de `mods/` es una carpeta de subida al Workshop tal cual (`workshop
 | DynamicTarpsFix | Dynamic Tarp Cover - Server Fix (B42) | DynamicTarpsFix | [3841650817](https://steamcommunity.com/sharedfiles/filedetails/?id=3841650817) |
 | EstadoObjetosCleanUI | Item Status CleanUI (B42) | EstadoObjetosCleanUI | [3842038747](https://steamcommunity.com/sharedfiles/filedetails/?id=3842038747) |
 | ExtraGunSlotMPFix | Extra Gun Slot - Multiplayer Fix (B42) | ExtraGunSlotMPFix | [3836671547](https://steamcommunity.com/sharedfiles/filedetails/?id=3836671547) |
+| FastForwardNetFix | Fast Forward - Network Desync Fix (B42) | FastForwardNetFix | |
 | KeyRingPlusReborn | Key Ring Plus - Reborn (B42) | KeyRingPlusReborn | [3842390664](https://steamcommunity.com/sharedfiles/filedetails/?id=3842390664) |
 | LightSwitchBacklightFixed | Light Switch Backlight - Fixed (B42) | LightSwitchBacklightFixed | [3842415222](https://steamcommunity.com/sharedfiles/filedetails/?id=3842415222) |
 | PlayersOnMapNetFix | Players On Map - Network Fix (B42) | PlayersOnMapNetFix | [3842678948](https://steamcommunity.com/sharedfiles/filedetails/?id=3842678948) |
@@ -28,6 +29,8 @@ Cada carpeta de `mods/` es una carpeta de subida al Workshop tal cual (`workshop
 | TraduccionServerES | Multiple Traduccion ES - B42 | TraduccionServerFiuRyES | [3834692364](https://steamcommunity.com/sharedfiles/filedetails/?id=3834692364) |
 
 KeyRingPlusReborn, LightSwitchBacklightFixed y BCMIExtension parten del código de sus autores originales; el crédito está en su `workshop.txt`.
+
+FastForwardNetFix es un parche para Fast Forward (2968318536); no se usa en el servidor.
 
 ## Normas del proyecto
 
