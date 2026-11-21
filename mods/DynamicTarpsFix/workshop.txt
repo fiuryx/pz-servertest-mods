@@ -1,0 +1,6 @@
+version=1
+id=3841650817
+title=Dynamic Tarp Cover - Server Fix (B42)
+description=Arregla el error "attempted index: Add of non-table: null" (loacalDynamicTrunk.lua:140) de Dynamic tarp cover en servidores dedicados B42. Es el mismo codigo, pero solo registra los eventos que existen en el servidor. Necesita Dynamic tarp cover. Se puede anadir o quitar en una partida empezada. / Fixes Dynamic tarp cover Lua error on B42 dedicated servers.
+tags=Build 42;Multiplayer;Vehicles
+visibility=public

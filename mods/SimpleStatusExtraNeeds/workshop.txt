@@ -1,4 +1,5 @@
 version=1
+id=3843223837
 title=Simple Status - Extra Needs (B42)
 description=[h1]Simple Status - Extra Needs (B42)[/h1]
 description=Adds extra bars to [b]Simple Status[/b] for needs that other mods add, using Simple Status' official API:
@@ -19,5 +20,5 @@ description=[*]English and Spanish texts.
 description=[*]Client side only. Safe to add or remove at any time, also on servers.
 description=[/list]
 description=[b]Requires[/b] Simple Status.
-tags=Build 42;Interface;Multiplayer;Misc
+tags=Build 42;Interface;Misc;Multiplayer
 visibility=public

@@ -1,4 +1,5 @@
 version=1
+id=3842854321
 title=Cooler Backpack - MP Fix (B42)
 description=[h1]Cooler Backpack - MP Fix (B42)[/h1]
 description=Multiplayer patch for [b]Cooler Backpack[/b] (required).
@@ -14,5 +15,5 @@ description=[*]Singleplayer and the server are not touched.
 description=[/list]
 description=
 description=Upgrades that are already stuck on a corpse disappear after reconnecting. Can be added or removed at any time. Load it after Cooler Backpack. All credit for Cooler Backpack goes to its author.
-tags=Build 42;Multiplayer;Misc
+tags=Build 42;Misc;Multiplayer
 visibility=public

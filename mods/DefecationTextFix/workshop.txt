@@ -1,4 +1,5 @@
 version=1
+id=3843220768
 title=Defecation - Toilet Option Translation Fix (B42)
 description=[h1]Defecation - Toilet Option Translation Fix (B42)[/h1]
 description=The [b]Defecation[/b] mod adds the "Defecate" option to the toilet context menu with fixed English text, so it is never translated, even though the mod already ships that word in several languages.
@@ -11,5 +12,5 @@ description=[*]No new texts: it uses the translations the Defecation mod already
 description=[*]Client side only. Safe to add or remove at any time, also on servers.
 description=[/list]
 description=[b]Requires[/b] Defecation.
-tags=Build 42;Interface;Multiplayer;Misc
+tags=Build 42;Interface;Misc;Multiplayer
 visibility=public

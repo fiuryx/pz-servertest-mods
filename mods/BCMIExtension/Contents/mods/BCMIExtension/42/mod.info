@@ -1,0 +1,7 @@
+name=Better Context Menu Icons - Extension (B42)
+id=BCMIExtension
+require=\SuperOl3gContextMenuIcons
+loadModAfter=\SuperOl3gContextMenuIcons
+description=Adds icons, in the same style, to more than 300 context-menu options of popular mods (Lifestyle, Take A Bath And Shower, Picking Meister, Take Any Amount, Pry Open, Water Pipes, Trees Have Loot, Smarter Storage, Nested Containers and more) and to some vanilla options that Better Context Menu Icons leaves without one. Requires Better Context Menu Icons. Client-side only.
+poster=poster.png
+versionMin=42.0

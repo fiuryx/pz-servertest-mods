@@ -1,0 +1,7 @@
+name=Dynamic Tarp Cover - Server Fix (B42)
+id=DynamicTarpsFix
+require=\DynamicTarps
+loadModAfter=\DynamicTarps
+description=Fixes the "attempted index: Add of non-table" error of Dynamic tarp cover (loacalDynamicTrunk.lua) on B42 dedicated servers. Same code, but events are only registered if they exist. Requires Dynamic tarp cover.
+poster=poster.png
+versionMin=42.0

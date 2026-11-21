@@ -1,4 +1,5 @@
 version=1
+id=3843221134
 title=Better Clothing Info - Material Translation Fix (B42)
 description=[h1]Better Clothing Info - Material Translation Fix (B42)[/h1]
 description=[b]Better Clothing Info[/b] shows the clothing material using the raw value from the item script (for example "cotton"), so it is never translated. This small patch shows a proper, translated name instead.
@@ -11,5 +12,5 @@ description=[*]English and Spanish texts. Other languages can be added with UI_B
 description=[*]Client side only. Safe to add or remove at any time, also on servers.
 description=[/list]
 description=[b]Requires[/b] Better Clothing Info (EURY_CLOTHINGINFO).
-tags=Build 42;Interface;Multiplayer;Clothing/Armor;Misc
+tags=Build 42;Clothing/Armor;Interface;Misc;Multiplayer
 visibility=public

@@ -1,4 +1,5 @@
 version=1
+id=3842415222
 title=Light Switch Backlight - Fixed (B42)
 description=[h1]Light Switch Backlight - Fixed (B42)[/h1]
 description=Fixed version of [b]Light Switch Backlight[/b]. Light switches within 2 tiles are highlighted so you can find them in the dark: [b]green[/b] when the light is on, [b]red[/b] when it is off. Only when there is power.

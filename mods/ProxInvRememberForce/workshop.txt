@@ -1,4 +1,5 @@
 version=1
+id=3842229919
 title=Proximity Inventory - Remember Force Selected (B42)
 description=[h1]Proximity Inventory - Remember Force Selected (B42)[/h1]
 description=Small patch for [b]Proximity Inventory[/b] (required).

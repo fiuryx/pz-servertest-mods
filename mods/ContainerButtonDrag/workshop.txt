@@ -1,4 +1,5 @@
 version=1
+id=3842887376
 title=Container Button Drag (B42)
 description=[h1]Container Button Drag (B42)[/h1]
 description=Drag a bag straight from its button in the container column of the inventory and loot windows.
@@ -20,5 +21,5 @@ description=[*]Works with the vanilla UI and with [b]CleanUI[/b], Proximity Inve
 description=[*]Client side only. Can be added or removed at any time.
 description=[/list]
 description=Mouse only, player 1 (no split-screen or controller).
-tags=Build 42;Interface;Multiplayer;Misc
+tags=Build 42;Interface;Misc;Multiplayer
 visibility=public

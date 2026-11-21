@@ -1,0 +1,7 @@
+name=Extra Gun Slot - Multiplayer Fix (B42)
+id=ExtraGunSlotMPFix
+require=\BB_ExtraGunSlot
+loadModAfter=\BB_ExtraGunSlot
+description=Fixes the "no such location holsterbackb" errors on dedicated servers with Extra Gun Slot. Registers the lower back holster location on the server too. Requires Extra Gun Slot.
+poster=poster.png
+versionMin=42.0

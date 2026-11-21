@@ -1,4 +1,5 @@
 version=1
+id=3842384884
 title=Clean Ashes - MP Fix (B42)
 description=[h1]Clean Ashes - MP Fix (B42)[/h1]
 description=Small multiplayer patch for [b]Clean Ashes[/b] (required).
@@ -10,5 +11,5 @@ description=[*]Everything else from Clean Ashes stays the same: the cursor, the 
 description=[/list]
 description=
 description=Client-side, works in singleplayer and multiplayer, can be added or removed at any time. Load it after Clean Ashes. All credit for Clean Ashes goes to its author.
-tags=Build 42;Multiplayer;Misc
+tags=Build 42;Misc;Multiplayer
 visibility=public

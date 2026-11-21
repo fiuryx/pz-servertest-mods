@@ -1,0 +1,6 @@
+version=1
+id=3836671547
+title=Extra Gun Slot - Multiplayer Fix (B42)
+description=Arregla los errores "no such location holsterbackb" de Extra Gun Slot en servidores dedicados. Extra Gun Slot crea la ranura de la espalda solo en el lado del jugador, asi que el servidor la rechaza. Este parche la registra tambien en el servidor. Necesita Extra Gun Slot (3120702374). Se puede anadir o quitar en una partida empezada. / Fixes Extra Gun Slot "no such location holsterbackb" errors on dedicated servers.
+tags=Build 42;Multiplayer;Weapons
+visibility=public

@@ -25,5 +25,5 @@ description=[h2]Changelog[/h2]
 description=[list]
 description=[*]Fixed an error spam with other mods that call sendServerCommand/sendClientCommand (for example Fast Forward): arguments are now passed through exactly as received.
 description=[/list]
-tags=Build 42;Multiplayer;Misc;Interface
+tags=Build 42;Interface;Misc;Multiplayer
 visibility=public
