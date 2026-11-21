@@ -1,7 +1,7 @@
 name=Take Any Amount - Fix (B42)
 id=TakeAnyAmountFix
 require=\TakeAnyAmount
-loadModAfter=\TakeAnyAmount
+loadModAfter=\TakeAnyAmount;\CleanUI
 description=Fixes a Lua error of Take Any Amount when right-clicking items without a container (CleanUI, Proximity Inventory) and adds the missing B42 translations (EN/ES). Requires Take Any Amount.
 poster=poster.png
 versionMin=42.0

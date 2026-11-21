@@ -4,6 +4,8 @@
 --       (abajo, arriba, vertical a la izquierda o a la derecha del icono).
 --       Casilla propia para el estado de armas y herramientas.
 -- v1.4: ropa manchada por el mod Defecation: barra marron (solo si ese mod esta activo).
+-- v1.5: las pilas cerradas ya no se recorren enteras en cada fotograma: el resultado se
+--       guarda un segundo por fila y se miran como mucho 200 objetos por pila.
 -- Mod propio para el servidor de FiuRy. Solo dibuja: no cambia objetos ni guarda nada.
 -- Se engancha al final de renderdetails() de los dos modos de inventario de CleanUI
 -- (y del vanilla si se usa sin CleanUI), sin sustituir a otros mods que ya lo envuelvan.
@@ -217,6 +219,40 @@ local function drawBar(pane, x, y, w, h, r, kind, vertical)
 end
 
 ----------------------------------------------------------------------
+-- Pilas cerradas: objeto que peor esta (con cache)
+----------------------------------------------------------------------
+-- Recorrer una pila de cientos de objetos en cada fotograma baja los FPS, asi que
+-- el resultado se guarda un segundo por fila (la fila es una tabla nueva cada vez
+-- que el inventario se refresca) y se miran como mucho STACK_SCAN objetos.
+local STACK_SCAN = 200
+local STACK_TTL = 1000
+local stackCache = setmetatable({}, { __mode = "k" })
+
+local function nowMs()
+    local ok, t = pcall(getTimestampMs)
+    if ok and t then return t end
+    return os.time() * 1000
+end
+
+local function worstOfStack(data, cfg, now)
+    local c = stackCache[data]
+    if c and now - c.t < STACK_TTL then return c.item, c.bars end
+    local worst, item, bars = nil, nil, nil
+    local last = math.min(#data.items, STACK_SCAN + 1)
+    for i = 2, last do
+        local it = data.items[i]
+        local b = it and getBars(it, cfg)
+        if b and #b > 0 then
+            local r = b[1][1]
+            for j = 2, #b do r = math.min(r, b[j][1]) end
+            if worst == nil or r < worst then worst = r; item = it; bars = b end
+        end
+    end
+    stackCache[data] = { t = now, item = item, bars = bars }
+    return item, bars
+end
+
+----------------------------------------------------------------------
 -- Dibujo de las filas visibles
 ----------------------------------------------------------------------
 local function drawBars(pane, doDragged)
@@ -233,6 +269,7 @@ local function drawBars(pane, doDragged)
     local iconSize = pane.cleanUIItemIconSize or math.min(rowH - 2, 32)
     local inset = (rowH - iconSize) / 2
     local barH = math.max(4, math.floor(iconSize / 7))
+    local now = nowMs()
     local pos = optNum("position", POS_BOTTOM)
     if pos < POS_BOTTOM or pos > POS_RIGHT then pos = POS_BOTTOM end
     local dx, dy = 0, 0
@@ -255,17 +292,7 @@ local function drawBars(pane, doDragged)
                     if data.count == nil or data.count <= 2 then
                         item = data.items[1]
                     elseif cfg.stacks then
-                        -- Pila cerrada de varios objetos: barras del que peor esta
-                        local worst = nil
-                        for i = 2, #data.items do
-                            local it = data.items[i]
-                            local b = it and getBars(it, cfg)
-                            if b and #b > 0 then
-                                local r = b[1][1]
-                                for j = 2, #b do r = math.min(r, b[j][1]) end
-                                if worst == nil or r < worst then worst = r; item = it; bars = b end
-                            end
-                        end
+                        item, bars = worstOfStack(data, cfg, now)
                     end
                 else
                     item = data

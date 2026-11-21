@@ -1,6 +1,9 @@
 -- Take Any Amount - Fix (B42): copy of takeAnyAmount.lua (Workshop 3389115640) with one fix:
 -- avoids "attempted index: isInCharacterInventory of non-table" when an item has no container
--- (CleanUI / Proximity Inventory rows). Everything else is unchanged.
+-- (CleanUI / Proximity Inventory rows).
+-- 1.1: the typed amount is rounded down (a decimal like 2.5 used to move every item), and the
+-- Grab menu keeps the checks of CleanUI / vanilla (no Grab option for items the inventory
+-- does not accept, no error on empty rows).
 
 require "ISUI/ISToolTip"
 
@@ -72,6 +75,7 @@ function setAmountAndGrab(target, button, obj, items, player)
         local text = button.parent.entry:getText()
         local n = tonumber(text)
         if n then
+            n = math.floor(n)
             if n > MAX then n = MAX end
             if n < 0 then n = 0 end
             AMOUNT = n
@@ -130,10 +134,25 @@ ISInventoryPaneContextMenu.onGrabAnyAmount = function(items, player)
 end
 
 function ISInventoryPaneContextMenu.doGrabMenu(context, items, player)
+    local inventoryPage = getPlayerInventory(player)
+    local destContainer = inventoryPage and inventoryPage.inventory
+    if not destContainer then return end
+
+    local function allowed(item)
+        if not destContainer.isItemAllowed then return true end
+        local ok, res = pcall(function() return destContainer:isItemAllowed(item) end)
+        return not ok or res == true
+    end
+
     for _, k in pairs(items) do
         if not instanceof(k, "InventoryItem") then
-            if isForceDropHeavyItem(k.items[1]) then
+            local first = k and k.items and k.items[1]
+            if not first or not instanceof(first, "InventoryItem") then
+                -- empty or broken row
+            elseif isForceDropHeavyItem(first) then
                 -- corpse or generator
+            elseif not allowed(first) then
+                -- item is forbidden in the destination container
             elseif #k.items > 2 then
                 MAX = #k.items - 1
                 context:addOption(getText("ContextMenu_Grab_one"), items, ISInventoryPaneContextMenu.onGrabOneItems, player)
@@ -146,6 +165,8 @@ function ISInventoryPaneContextMenu.doGrabMenu(context, items, player)
             break
         elseif isForceDropHeavyItem(k) then
             -- corpse or generator
+        elseif not allowed(k) then
+            -- item is forbidden in the destination container
         else
             context:addOption(getText("ContextMenu_Grab"), items, ISInventoryPaneContextMenu.onGrabItems, player)
             break
@@ -162,6 +183,7 @@ function setAmountAndPut(target, button, obj, items, player)
         local text = button.parent.entry:getText()
         local n = tonumber(text)
         if n then
+            n = math.floor(n)
             if n > MAX then n = MAX end
             if n < 0 then n = 0 end
             AMOUNT = n
