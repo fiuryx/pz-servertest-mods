@@ -7,6 +7,11 @@
 -- It only reuses the game's own drag system (ISMouseDrag + the inventory panes'
 -- drop handling), so transfers go through the normal timed actions and work in
 -- multiplayer. Works with the vanilla UI and with CleanUI.
+--
+-- CleanUI also uses dragging on these buttons, to reorder the container column.
+-- To keep both: while the mouse stays inside the column the drag is CleanUI's
+-- reorder; once it leaves the column it turns into moving the bag (CleanUI's
+-- reorder is cancelled and the button goes back to its place).
 
 require "ISUI/ISUIElement"
 require "ISUI/ISMouseDrag"
@@ -103,6 +108,36 @@ local function dropOutside(a, mx, my)
     end
 end
 
+-- CleanUI's drag-to-reorder is installed on the button (see its ISInventoryPage_DragSort).
+local function usesCleanUISort(button)
+    return button ~= nil and button.cleanUIOriginalOnMouseDown ~= nil
+end
+
+-- Is the mouse still inside the column that holds the container buttons?
+local function insideColumn(button, mx, my)
+    local col = button.getParent and button:getParent() or nil
+    if not col then return false end
+    local x, y = col:getAbsoluteX(), col:getAbsoluteY()
+    return mx >= x and mx < x + col:getWidth() and my >= y and my < y + col:getHeight()
+end
+
+-- Stop a CleanUI reorder in progress and put the button back where it was.
+local function cancelCleanUISort(button)
+    if not button or not button.isDragging then return end
+    if button.dragStartX ~= nil then pcall(button.setX, button, button.dragStartX) end
+    if button.dragStartY ~= nil then pcall(button.setY, button, button.dragStartY) end
+    button.isDragging = false
+    button.canDrag = false
+    local page = button.page
+    if not page and button.getParent and button:getParent() then
+        page = button:getParent().inventorypage
+    end
+    if page then
+        page.draggingButton = nil
+        page.dragInsertPosition = nil
+    end
+end
+
 function CBD.update()
     local mx, my = getMouseX(), getMouseY()
 
@@ -111,7 +146,12 @@ function CBD.update()
         if not isMouseButtonDown(0) then
             CBD.pending = nil
         elseif math.abs(mx - p.x) > DRAG_THRESHOLD or math.abs(my - p.y) > DRAG_THRESHOLD then
-            CBD.start(p)
+            if usesCleanUISort(p.button) and insideColumn(p.button, mx, my) then
+                -- still reordering with CleanUI; wait until the mouse leaves the column
+            else
+                cancelCleanUISort(p.button)
+                CBD.start(p)
+            end
         end
     end
 
