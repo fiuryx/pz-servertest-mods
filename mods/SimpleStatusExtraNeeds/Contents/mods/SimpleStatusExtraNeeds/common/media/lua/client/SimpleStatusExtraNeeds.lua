@@ -35,6 +35,9 @@ end
 
 local function makeStat(percentFn)
     local stat = { type = "custom", shown = false }  -- hidden by default; enable from the Simple Status menu
+    -- ruler: marks at 25/50/75 (where the colour changes) and, above all, makes Simple
+    -- Status draw the separator line above the bar like it does for its own needs
+    stat.ruler = { 25, 50, 75 }
     stat.valueFn = function(player) return percentFn(player) end
     stat.percentFn = function(player) return percentFn(player) end
     stat.textFn = function(player) return tostring(math.floor(percentFn(player) * 100 + 0.5)) .. " / 100" end
@@ -108,3 +111,33 @@ end
 
 local ok, err = pcall(register)
 if not ok then print("[SimpleStatusExtraNeeds] " .. tostring(err)) end
+
+-- Simple Status only draws the separator line above a bar when that stat has a
+-- "ruler". Some bars (weight, carry capacity, dirtiness and bars added by other
+-- mods) have none, so the list looked uneven. Give those an empty ruler: the line
+-- is drawn and no marks are added. Temperature bars are drawn differently and are
+-- left alone.
+local function addSeparators()
+    local okStats, stats = pcall(require, "ss.stats")
+    if not okStats or type(stats) ~= "table" or type(stats._values) ~= "table" then return end
+    for _, name in ipairs(stats._values) do
+        local st = stats[name]
+        -- not for "simple" bars: Simple Status uses their ruler to pick the colour
+        local t = type(st) == "table" and tostring(st.type or "") or ""
+        if t ~= "" and st.ruler == nil and t ~= "temp" and t:sub(1, 6) ~= "simple" then
+            st.ruler = {}
+        end
+    end
+end
+
+pcall(addSeparators)
+Events.OnGameStart.Add(function() pcall(addSeparators) end)
+-- once more a little later, for bars that other mods add when the game starts
+local waitTicks = 0
+local function lateSeparators()
+    waitTicks = waitTicks + 1
+    if waitTicks < 120 then return end
+    Events.OnTick.Remove(lateSeparators)
+    pcall(addSeparators)
+end
+Events.OnTick.Add(lateSeparators)

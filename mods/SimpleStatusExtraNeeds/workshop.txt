@@ -16,6 +16,7 @@ description=[h2]Details[/h2]
 description=[list]
 description=[*]Only reads values those mods already store on the player; nothing is changed.
 description=[*]Colour goes from green to red as the need grows. Uses each mod's own moodle icons.
+description=[*]Each bar has marks at 25, 50 and 75 and the separator line above it. Simple Status bars that had no separator line (weight, carry capacity, dirtiness, nicotine...) get it too, so the list looks even.
 description=[*]English and Spanish texts.
 description=[*]Client side only. Safe to add or remove at any time, also on servers.
 description=[/list]
