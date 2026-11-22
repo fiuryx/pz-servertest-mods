@@ -13,7 +13,7 @@ Cada carpeta de `mods/` es una carpeta de subida al Workshop tal cual (`workshop
 | CleanAshesMPFix | Clean Ashes - MP Fix (B42) | CleanAshesMPFix | [3842384884](https://steamcommunity.com/sharedfiles/filedetails/?id=3842384884) |
 | ContainerButtonDrag | Container Button Drag (B42) | ContainerButtonDrag | [3842887376](https://steamcommunity.com/sharedfiles/filedetails/?id=3842887376) |
 | CoolerBackpackMPFix | Cooler Backpack - MP Fix (B42) | CoolerBackpackMPFix | [3842854321](https://steamcommunity.com/sharedfiles/filedetails/?id=3842854321) |
-| DebugMenuMPRoleFix | Debug Menu - MP Role Fix (B42) | DebugMenuMPRoleFix | |
+| DebugMenuMPRoleFix | Debug Menu - MP Role Fix (B42) | DebugMenuMPRoleFix | [3844446161](https://steamcommunity.com/sharedfiles/filedetails/?id=3844446161) |
 | DefecationTextFix | Defecation - Toilet Option Translation Fix (B42) | DefecationTextFix | [3843220768](https://steamcommunity.com/sharedfiles/filedetails/?id=3843220768) |
 | DynamicTarpsFix | Dynamic Tarp Cover - Server Fix (B42) | DynamicTarpsFix | [3841650817](https://steamcommunity.com/sharedfiles/filedetails/?id=3841650817) |
 | EstadoObjetosCleanUI | Item Status CleanUI (B42) | EstadoObjetosCleanUI | [3842038747](https://steamcommunity.com/sharedfiles/filedetails/?id=3842038747) |

@@ -1,4 +1,5 @@
 version=1
+id=3844446161
 title=Debug Menu - MP Role Fix (B42)
 description=[h1]Debug Menu - MP Role Fix (B42)[/h1]
 description=Small patch for [b]Debug Menu[/b] (required) on multiplayer servers.
@@ -10,5 +11,5 @@ description=[*]Singleplayer is not touched. Everything else in Debug Menu works 
 description=[/list]
 description=
 description=Client-side, no texts, can be added or removed at any time. If the tag is already showing, it goes away within a game minute. All credit for Debug Menu goes to its author.
-tags=Build 42;Multiplayer;Misc
+tags=Build 42;Misc;Multiplayer
 visibility=public
