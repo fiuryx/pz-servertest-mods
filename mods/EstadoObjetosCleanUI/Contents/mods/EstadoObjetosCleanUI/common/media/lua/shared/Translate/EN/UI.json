@@ -49,5 +49,8 @@
     "UI_EOC_Tip_Soiled": "Soiled (Defecation)",
     "UI_EOC_Tip_SoiledHint": "Wash it to remove the stain",
     "UI_EOC_Tip_Stack": "Worst in stack: %1",
-    "UI_EOC_Tip_DecimalSep": "."
+    "UI_EOC_Tip_DecimalSep": ".",
+    "UI_EOC_Containers": "Show capacity on container buttons",
+    "UI_EOC_Containers_tooltip": "Draws a bar on the buttons of the container column (your inventory, bags, furniture, car trunks...) with how full each one is: green with room, yellow and orange as it fills, red when full. The floor has no bar.",
+    "UI_EOC_Tip_Capacity": "Capacity"
 }

@@ -10,6 +10,8 @@
 --       por el mod Defecation (sustituye a la barra marron de la v1.4). Cada uno con su opcion.
 -- v1.7: al pasar el raton por una barra o un icono sale un recuadro con el estado y su
 --       porcentaje (y los dias que le quedan a la comida). Opcion para quitarlo.
+-- v1.8: barra de capacidad en los botones de la columna de contenedores (inventario,
+--       mochilas, muebles, maleteros...). Verde con sitio, roja llena. Con su opcion.
 -- Mod propio para el servidor de FiuRy. Solo dibuja: no cambia objetos ni guarda nada.
 -- Se engancha al final de renderdetails() de los dos modos de inventario de CleanUI
 -- (y del vanilla si se usa sin CleanUI), sin sustituir a otros mods que ya lo envuelvan.
@@ -31,6 +33,7 @@ local function setupOptions()
     o:addTickBox("clothing", getText("UI_EOC_Clothing"), true, getText("UI_EOC_Clothing_tooltip"))
     o:addTickBox("head", getText("UI_EOC_Head"), true, getText("UI_EOC_Head_tooltip"))
     o:addTickBox("contents", getText("UI_EOC_Contents"), true, getText("UI_EOC_Contents_tooltip"))
+    o:addTickBox("containers", getText("UI_EOC_Containers"), true, getText("UI_EOC_Containers_tooltip"))
     o:addTickBox("fresh", getText("UI_EOC_Fresh"), true, getText("UI_EOC_Fresh_tooltip"))
     o:addTickBox("stacks", getText("UI_EOC_Stacks"), true, getText("UI_EOC_Stacks_tooltip"))
     o:addTickBox("hideFull", getText("UI_EOC_HideFull"), false, getText("UI_EOC_HideFull_tooltip"))
@@ -268,6 +271,12 @@ local function texFor(kind)
 end
 
 local function colorFor(r, kind)
+    if kind == "capacity" then
+        if r >= 1.0 then return 0.90, 0.15, 0.15 end    -- rojo: lleno
+        if r >= 0.85 then return 0.95, 0.55, 0.10 end   -- naranja
+        if r >= 0.60 then return 0.90, 0.85, 0.15 end   -- amarillo
+        return 0.20, 0.80, 0.20                          -- verde: con sitio
+    end
     if kind == "fresh" then return 0.20, 0.80, 0.20 end   -- verde: fresca
     if kind == "stale" then return 0.95, 0.55, 0.10 end   -- naranja: pasada
     if kind == "rot" then return 0.90, 0.15, 0.15 end     -- rojo: podrida
@@ -361,6 +370,13 @@ local function daysText(d)
     return txt
 end
 
+local function numText(v)
+    local txt = string.format("%.1f", v)
+    local sep = getTextOrNull("UI_EOC_Tip_DecimalSep")
+    if sep and sep ~= "." then txt = txt:gsub("%.", sep) end
+    return txt
+end
+
 local KIND_TEXT = {
     cond = "UI_EOC_Tip_Condition", head = "UI_EOC_Tip_Head", fill = "UI_EOC_Tip_Contents",
     fresh = "UI_EOC_Tip_Fresh", stale = "UI_EOC_Tip_Stale", rot = "UI_EOC_Tip_Rotten",
@@ -377,6 +393,12 @@ local function tipLines(info)
         if ok and name then table.insert(lines, getText("UI_EOC_Tip_Stack", name)) end
     end
     local kind = info.kind
+    if kind == "capacity" then
+        if info.name then table.insert(lines, info.name) end
+        table.insert(lines, getText("UI_EOC_Tip_Capacity") .. ": " .. numText(info.w) .. " / " .. numText(info.cap)
+            .. " (" .. pctText(info.w / info.cap * 100) .. ")")
+        return lines
+    end
     local label = getText(KIND_TEXT[kind] or "UI_EOC_Tip_Condition")
     if kind == "cond" or kind == "head" or kind == "fill" then
         table.insert(lines, label .. ": " .. pctText(info.ratio * 100))
@@ -583,6 +605,90 @@ local function drawBars(pane, doDragged)
 end
 
 ----------------------------------------------------------------------
+-- Barra de capacidad en los botones de la columna de contenedores
+----------------------------------------------------------------------
+-- Cada boton de la columna (inventario, mochilas, muebles, maleteros...) guarda su
+-- contenedor en button.inventory y su capacidad en button.capacity. El peso se lee
+-- como mucho cada 300 ms por boton. El suelo no lleva barra.
+local CAP_TTL = 300
+
+local function drawContainerBar(button)
+    if not opt("enabled", true) or not opt("containers", true) then return end
+    local inv = button.inventory
+    if not inv then return end
+    local okType, ctype = pcall(function() return inv:getType() end)
+    if okType and ctype == "floor" then return end
+    local now = nowMs()
+    if not button._EOC_t or now - button._EOC_t > CAP_TTL or button._EOC_inv ~= inv then
+        button._EOC_t = now
+        button._EOC_inv = inv
+        local okW, w = pcall(function() return inv:getCapacityWeight() end)
+        local cap = button.capacity
+        if not cap or cap <= 0 then
+            local okC, c = pcall(function() return inv:getEffectiveCapacity(getSpecificPlayer(0)) end)
+            cap = okC and c or nil
+        end
+        button._EOC_w = okW and w or nil
+        button._EOC_cap = cap
+    end
+    local w, cap = button._EOC_w, button._EOC_cap
+    if not w or not cap or cap <= 0 then return end
+    local ratio = w / cap
+
+    local bs = math.min(button:getWidth(), button:getHeight())
+    local barH = math.max(3, math.floor(bs / 9))
+    local pos = optNum("position", POS_BOTTOM)
+    local x, y, bw, bh, vert
+    if pos == POS_TOP then
+        x, y, bw, bh, vert = 2, 1, bs - 4, barH, false
+    elseif pos == POS_LEFT then
+        x, y, bw, bh, vert = 1, 2, barH, bs - 4, true
+    elseif pos == POS_RIGHT then
+        x, y, bw, bh, vert = bs - barH - 1, 2, barH, bs - 4, true
+    else
+        x, y, bw, bh, vert = 2, bs - barH - 1, bs - 4, barH, false
+    end
+    -- el relleno no pasa del borde; el color rojo indica que esta lleno o pasado
+    local fill = math.min(1, ratio)
+    drawBar(button, x, y, bw, bh, fill, "capacity", vert)
+
+    if opt("tooltips", false) and button:isMouseOver() then
+        local mx, my = button:getMouseX(), button:getMouseY()
+        if mx >= x and mx < x + bw and my >= y and my < y + bh then
+            ensureTip()
+            hover = { info = { kind = "capacity", w = w, cap = cap, name = button.name }, t = now }
+        end
+    end
+end
+
+local function wrapButton(button)
+    if not button or button._EOC_render then return end
+    local original = button.render
+    button._EOC_render = true
+    button.render = function(self, ...)
+        if original then original(self, ...) end
+        local ok, err = pcall(drawContainerBar, self)
+        if not ok and not failedOnce then
+            failedOnce = true
+            print("[" .. MOD .. "] error en barra de contenedor: " .. tostring(err))
+        end
+    end
+end
+
+local function wrapPage(pageClass)
+    if type(pageClass) ~= "table" then return end
+    if rawget(pageClass, "_EOC_btn_done") then return end
+    local original = rawget(pageClass, "addContainerButton") or pageClass.addContainerButton
+    if type(original) ~= "function" then return end
+    pageClass.addContainerButton = function(self, ...)
+        local button = original(self, ...)
+        pcall(wrapButton, button)
+        return button
+    end
+    rawset(pageClass, "_EOC_btn_done", true)
+end
+
+----------------------------------------------------------------------
 -- Enganche a renderdetails()
 ----------------------------------------------------------------------
 local function wrap(paneClass)
@@ -608,6 +714,8 @@ local function installAll()
     wrap(rawget(_G, "CleanUI_Clean_ISInventoryPane"))
     wrap(rawget(_G, "CleanUI_Vanilla_ISInventoryPane"))
     wrap(rawget(_G, "ISInventoryPane"))
+    wrapPage(rawget(_G, "CleanUI_Vanilla_ISInventoryPage"))
+    wrapPage(rawget(_G, "ISInventoryPage"))
 end
 
 local ticks = 0

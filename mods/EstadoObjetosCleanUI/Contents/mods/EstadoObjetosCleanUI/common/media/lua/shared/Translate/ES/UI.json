@@ -49,5 +49,8 @@
     "UI_EOC_Tip_Soiled": "Manchada (Defecation)",
     "UI_EOC_Tip_SoiledHint": "Lávala para quitar la mancha",
     "UI_EOC_Tip_Stack": "El peor de la pila: %1",
-    "UI_EOC_Tip_DecimalSep": ","
+    "UI_EOC_Tip_DecimalSep": ",",
+    "UI_EOC_Containers": "Mostrar la capacidad en los contenedores",
+    "UI_EOC_Containers_tooltip": "Dibuja una barra en los botones de la columna de contenedores (tu inventario, mochilas, muebles, maleteros...) con lo llenos que están: verde con sitio, amarilla y naranja según se llenan, roja cuando están llenos. El suelo no lleva barra.",
+    "UI_EOC_Tip_Capacity": "Capacidad"
 }
