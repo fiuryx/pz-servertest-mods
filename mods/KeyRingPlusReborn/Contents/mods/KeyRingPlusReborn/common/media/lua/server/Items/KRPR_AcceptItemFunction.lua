@@ -9,6 +9,10 @@ local EXTRA = {
     ["Base.BottleOpener"] = true,
     ["Base.BottleOpener_Keychain"] = true,
     ["Base.Corkscrew"] = true,
+    ["Base.Paperclip"] = true,
+    ["Base.FishingHook"] = true,
+    ["Base.FishingHook_Forged"] = true,
+    ["Base.FishingHook_Bone"] = true,
     ["Base.Handiknife"] = true,
     ["Base.Multitool"] = true,
     ["Base.PenLight"] = true,
@@ -24,5 +28,11 @@ function AcceptItemFunction.KeyRingPlus(container, item)
     if item:getCategory() == "Key" or item:hasTag(ItemTag.FITS_KEY_RING) then
         return true
     end
-    return EXTRA[item:getFullType()] == true
+    local fullType = item:getFullType()
+    if EXTRA[fullType] then return true end
+    -- Authentic Z glow sticks (every colour, lit or not), but not the full pack
+    if fullType:find("^AuthenticZClothing%.AuthenticGlowstick_") and fullType ~= "AuthenticZClothing.AuthenticGlowstick_Pack" then
+        return true
+    end
+    return false
 end
