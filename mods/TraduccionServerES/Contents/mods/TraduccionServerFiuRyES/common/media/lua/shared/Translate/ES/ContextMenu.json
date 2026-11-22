@@ -3552,5 +3552,13 @@
     "ContextMenu_RWFix_WallObject": "Muro / objeto",
     "ContextMenu_RWFix_Door": "Puerta",
     "ContextMenu_RWFix_Unknown": "Objeto desconocido",
-    "ContextMenu_RWFix_Missing": "Ya no tengo los materiales."
+    "ContextMenu_RWFix_Missing": "Ya no tengo los materiales.",
+    "ContextMenu_AfroPick2": "Usar para pelo pequeño",
+    "ContextMenu_PullVeilBack": "Echar velo hacia atrás",
+    "ContextMenu_TakeOffMask": "Quitar máscara",
+    "ContextMenu_TakeOffShoeCoversAndMask": "Quitar máscara y cubrezapatos",
+    "ContextMenu_TipHatBack": "Inclinar sombrero hacia atrás",
+    "ContextMenu_WearHigher": "Vestir más arriba",
+    "ContextMenu_WearLower": "Vestir más abajo",
+    "ContextMenu_WearNormally2": "Vestir máscara y cubrezapatos"
 }

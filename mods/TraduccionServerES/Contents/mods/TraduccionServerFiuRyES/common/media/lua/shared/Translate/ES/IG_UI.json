@@ -13666,5 +13666,8 @@
     "IGUI_SS_BARTITLE_SLEEP_SCHEDULE": "Horario sueño",
     "IGUI_SS_BARTITLE_HYGIENE_NEED": "Higiene",
     "IGUI_SS_BARTITLE_BLADDER_NEED": "Orinar",
-    "IGUI_QNW_DebugMenu_ModeSwitch_ReserveAmmo": "Munición de reserva ilimitada"
+    "IGUI_QNW_DebugMenu_ModeSwitch_ReserveAmmo": "Munición de reserva ilimitada",
+    "IGUI_CraftCategory_Tailoring": "Sastrería",
+    "IGUI_HotbarAttachment_AZWebbingLeft": "Ranura de cinturón izquierdo",
+    "IGUI_HotbarAttachment_AZWebbingRight": "Ranura de cinturón derecho"
 }
