@@ -130,14 +130,59 @@ local function addSeparators()
     end
 end
 
-pcall(addSeparators)
-Events.OnGameStart.Add(function() pcall(addSeparators) end)
+-- Simple Status shows the bars in the order they were added (its own, then each
+-- mod's). Put them in groups so related bars sit together. Bars not listed here
+-- (from other mods) keep their order at the end. The list is changed in place,
+-- because Simple Status keeps a reference to it.
+local ORDER = {
+    -- body
+    "health", "endurance", "fatigue", "rest", "pain", "fitness",
+    -- needs
+    "hunger", "thirst", "defecation_need", "bladder_need", "hygiene_need", "sleep_schedule",
+    -- mood
+    "happy", "unhappy", "morale", "stress", "panic", "anger", "boredom", "idleness", "discomfort", "sanity",
+    -- illness and addictions
+    "sickness", "food_sickness", "poison", "intoxication", "zombie_infection", "zombie_fever",
+    "nicotine_withdrawal", "alcohol_withdrawal",
+    -- temperature and state of the body
+    "bodytemp", "bodyheatgen", "wetness", "dirtiness", "cleanliness",
+    -- weight and nutrition
+    "weight", "weight_capacity", "calories", "proteins", "carbohydrates", "lipids",
+}
+
+local function sortBars()
+    local okStats, stats = pcall(require, "ss.stats")
+    if not okStats or type(stats) ~= "table" or type(stats._values) ~= "table" then return end
+    local values = stats._values
+    local present, rest, sorted = {}, {}, {}
+    for _, name in ipairs(values) do present[name] = true end
+    local used = {}
+    for _, name in ipairs(ORDER) do
+        if present[name] and not used[name] then
+            table.insert(sorted, name); used[name] = true
+        end
+    end
+    for _, name in ipairs(values) do
+        if not used[name] then table.insert(rest, name); used[name] = true end
+    end
+    for _, name in ipairs(rest) do table.insert(sorted, name) end
+    for i = #values, 1, -1 do values[i] = nil end
+    for i, name in ipairs(sorted) do values[i] = name end
+end
+
+local function tidy()
+    pcall(addSeparators)
+    pcall(sortBars)
+end
+
+tidy()
+Events.OnGameStart.Add(tidy)
 -- once more a little later, for bars that other mods add when the game starts
 local waitTicks = 0
 local function lateSeparators()
     waitTicks = waitTicks + 1
     if waitTicks < 120 then return end
     Events.OnTick.Remove(lateSeparators)
-    pcall(addSeparators)
+    tidy()
 end
 Events.OnTick.Add(lateSeparators)
