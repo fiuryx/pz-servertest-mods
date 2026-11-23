@@ -16,7 +16,7 @@ Cada carpeta de `mods/` es una carpeta de subida al Workshop tal cual (`workshop
 | DebugMenuMPRoleFix | Debug Menu - MP Role Fix (B42) | DebugMenuMPRoleFix | [3844446161](https://steamcommunity.com/sharedfiles/filedetails/?id=3844446161) |
 | DefecationTextFix | Defecation - Toilet Option Translation Fix (B42) | DefecationTextFix | [3843220768](https://steamcommunity.com/sharedfiles/filedetails/?id=3843220768) |
 | DynamicTarpsFix | Dynamic Tarp Cover - Server Fix (B42) | DynamicTarpsFix | [3841650817](https://steamcommunity.com/sharedfiles/filedetails/?id=3841650817) |
-| EstadoObjetosCleanUI | Item Status CleanUI (B42) | EstadoObjetosCleanUI | [3842038747](https://steamcommunity.com/sharedfiles/filedetails/?id=3842038747) |
+| ItemStatusCleanUI | Item Status CleanUI (B42) | EstadoObjetosCleanUI | [3842038747](https://steamcommunity.com/sharedfiles/filedetails/?id=3842038747) |
 | ExtraGunSlotMPFix | Extra Gun Slot - Multiplayer Fix (B42) | ExtraGunSlotMPFix | [3836671547](https://steamcommunity.com/sharedfiles/filedetails/?id=3836671547) |
 | FastForwardNetFix | Fast Forward - Network Desync Fix (B42) | FastForwardNetFix | |
 | KeyRingPlusReborn | Key Ring Plus - Reborn (B42) | KeyRingPlusReborn | [3842390664](https://steamcommunity.com/sharedfiles/filedetails/?id=3842390664) |
