@@ -12,6 +12,8 @@
 --       porcentaje (y los dias que le quedan a la comida). Opcion para quitarlo.
 -- v1.8: barra de capacidad en los botones de la columna de contenedores (inventario,
 --       mochilas, muebles, maleteros...). Verde con sitio, roja llena. Con su opcion.
+-- v1.9: barra de lectura en los libros de habilidad (paginas leidas por el jugador).
+--       Solo sale si se ha empezado a leer; verde cuando esta terminado.
 -- Mod propio para el servidor de FiuRy. Solo dibuja: no cambia objetos ni guarda nada.
 -- Se engancha al final de renderdetails() de los dos modos de inventario de CleanUI
 -- (y del vanilla si se usa sin CleanUI), sin sustituir a otros mods que ya lo envuelvan.
@@ -34,6 +36,7 @@ local function setupOptions()
     o:addTickBox("head", getText("UI_EOC_Head"), true, getText("UI_EOC_Head_tooltip"))
     o:addTickBox("contents", getText("UI_EOC_Contents"), true, getText("UI_EOC_Contents_tooltip"))
     o:addTickBox("containers", getText("UI_EOC_Containers"), true, getText("UI_EOC_Containers_tooltip"))
+    o:addTickBox("books", getText("UI_EOC_Books"), true, getText("UI_EOC_Books_tooltip"))
     o:addTickBox("fresh", getText("UI_EOC_Fresh"), true, getText("UI_EOC_Fresh_tooltip"))
     o:addTickBox("stacks", getText("UI_EOC_Stacks"), true, getText("UI_EOC_Stacks_tooltip"))
     o:addTickBox("hideFull", getText("UI_EOC_HideFull"), false, getText("UI_EOC_HideFull_tooltip"))
@@ -160,6 +163,23 @@ end
 -- Devuelve la lista de barras a dibujar: { {ratio, tipo}, ... }
 -- tipo: "cond" (estado), "head" (cabeza del arma), "fill" (contenido),
 --       "fresh"/"stale"/"rot"/"frozen" (frescura de la comida)
+-- Libros con paginas (los de habilidad): paginas leidas por el jugador local.
+-- El juego lo guarda en el personaje (getAlreadyReadPages(tipo)) y en el libro.
+local function getReadProgress(item)
+    if not instanceof(item, "Literature") then return nil end
+    local pages = call(item, "getNumberOfPages")
+    if not pages or pages <= 0 then return nil end
+    local read = call(item, "getAlreadyReadPages") or 0
+    local player = getSpecificPlayer(0)
+    if player then
+        local ok, p = pcall(function() return player:getAlreadyReadPages(item:getFullType()) end)
+        if ok and p and p > read then read = p end
+    end
+    if read <= 0 then return nil end   -- sin empezar: no se muestra
+    if read > pages then read = pages end
+    return { read / pages, "read", { read, pages } }
+end
+
 local function getBars(item, cfg)
     local bars = {}
     local isWeapon = instanceof(item, "HandWeapon")
@@ -192,6 +212,10 @@ local function getBars(item, cfg)
     if cfg.contents and not isClothing then
         local fill = getContents(item)
         if fill ~= nil then table.insert(bars, { fill, "fill" }) end
+    end
+    if cfg.books then
+        local rp = getReadProgress(item)
+        if rp then table.insert(bars, rp) end
     end
     return bars
 end
@@ -271,6 +295,10 @@ local function texFor(kind)
 end
 
 local function colorFor(r, kind)
+    if kind == "read" then
+        if r >= 1.0 then return 0.20, 0.80, 0.20 end    -- verde: terminado
+        return 0.60, 0.45, 0.95                          -- morado: leyendo
+    end
     if kind == "capacity" then
         if r >= 1.0 then return 0.90, 0.15, 0.15 end    -- rojo: lleno
         if r >= 0.85 then return 0.95, 0.55, 0.10 end   -- naranja
@@ -393,6 +421,11 @@ local function tipLines(info)
         if ok and name then table.insert(lines, getText("UI_EOC_Tip_Stack", name)) end
     end
     local kind = info.kind
+    if kind == "read" and info.extra then
+        table.insert(lines, getText("UI_EOC_Tip_Read") .. ": " .. getText("UI_EOC_Tip_Pages", tostring(info.extra[1]), tostring(info.extra[2]))
+            .. " (" .. pctText(info.ratio * 100) .. ")")
+        return lines
+    end
     if kind == "capacity" then
         if info.name then table.insert(lines, info.name) end
         table.insert(lines, getText("UI_EOC_Tip_Capacity") .. ": " .. numText(info.w) .. " / " .. numText(info.cap)
@@ -513,7 +546,7 @@ local function drawBars(pane, doDragged)
     local rowH = pane.itemHgt
     if not map or not rowH or rowH <= 0 then return end
 
-    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true) }
+    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true) }
     local scroll = pane:getYScroll()
     local first = math.max(0, math.floor(-scroll / rowH) - 1)
     local last = math.max(first, math.ceil((pane:getHeight() - scroll) / rowH) + 1)
@@ -593,7 +626,7 @@ local function drawBars(pane, doDragged)
                             end
                             drawBar(pane, bx, by, bw, bh, bars[i][1], bars[i][2], vert)
                             if probe then
-                                hit(bx, by, bw, bh, { kind = bars[i][2], ratio = bars[i][1], item = item, stack = stacked })
+                                hit(bx, by, bw, bh, { kind = bars[i][2], ratio = bars[i][1], extra = bars[i][3], item = item, stack = stacked })
                             end
                         end
                         if doDragged then pane:resumeStencil() end
