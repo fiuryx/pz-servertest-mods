@@ -20,6 +20,7 @@ end
 
 function ISAnimalCageRelease:complete()
     local item = AnimalCages.getAnimalItem(self.cage)
+    AnimalCages.log("release complete", AnimalCages.describe(self.cage))
     if not item then return false end
     local cont = self.cage:getItemContainer()
     local inv = self.character:getInventory()

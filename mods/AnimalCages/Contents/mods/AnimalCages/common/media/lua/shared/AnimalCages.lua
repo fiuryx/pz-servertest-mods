@@ -107,6 +107,22 @@ function AC.findAnimalItem(inv, animalId)
     return nil
 end
 
+-- Diagnostics: one line per cage action in the console / DebugLog ("[AnimalCages] ...").
+function AC.log(...)
+    local parts = {}
+    for i = 1, select("#", ...) do parts[#parts + 1] = tostring(select(i, ...)) end
+    print("[AnimalCages] " .. (isServer() and "server " or (isClient() and "client " or "sp ")) .. table.concat(parts, " "))
+end
+
+function AC.describe(cage)
+    if not cage then return "cage=nil" end
+    local cont = cage.getItemContainer and cage:getItemContainer()
+    local n = cont and cont:getItems():size() or -1
+    local a = AC.getAnimalItem(cage)
+    return "cage=" .. tostring(cage:getID()) .. " in=" .. tostring(cage:getContainer() and cage:getContainer():getType())
+        .. " items=" .. n .. " animalItem=" .. tostring(a and a:getID()) .. " animal=" .. tostring(a and a:getAnimal() and a:getAnimal():getAnimalID())
+end
+
 function AC.syncItem(character, item)
     pcall(function() if syncItemFields then syncItemFields(character, item) end end)
     pcall(function() if syncItemModData then syncItemModData(character, item) end end)

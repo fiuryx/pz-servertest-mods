@@ -35,6 +35,7 @@ end
 -- From the hands -------------------------------------------------------------------------------
 
 local function onPutFromHands(player, cage, animalItem)
+    AnimalCages.log("put from hands", animalItem:getID(), AnimalCages.describe(cage))
     ISInventoryPaneContextMenu.transferIfNeeded(player, cage)
     ISTimedActionQueue.add(ISAnimalCagePut:new(player, cage, animalItem:getAnimal():getAnimalID()))
 end
@@ -78,6 +79,7 @@ Events.OnFillInventoryObjectContextMenu.Add(onInventoryMenu)
 
 local function onCatch(player, cage, animal)
     if not animal or not animal:getSquare() then return end
+    AnimalCages.log("catch", animal:getAnimalID(), AnimalCages.describe(cage))
     ISInventoryPaneContextMenu.transferIfNeeded(player, cage)
     if luautils.walkAdj(player, animal:getSquare(), true) then
         ISTimedActionQueue.add(ISPickupAnimal:new(player, animal))
