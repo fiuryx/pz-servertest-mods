@@ -1,5 +1,6 @@
 -- Animal Cages and Carriers (B42): context menus and transfer rules (client).
 require "AnimalCages"
+require "TimedActions/ISAnimalCageCatch"
 require "TimedActions/ISAnimalCagePut"
 require "TimedActions/ISAnimalCageRelease"
 
@@ -82,7 +83,7 @@ local function onCatch(player, cage, animal)
     AnimalCages.log("catch", animal:getAnimalID(), AnimalCages.describe(cage))
     ISInventoryPaneContextMenu.transferIfNeeded(player, cage)
     if luautils.walkAdj(player, animal:getSquare(), true) then
-        ISTimedActionQueue.add(ISPickupAnimal:new(player, animal))
+        ISTimedActionQueue.add(ISAnimalCageCatch:new(player, animal))
         ISTimedActionQueue.add(ISAnimalCagePut:new(player, cage, animal:getAnimalID()))
     end
 end
