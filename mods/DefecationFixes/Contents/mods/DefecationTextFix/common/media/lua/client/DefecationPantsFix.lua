@@ -9,6 +9,8 @@ require "TimedActions/ISUnequipAction"
 require "TimedActions/ISWearClothing"
 
 local FIX = {}
+local okDF, DF = pcall(require, "DefecationMain")
+if not okDF or type(DF) ~= "table" then DF = nil end
 -- Outer layers first: that is the order to take them off.
 local LOCATIONS = { "PANTS_EXTRA", "PANTS", "PANTS_SKINNY", "SHORT_PANTS", "SHORTS_SHORT",
                     "LONG_SKIRT", "SKIRT", "LEGS1", "UNDERWEAR_BOTTOM" }
@@ -82,4 +84,32 @@ local function install()
     end
 end
 
+-- Watchdog: Defecation marks the player as "defecating" when the squat starts and only clears it
+-- when its own defecate action ends. If the queue is cleared in between (walking away, an
+-- interrupted unequip...), the flag stayed on and every "Defecate" option (toilets included) stayed
+-- greyed out until the game was restarted. Clear it, and put the clothes back on, when no
+-- defecation action is left in the queue.
+local ticks = 0
+local function watchdog()
+    ticks = ticks + 1
+    if ticks < 30 then return end
+    ticks = 0
+    for i = 0, getNumActivePlayers() - 1 do
+        local chr = getSpecificPlayer(i)
+        if chr and not chr:isDead() then
+            local busy = ISTimedActionQueue.hasActionType(chr, "DefecationAction")
+                or ISTimedActionQueue.hasActionType(chr, "DefecationDropPantsAction")
+            if not busy then
+                if pending[chr] then
+                    local items = pending[chr]
+                    pending[chr] = nil
+                    wearBack(chr, items)
+                end
+                if DF and DF.playerDefecating and i == 0 then DF.playerDefecating = false end
+            end
+        end
+    end
+end
+
 Events.OnGameStart.Add(install)
+Events.OnTick.Add(watchdog)
