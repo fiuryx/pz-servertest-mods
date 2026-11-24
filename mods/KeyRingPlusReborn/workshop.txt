@@ -26,6 +26,7 @@ description=
 description=[h2]Changelog[/h2]
 description=[list]
 description=[*]Disposable and battery lighters now fit on the key ring (only the refillable lighter was accepted before).
+description=[*]Key ring icon and model texture toned down (less saturated, warmer) so they match the vanilla item style.
 description=[/list]
 tags=Build 42;Items;Multiplayer;QoL
 visibility=public
