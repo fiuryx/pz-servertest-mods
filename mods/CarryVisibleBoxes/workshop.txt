@@ -1,4 +1,5 @@
 version=1
+id=3845324410
 title=Carry Visible Boxes and Bags (B42)
 description=[h1]Carry Visible Boxes and Bags (B42)[/h1]
 description=In Build 42 many boxes and bags disappear when you hold them: the character walks with empty hands. Carry Visible Items covers bottles, radios, car parts and much more, but not boxes. This small add-on does the same for them.
