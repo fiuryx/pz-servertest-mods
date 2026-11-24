@@ -17,6 +17,8 @@ module Base
         PutInSound = PutItemInBag,
         RunSpeedModifier = 0.97,
         StaticModel = AC_CageSmall,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
         WorldStaticModel = AC_CageSmall,
         Tags = base:hasmetal,
     }
@@ -36,6 +38,8 @@ module Base
         PutInSound = PutItemInBag,
         RunSpeedModifier = 0.93,
         StaticModel = AC_Carrier,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
         WorldStaticModel = AC_Carrier,
     }
 }

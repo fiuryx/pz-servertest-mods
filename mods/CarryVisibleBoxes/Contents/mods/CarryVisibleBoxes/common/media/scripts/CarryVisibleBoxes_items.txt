@@ -506,4 +506,24 @@ module Base
         primaryAnimMask = holdingbagright,
         secondaryAnimMask = holdingbagleft,
     }
+    item Generator
+    {
+        StaticModel = CVB_Generator,
+        WorldStaticModel = CVB_Generator,
+    }
+    item Generator_Yellow
+    {
+        StaticModel = CVB_Generator_Yellow,
+        WorldStaticModel = CVB_Generator_Yellow,
+    }
+    item Generator_Blue
+    {
+        StaticModel = CVB_Generator_Blue,
+        WorldStaticModel = CVB_Generator_Blue,
+    }
+    item Generator_Old
+    {
+        StaticModel = CVB_Generator_Old,
+        WorldStaticModel = CVB_Generator_Old,
+    }
 }

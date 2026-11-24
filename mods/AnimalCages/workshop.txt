@@ -25,6 +25,7 @@ description=[b]Changelog[/b]
 description=[list]
 description=[*]1.1: survival time inside cages (hunger, thirst and death), status in the cage name.
 description=[*]1.1.1: fixed "Catch" in multiplayer: the animal was picked up but not put in the cage.
+description=[*]1.1.2: cages and carriers are held in the hand like a bag.
 description=[/list]
 description=English and Spanish. Multiplayer: the actions run on the server like vanilla animal actions.
 tags=Build 42;Items;Multiplayer;Realistic
