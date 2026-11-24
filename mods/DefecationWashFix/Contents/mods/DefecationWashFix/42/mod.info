@@ -1,0 +1,7 @@
+name=Defecation - Clean Soiled Clothes Fix (B42)
+id=DefecationWashFix
+require=\Defecation
+loadModAfter=\Defecation
+description=Makes the "Clean the feces" option of the Defecation mod show up again on water sources in Build 42.22. Client side only.
+poster=poster.png
+versionMin=42.0
