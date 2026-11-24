@@ -14,8 +14,7 @@ Cada carpeta de `mods/` es una carpeta de subida al Workshop tal cual (`workshop
 | ContainerButtonDrag | Container Button Drag (B42) | ContainerButtonDrag | [3842887376](https://steamcommunity.com/sharedfiles/filedetails/?id=3842887376) |
 | CoolerBackpackMPFix | Cooler Backpack - MP Fix (B42) | CoolerBackpackMPFix | [3842854321](https://steamcommunity.com/sharedfiles/filedetails/?id=3842854321) |
 | DebugMenuMPRoleFix | Debug Menu - MP Role Fix (B42) | DebugMenuMPRoleFix | [3844446161](https://steamcommunity.com/sharedfiles/filedetails/?id=3844446161) |
-| DefecationTextFix | Defecation - Toilet Option Translation Fix (B42) | DefecationTextFix | [3843220768](https://steamcommunity.com/sharedfiles/filedetails/?id=3843220768) |
-| DefecationWashFix | Defecation - Clean Soiled Clothes Fix (B42) | DefecationWashFix | (pendiente) |
+| DefecationFixes | Defecation Fixes (B42) | DefecationTextFix | [3843220768](https://steamcommunity.com/sharedfiles/filedetails/?id=3843220768) |
 | DynamicTarpsFix | Dynamic Tarp Cover - Server Fix (B42) | DynamicTarpsFix | [3841650817](https://steamcommunity.com/sharedfiles/filedetails/?id=3841650817) |
 | ItemStatusCleanUI | Item Status CleanUI (B42) | EstadoObjetosCleanUI | [3842038747](https://steamcommunity.com/sharedfiles/filedetails/?id=3842038747) |
 | ExtraGunSlotMPFix | Extra Gun Slot - Multiplayer Fix (B42) | ExtraGunSlotMPFix | [3836671547](https://steamcommunity.com/sharedfiles/filedetails/?id=3836671547) |

@@ -1,0 +1,7 @@
+name=Defecation Fixes (B42)
+id=DefecationTextFix
+require=\Defecation
+loadModAfter=\Defecation
+description=Fixes for the Defecation mod in Build 42.22: translates the toilet "Defecate" option and restores the "Clean the feces" option on water sources. Client side only.
+poster=poster.png
+versionMin=42.0

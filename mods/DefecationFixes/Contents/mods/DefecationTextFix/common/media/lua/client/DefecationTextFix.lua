@@ -1,4 +1,4 @@
--- Defecation - Toilet Option Translation Fix (B42)
+-- Defecation Fixes (B42) - part 1: toilet option translation
 -- The Defecation mod adds the toilet option with the fixed English text
 -- "Defecate" instead of using its own translation key. After the world
 -- context menu is built, this renames that option to getText("ContextMenu_Defecate")

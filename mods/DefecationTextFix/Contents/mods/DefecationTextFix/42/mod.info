@@ -1,7 +1,0 @@
-name=Defecation - Toilet Option Translation Fix (B42)
-id=DefecationTextFix
-require=\Defecation
-loadModAfter=\Defecation
-description=Translates the "Defecate" option of the toilet context menu, which the Defecation mod shows in English in every language. Client side only.
-poster=poster.png
-versionMin=42.0

@@ -1,4 +1,4 @@
--- Defecation - Clean Soiled Clothes Fix (B42)
+-- Defecation Fixes (B42) - part 2: clean soiled clothes at water sources
 -- The Defecation mod adds "Clean the feces" only inside the water source submenu, looking it up by name.
 -- In 42.22 that submenu is built in Java and the lookup can fail (bath and shower mods, world items,
 -- rain collectors...), so the option never shows. This handler runs after the mod's own: if the option
