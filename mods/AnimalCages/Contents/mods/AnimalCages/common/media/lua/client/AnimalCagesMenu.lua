@@ -20,6 +20,12 @@ local function freeCagesFor(player, animal)
     return out
 end
 
+-- Menu icon: the cage's own item icon (the game draws it next to the option).
+local function setIcon(opt, item)
+    if opt and item then pcall(function() opt.iconTexture = item:getTex() end) end
+    return opt
+end
+
 local function tooBigTooltip(names)
     local tip = ISWorldObjectContextMenu.addToolTip()
     tip.description = getText("Tooltip_AC_NoCage") .. (names ~= "" and (" <LINE> " .. names) or "")
@@ -49,10 +55,10 @@ local function onInventoryMenu(playerNum, context, items)
             local cages = freeCagesFor(player, animal)
             if #cages > 0 then
                 for _, cage in ipairs(cages) do
-                    context:addOption(getText("ContextMenu_AC_PutIn", cage:getName()), player, onPutFromHands, cage, item)
+                    setIcon(context:addOption(getText("ContextMenu_AC_PutIn", cage:getName()), player, onPutFromHands, cage, item), cage)
                 end
             elseif #playerCages(player) > 0 then
-                local opt = context:addOption(getText("ContextMenu_AC_PutIn", getText("IGUI_AC_ACage")), nil, nil)
+                local opt = setIcon(context:addOption(getText("ContextMenu_AC_PutIn", getText("IGUI_AC_ACage")), nil, nil), playerCages(player)[1])
                 opt.notAvailable = true
                 opt.toolTip = tooBigTooltip("")
             end
@@ -60,7 +66,7 @@ local function onInventoryMenu(playerNum, context, items)
         elseif AC.isCage(item) then
             local inside = AC.getAnimalItem(item)
             if inside and inside:getAnimal() then
-                context:addOption(getText("ContextMenu_AC_Release", inside:getAnimal():getFullName()), player, onRelease, item)
+                setIcon(context:addOption(getText("ContextMenu_AC_Release", inside:getAnimal():getFullName()), player, onRelease, item), item)
             end
             break
         end
@@ -102,7 +108,7 @@ local function onWorldMenu(playerNum, context, worldObjects, test)
             if animal:isDead() or not animal:isExistInTheWorld() then return end
             local free = freeCagesFor(player, animal)
             if #free > 0 then
-                context:addOption(getText("ContextMenu_AC_Catch", animal:getFullName(), free[1]:getName()), player, onCatch, free[1], animal)
+                setIcon(context:addOption(getText("ContextMenu_AC_Catch", animal:getFullName(), free[1]:getName()), player, onCatch, free[1], animal), free[1])
             end
         end)
     end
