@@ -1,4 +1,7 @@
 {
     "IGUI_AC_CageWith": "%1 (%2)",
-    "IGUI_AC_ACage": "a cage"
+    "IGUI_AC_ACage": "a cage",
+    "IGUI_AC_CageWithStatus": "%1 (%2, %3)",
+    "IGUI_AC_Thirsty": "thirsty",
+    "IGUI_AC_Weak": "very weak"
 }

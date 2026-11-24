@@ -37,7 +37,7 @@ function ISAnimalCagePut:complete()
     local md = self.cage:getModData()
     md.AC_time = getGameTime():getWorldAgeHours()
     md.AC_name = md.AC_name or self.cage:getName()
-    self.cage:setName(getText("IGUI_AC_CageWith", md.AC_name, item:getAnimal():getFullName()))
+    self.cage:setName(AnimalCages.cageName(self.cage, item:getAnimal()))
     self.cage:setCustomName(true)
     AnimalCages.syncItem(self.character, self.cage)
     return true

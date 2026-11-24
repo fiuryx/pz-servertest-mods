@@ -30,10 +30,20 @@ function ISAnimalCageRelease:complete()
 
     local md = self.cage:getModData()
     local animal = item:getAnimal()
+    local died = false
     if animal and md.AC_time then
         local hours = getGameTime():getWorldAgeHours() - md.AC_time
-        if hours > 0 then
+        local share = AnimalCages.timeShare(self.cage, animal)
+        if share >= 1 then
+            died = true
+        elseif hours > 0 then
+            -- Time inside without food or water, applied now (the game did not update it in the cage).
             pcall(function() animal:changeStress(math.min(AnimalCages.STRESS_MAX, hours * AnimalCages.STRESS_PER_HOUR)) end)
+            pcall(function()
+                local st = animal:getStats()
+                st:set(CharacterStat.THIRST, math.min(1, st:get(CharacterStat.THIRST) + share))
+                st:set(CharacterStat.HUNGER, math.min(1, st:get(CharacterStat.HUNGER) + share * 0.7))
+            end)
         end
     end
     if md.AC_name then self.cage:setName(md.AC_name) end
@@ -45,6 +55,25 @@ function ISAnimalCageRelease:complete()
     forceDropHeavyItems(self.character)
     self.character:setPrimaryHandItem(nil)
     self.character:setSecondaryHandItem(nil)
+    if died then
+        -- Too long without water: it comes out dead, as a corpse (same steps as the game's own kill).
+        local ok = pcall(function()
+            animal:setX(self.character:getX())
+            animal:setY(self.character:getY())
+            animal:setZ(self.character:getZ())
+            if self.character:getCurrentSquare() then animal:setCurrentSquare(self.character:getCurrentSquare()) end
+            animal:setHealth(0)
+            local body = IsoDeadBody.new(animal, true, false)
+            local corpse = body:getItem()
+            inv:Remove(item)
+            sendRemoveItemFromContainer(inv, item)
+            inv:AddItem(corpse)
+            sendAddItemToContainer(inv, corpse)
+            self.character:setPrimaryHandItem(corpse)
+            self.character:setSecondaryHandItem(corpse)
+        end)
+        if ok then return true end
+    end
     self.character:setPrimaryHandItem(item)
     self.character:setSecondaryHandItem(item)
     return true

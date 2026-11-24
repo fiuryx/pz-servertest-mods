@@ -25,6 +25,47 @@ AC.MIN_BAG_CAPACITY = 18      -- the small cage fits only in large bags (duffel,
 AC.STRESS_PER_HOUR = 4        -- stress added on release per hour spent inside
 AC.STRESS_MAX = 40
 
+-- Time an animal survives inside (no food or water): the game does not update animals stored in a
+-- container, so this is applied when it comes out. Hours of game time.
+AC.LIMIT_HOURS = {
+    rat = 48, ratbaby = 48, ratfemale = 48, mouse = 48, mousefemale = 48, mousepups = 48,
+    chick = 48, turkeypoult = 48, rabkitten = 48,
+    hen = 72, cockerel = 72, turkeyhen = 72, gobblers = 72, rabdoe = 72, rabbuck = 72,
+    raccoonkit = 72, raccoonsow = 72, raccoonboar = 72,
+    lamb = 96, piglet = 96,
+}
+AC.LIMIT_DEFAULT = 72
+AC.WARN_THIRSTY = 0.4     -- share of the limit: name shows "thirsty"
+AC.WARN_WEAK = 0.75       -- share of the limit: name shows "very weak"
+
+function AC.limitFor(animal)
+    local ok, t = pcall(function() return animal:getAnimalType() end)
+    return (ok and t and AC.LIMIT_HOURS[t]) or AC.LIMIT_DEFAULT
+end
+
+-- Share (0..1+) of the survival limit already spent inside this cage.
+function AC.timeShare(cage, animal)
+    local md = cage:getModData()
+    if not md.AC_time or not animal then return 0 end
+    local hours = getGameTime():getWorldAgeHours() - md.AC_time
+    if hours <= 0 then return 0 end
+    return hours / AC.limitFor(animal)
+end
+
+-- Cage name with the animal and, when it matters, how it is doing.
+function AC.cageName(cage, animal)
+    local md = cage:getModData()
+    local base = md.AC_name or (cage:getScriptItem() and cage:getScriptItem():getDisplayName()) or cage:getName()
+    if not animal then return base end
+    local share = AC.timeShare(cage, animal)
+    if share >= AC.WARN_WEAK then
+        return getText("IGUI_AC_CageWithStatus", base, animal:getFullName(), getText("IGUI_AC_Weak"))
+    elseif share >= AC.WARN_THIRSTY then
+        return getText("IGUI_AC_CageWithStatus", base, animal:getFullName(), getText("IGUI_AC_Thirsty"))
+    end
+    return getText("IGUI_AC_CageWith", base, animal:getFullName())
+end
+
 function AC.isCage(item)
     return item ~= nil and AC.ALLOWED[item:getFullType()] ~= nil
 end

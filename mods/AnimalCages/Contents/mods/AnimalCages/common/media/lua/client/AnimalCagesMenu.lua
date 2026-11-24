@@ -131,3 +131,21 @@ function ISInventoryTransferAction:isValid()
     end
     return vanillaValid(self)
 end
+
+-- Keep the name of the cages you carry up to date ("thirsty", "very weak"). Display only: the real
+-- effects are applied by the server when the animal comes out.
+local function refreshNames()
+    for i = 0, getNumActivePlayers() - 1 do
+        local player = getSpecificPlayer(i)
+        if player and not player:isDead() then
+            for _, cage in ipairs(playerCages(player)) do
+                local inside = AC.getAnimalItem(cage)
+                if inside and inside:getAnimal() then
+                    local name = AC.cageName(cage, inside:getAnimal())
+                    if cage:getName() ~= name then cage:setName(name) end
+                end
+            end
+        end
+    end
+end
+Events.EveryTenMinutes.Add(function() pcall(refreshNames) end)

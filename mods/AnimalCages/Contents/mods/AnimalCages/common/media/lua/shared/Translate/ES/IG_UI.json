@@ -1,4 +1,7 @@
 {
     "IGUI_AC_CageWith": "%1 (%2)",
-    "IGUI_AC_ACage": "una jaula"
+    "IGUI_AC_ACage": "una jaula",
+    "IGUI_AC_CageWithStatus": "%1 (%2, %3)",
+    "IGUI_AC_Thirsty": "con sed",
+    "IGUI_AC_Weak": "muy débil"
 }
