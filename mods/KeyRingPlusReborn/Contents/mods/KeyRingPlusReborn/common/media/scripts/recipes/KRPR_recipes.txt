@@ -1,14 +1,15 @@
 module Base
 {
-    craftRecipe BuyPFKeyRing
+    craftRecipe MakeSurvivalKeyRing
     {
         timedAction = Making,
-        time = 20,
+        time = 60,
         Tags = InHandCraft;CanBeDoneInDark,
         category = Miscellaneous,
         inputs
         {
-            item 150 [Base.Money] mode:destroy,
+            item 2 [Base.Wire],
+            item 1 [Base.Twine],
         }
         outputs
         {
