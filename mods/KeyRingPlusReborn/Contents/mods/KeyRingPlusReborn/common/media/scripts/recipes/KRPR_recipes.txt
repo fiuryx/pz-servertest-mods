@@ -8,6 +8,7 @@ module Base
         category = Miscellaneous,
         inputs
         {
+            item 1 tags[base:pliers] mode:keep flags[MayDegradeLight],
             item 2 [Base.Wire],
             item 1 [Base.Twine],
         }
