@@ -1,4 +1,5 @@
 version=1
+id=3845282050
 title=Animal Cages and Carriers (B42)
 description=[h1]Animal Cages and Carriers (B42)[/h1]
 description=In Build 42 a live animal can only be carried in your arms or left on the ground: no bag, crate or trunk accepts it. This mod adds two one-animal containers so you can move small animals the realistic way.

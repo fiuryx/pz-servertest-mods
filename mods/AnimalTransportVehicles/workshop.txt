@@ -1,4 +1,5 @@
 version=1
+id=3845282147
 title=Animal Transport in Vehicles (B42)
 description=[h1]Animal Transport in Vehicles (B42)[/h1]
 description=In vanilla Build 42 only livestock and horse trailers can carry animals. This mod gives the vehicles you already have a small animal space in their trunk or truck bed, using the game's own livestock trailer system.
