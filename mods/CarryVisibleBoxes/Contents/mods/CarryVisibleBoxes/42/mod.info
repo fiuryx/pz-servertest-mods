@@ -1,0 +1,8 @@
+name=Carry Visible Boxes and Bags (B42)
+id=CarryVisibleBoxes
+loadModAfter=\CVI
+icon=icon.png
+poster=poster.png
+versionMin=42.13
+modversion=1.0.0
+description=Shows boxes, cartons, parcels and bags in your hands (produce boxes, shoeboxes, ammo and nail cartons, food boxes, paper bags...), using each item's own model. Visual only. Works alone or with Carry Visible Items.

@@ -1,0 +1,509 @@
+module Base
+{
+    /* Carry Visible Boxes and Bags: show boxes, cartons, parcels and bags in the hands,
+       using each item's own world model. Visual only: no stat is changed. */
+    item 3030Carton
+    {
+        StaticModel = Parcel_Ammo_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item 308Carton
+    {
+        StaticModel = Parcel_Ammo_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item 556Carton
+    {
+        StaticModel = Parcel_Military_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item AdhesiveBandageBox
+    {
+        StaticModel = MedicalParcel_Green,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item AdhesiveTapeBox
+    {
+        StaticModel = Parcel_Food_Small,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item AntibioticsBox
+    {
+        StaticModel = MedicalParcel_Red,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item BandageBox
+    {
+        StaticModel = MedicalParcel_Green,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item BatteryBox
+    {
+        StaticModel = Parcel_Food_Small,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item BoxOfJars
+    {
+        StaticModel = BoxOfJars,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Bullets357Carton
+    {
+        StaticModel = Parcel_Ammo_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Bullets38Carton
+    {
+        StaticModel = Parcel_Ammo_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Bullets44Carton
+    {
+        StaticModel = Parcel_Ammo_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Bullets45Carton
+    {
+        StaticModel = Parcel_Ammo_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Bullets9mmCarton
+    {
+        StaticModel = Parcel_Ammo_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CandleBox
+    {
+        StaticModel = Parcel_Food_ExtraSmall,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedBolognese_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedCarrots_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedChili_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedCorn_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedCornedBeef_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedFruitBeverage_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedFruitCocktail_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedMilk_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedMushroomSoup_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedPeaches_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedPeas_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedPineapple_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedPotato_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedSardines_Box
+    {
+        StaticModel = Parcel_Food_Small,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CannedTomato_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CapGunCapBox
+    {
+        StaticModel = CapGunCapBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CatFoodBag
+    {
+        StaticModel = CatFoodBag,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CigarBox
+    {
+        StaticModel = CigarBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CigarBox_Gaming
+    {
+        StaticModel = CigarBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CigarBox_Keepsakes
+    {
+        StaticModel = CigarBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CigarBox_Kids
+    {
+        StaticModel = CigarBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CigaretteCarton
+    {
+        StaticModel = CigaretteCarton,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item ColdpackBox
+    {
+        StaticModel = MedicalParcel_Red,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item CottonBallsBox
+    {
+        StaticModel = MedicalParcel_Green,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item DentedCan_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item DogFoodBag
+    {
+        StaticModel = DogFoodBag,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Dogfood_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item DuctTapeBox
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item FishingHookBox
+    {
+        StaticModel = BoxOfFishingHooks,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Garbagebag_box
+    {
+        StaticModel = Garbagebag_box,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item JewelleryBox
+    {
+        StaticModel = JewelleryBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item JewelleryBox_Fancy
+    {
+        StaticModel = JewelleryBox_Fancy,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item LightBulbBox
+    {
+        StaticModel = Parcel_Food_ExtraSmall,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Lunchbag
+    {
+        StaticModel = Paperbag_Ground,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Macandcheese_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item MysteryCan_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item NailsBox
+    {
+        StaticModel = NailsBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item NailsCarton
+    {
+        StaticModel = Parcel_Hardware_Large,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item PaperBag
+    {
+        StaticModel = Paperbag_Ground,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Paperbag_Jays
+    {
+        StaticModel = PaperbagJays_Ground,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Paperbag_Spiffos
+    {
+        StaticModel = PaperbagSpiffo_Ground,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item PaperclipBox
+    {
+        StaticModel = PaperclipBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Parcel_ExtraLarge
+    {
+        StaticModel = Parcel1,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Parcel_ExtraSmall
+    {
+        StaticModel = Parcel3,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Parcel_Large
+    {
+        StaticModel = Parcel2,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Parcel_Medium
+    {
+        StaticModel = Parcel4,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Parcel_Small
+    {
+        StaticModel = Parcel5,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item ProduceBox_ExtraLarge
+    {
+        StaticModel = ProduceBox_ExtraLarge,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item ProduceBox_ExtraSmall
+    {
+        StaticModel = ProduceBox_ExtraSmall,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item ProduceBox_Large
+    {
+        StaticModel = ProduceBox_Large,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item ProduceBox_Medium
+    {
+        StaticModel = ProduceBox_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item ProduceBox_Small
+    {
+        StaticModel = ProduceBox_Small,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item ScrewsBox
+    {
+        StaticModel = ScrewsBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item ScrewsCarton
+    {
+        StaticModel = Parcel_Hardware_Large,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item SeedBag
+    {
+        StaticModel = SeedBag,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item SeedBag_Farming
+    {
+        StaticModel = SeedBag,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item Shoebox
+    {
+        StaticModel = Shoebox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item ShotgunShellsCarton
+    {
+        StaticModel = Parcel_Ammo_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item SuspiciousPackage
+    {
+        StaticModel = SuspiciousPackage,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item SutureNeedleBox
+    {
+        StaticModel = MedicalParcel_Red,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item TakeoutBox_Styrofoam
+    {
+        StaticModel = TakeoutBox_Styrofoam,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item TinnedBeans_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item TinnedSoup_Box
+    {
+        StaticModel = Parcel_Food_Medium,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item TissueBox
+    {
+        StaticModel = TissueBox,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item TongueDepressorBox
+    {
+        StaticModel = MedicalParcel_Green,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item TunaTin_Box
+    {
+        StaticModel = Parcel_Food_Small,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item WaterRationCan_Box
+    {
+        StaticModel = Parcel_Medium_Ration,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item WineRed_Boxed
+    {
+        StaticModel = Parcel_Liquor_Large,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+    item WineWhite_Boxed
+    {
+        StaticModel = Parcel_Liquor_Large,
+        primaryAnimMask = holdingbagright,
+        secondaryAnimMask = holdingbagleft,
+    }
+}
