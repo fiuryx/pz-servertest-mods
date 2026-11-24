@@ -1,9 +1,9 @@
 module Base
 {
-    model PFKeyRing
+    model KRPR_Carabiner
     {
-        mesh = WorldItems/PFKeyRing,
-        texture = itemTextures/PFKeyRing,
+        mesh = WorldItems/KRPR_Carabiner,
+        texture = itemTextures/KRPR_Carabiner,
         scale = 0.004,
     }
 }

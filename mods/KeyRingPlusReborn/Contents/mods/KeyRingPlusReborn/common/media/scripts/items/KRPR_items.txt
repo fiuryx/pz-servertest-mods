@@ -9,7 +9,7 @@ module Base
         DisplayCategory = Memento,
         ItemType = base:container,
         Weight = 0.05,
-        Icon = Keychain_PFrog,
+        Icon = KeyRingCarabiner,
         Capacity = 2,
         WeightReduction = 85,
         CloseSound = CloseKeyRing,
@@ -18,8 +18,8 @@ module Base
         MetalValue = 5.0,
         AcceptItemFunction = AcceptItemFunction.KeyRingPlus,
         Tooltip = Tooltip_KeyRingPlus,
-        StaticModel = PFKeyRing,
-        WorldStaticModel = PFKeyRing,
+        StaticModel = KRPR_Carabiner,
+        WorldStaticModel = KRPR_Carabiner,
         Tags = base:keyring;base:hasmetal;base:neverempty;base:morewhennozombies;base:bagsfillexception;base:ignorezombiedensity;base:ismemento,
     }
 }
