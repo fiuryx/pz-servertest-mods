@@ -4,11 +4,30 @@ require "AnimalCages"
 -- Puts the animal the player is holding (picked-up animal item) into an empty cage or carrier.
 ISAnimalCagePut = ISBaseTimedAction:derive("ISAnimalCagePut")
 
+-- The animal item to cage: the one with this animal ID, or else the animal held in the hands.
+-- (Right after "Catch", the item created by the pickup can take a moment to reach the client.)
+local function animalItem(self)
+    local inv = self.character:getInventory()
+    local item = AnimalCages.findAnimalItem(inv, self.animalId)
+    if item then return item end
+    local hand = self.character:getPrimaryHandItem()
+    if instanceof(hand, "AnimalInventoryItem") and hand:getAnimal() and inv:contains(hand) then return hand end
+    return nil
+end
+
 function ISAnimalCagePut:isValid()
     local inv = self.character:getInventory()
     if not inv:contains(self.cage) or not AnimalCages.isEmpty(self.cage) then return false end
-    local item = AnimalCages.findAnimalItem(inv, self.animalId)
+    -- In multiplayer the server checks the animal when the action completes.
+    if isClient() then return true end
+    local item = animalItem(self)
     return item ~= nil and AnimalCages.accepts(self.cage, item:getAnimal())
+end
+
+function ISAnimalCagePut:waitToStart()
+    -- Wait (up to ~5 s) for the picked-up animal to show up in the inventory.
+    self.waited = (self.waited or 0) + 1
+    return animalItem(self) == nil and self.waited < 300
 end
 
 function ISAnimalCagePut:start()
@@ -22,7 +41,7 @@ end
 
 function ISAnimalCagePut:complete()
     local inv = self.character:getInventory()
-    local item = AnimalCages.findAnimalItem(inv, self.animalId)
+    local item = animalItem(self)
     if not item or not inv:contains(self.cage) or not AnimalCages.isEmpty(self.cage) then return false end
     if not AnimalCages.accepts(self.cage, item:getAnimal()) then return false end
 
