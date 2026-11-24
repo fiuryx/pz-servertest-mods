@@ -13669,5 +13669,7 @@
     "IGUI_QNW_DebugMenu_ModeSwitch_ReserveAmmo": "Munición de reserva ilimitada",
     "IGUI_CraftCategory_Tailoring": "Sastrería",
     "IGUI_HotbarAttachment_AZWebbingLeft": "Ranura de cinturón izquierdo",
-    "IGUI_HotbarAttachment_AZWebbingRight": "Ranura de cinturón derecho"
+    "IGUI_HotbarAttachment_AZWebbingRight": "Ranura de cinturón derecho",
+    "IGUI_AC_CageWith": "%1 (%2)",
+    "IGUI_AC_ACage": "una jaula"
 }

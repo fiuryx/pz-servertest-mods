@@ -24210,5 +24210,7 @@
     "Base.Plasticbag_Secondary": "Bolsa de plástico acoplable",
     "Base.FirstAidKit_Secondary": "Botiquín acoplable",
     "ItemName_Base.Plasticbag_Secondary": "Bolsa de plástico acoplable",
-    "ItemName_Base.FirstAidKit_Secondary": "Botiquín acoplable"
+    "ItemName_Base.FirstAidKit_Secondary": "Botiquín acoplable",
+    "Base.AnimalCageSmall": "Jaula pequeña para animales",
+    "Base.AnimalCarrier": "Transportín"
 }

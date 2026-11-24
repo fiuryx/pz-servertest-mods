@@ -28,6 +28,8 @@ Cada carpeta de `mods/` es una carpeta de subida al Workshop tal cual (`workshop
 | SortedModOptions | Sorted Mod Options (B42) | SortedModOptions | [3843168098](https://steamcommunity.com/sharedfiles/filedetails/?id=3843168098) |
 | TakeAnyAmountFix | Take Any Amount - Fix (B42) | TakeAnyAmountFix | [3842230284](https://steamcommunity.com/sharedfiles/filedetails/?id=3842230284) |
 | TraduccionServerES | Multiple Traduccion ES - B42 | TraduccionServerFiuRyES | [3834692364](https://steamcommunity.com/sharedfiles/filedetails/?id=3834692364) |
+| AnimalCages | Animal Cages and Carriers (B42) | AnimalCages | (pendiente) |
+| AnimalTransportVehicles | Animal Transport in Vehicles (B42) | AnimalTransportVehicles | (pendiente) |
 
 KeyRingPlusReborn, LightSwitchBacklightFixed y BCMIExtension parten del código de sus autores originales; el crédito está en su `workshop.txt`.
 

@@ -1,0 +1,15 @@
+module Base
+{
+    model AC_CageSmall
+    {
+        mesh = WorldItems/AC_CageSmall,
+        texture = itemTextures/AC_CageSmall,
+        scale = 0.004,
+    }
+    model AC_Carrier
+    {
+        mesh = WorldItems/AC_Carrier,
+        texture = itemTextures/AC_Carrier,
+        scale = 0.004,
+    }
+}

@@ -1,0 +1,7 @@
+name=Animal Transport in Vehicles (B42)
+id=AnimalTransportVehicles
+icon=icon.png
+poster=poster.png
+versionMin=42.13
+modversion=1.0.0
+description=Lets existing cars, pickups, vans and cargo trailers (vanilla and modded) carry small animals in the trunk or truck bed, using the game's own livestock trailer system.

@@ -3560,5 +3560,8 @@
     "ContextMenu_TipHatBack": "Inclinar sombrero hacia atrás",
     "ContextMenu_WearHigher": "Vestir más arriba",
     "ContextMenu_WearLower": "Vestir más abajo",
-    "ContextMenu_WearNormally2": "Vestir máscara y cubrezapatos"
+    "ContextMenu_WearNormally2": "Vestir máscara y cubrezapatos",
+    "ContextMenu_AC_PutIn": "Meter en: %1",
+    "ContextMenu_AC_Release": "Sacar: %1",
+    "ContextMenu_AC_Catch": "Atrapar %1 con: %2"
 }

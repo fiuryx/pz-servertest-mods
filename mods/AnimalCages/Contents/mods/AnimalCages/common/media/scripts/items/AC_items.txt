@@ -1,0 +1,41 @@
+module Base
+{
+    /* Animal Cages and Carriers: one-animal containers. The animal goes in only through the
+       mod's own actions (the game never lets players drag a live animal into a container). */
+    item AnimalCageSmall
+    {
+        DisplayCategory = Container,
+        ItemType = base:container,
+        Weight = 1.0,
+        Icon = AnimalCageSmall,
+        Capacity = 6,
+        WeightReduction = 0,
+        CanHaveHoles = false,
+        AcceptItemFunction = AcceptItemFunction.AnimalCage,
+        OpenSound = OpenBag,
+        CloseSound = CloseBag,
+        PutInSound = PutItemInBag,
+        RunSpeedModifier = 0.97,
+        StaticModel = AC_CageSmall,
+        WorldStaticModel = AC_CageSmall,
+        Tags = base:hasmetal,
+    }
+
+    item AnimalCarrier
+    {
+        DisplayCategory = Container,
+        ItemType = base:container,
+        Weight = 2.0,
+        Icon = AnimalCarrier,
+        Capacity = 20,
+        WeightReduction = 0,
+        CanHaveHoles = false,
+        AcceptItemFunction = AcceptItemFunction.AnimalCage,
+        OpenSound = OpenBag,
+        CloseSound = CloseBag,
+        PutInSound = PutItemInBag,
+        RunSpeedModifier = 0.93,
+        StaticModel = AC_Carrier,
+        WorldStaticModel = AC_Carrier,
+    }
+}

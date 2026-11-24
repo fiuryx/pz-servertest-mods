@@ -2826,5 +2826,6 @@
     "Tooltip_Venkman": "Peter Venkman solía llevar esto.",
     "Tooltip_Winslow": "Espero que no me haga falta la vacuna del tétanos...",
     "Tooltip_Zeddemore": "Winston Zeddemore solía llevar esto.",
-    "Tooltip_DefecateNotPotentEnough": " no es lo bastante fuerte"
+    "Tooltip_DefecateNotPotentEnough": " no es lo bastante fuerte",
+    "Tooltip_AC_NoCage": "Ninguna de tus jaulas o transportines puede llevar este animal, o ya están ocupados. Jaula pequeña: pollitos, gallinas, gallos, pavipollos, ratas, ratones y gazapos. Transportín: además conejos, mapaches, pavos, corderos y lechones."
 }

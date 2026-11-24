@@ -1,0 +1,19 @@
+module Base
+{
+    craftRecipe MakeAnimalCageSmall
+    {
+        timedAction = Making,
+        time = 150,
+        Tags = InHandCraft,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 tags[base:pliers] mode:keep flags[MayDegradeLight],
+            item 5 [Base.Wire],
+        }
+        outputs
+        {
+            item 1 Base.AnimalCageSmall,
+        }
+    }
+}
