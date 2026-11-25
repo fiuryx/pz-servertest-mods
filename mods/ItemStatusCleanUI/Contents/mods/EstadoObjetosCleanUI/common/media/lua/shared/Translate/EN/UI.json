@@ -58,7 +58,7 @@
     "UI_EOC_Tip_Read": "Read",
     "UI_EOC_Tip_Pages": "%1 / %2 pages",
     "UI_EOC_BooksDone": "Bar on what you have already read",
-    "UI_EOC_BooksDone_tooltip": "Also shows the green bar on things you have already read, watched or listened to. Turn it off to see only what you still need.",
+    "UI_EOC_BooksDone_tooltip": "Shows the green bar on things you have already read, watched or listened to. Items that already show the game's own green check never get a bar, so the same information is not shown twice.",
     "UI_EOC_BagItems": "Space bar on bags and carts",
     "UI_EOC_BagItems_tooltip": "In the inventory list, draws a bar on backpacks, bags and carts (Unified Carts too) with the space used: green with room, yellow and orange nearly full, red full. Empty ones have no bar.",
     "UI_EOC_ReadAll": "Read bar on magazines, books, maps and discs",

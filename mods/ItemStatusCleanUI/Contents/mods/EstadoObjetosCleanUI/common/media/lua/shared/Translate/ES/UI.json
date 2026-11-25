@@ -58,7 +58,7 @@
     "UI_EOC_Tip_Read": "Leído",
     "UI_EOC_Tip_Pages": "%1 / %2 páginas",
     "UI_EOC_BooksDone": "Barra en lo ya leído",
-    "UI_EOC_BooksDone_tooltip": "Muestra la barra verde también en lo que ya has leído, visto o escuchado. Desactívala si solo quieres ver lo que te falta.",
+    "UI_EOC_BooksDone_tooltip": "Muestra la barra verde en lo que ya has leído, visto o escuchado. Lo que ya lleva el check verde del juego nunca lleva barra, para no repetir la misma información.",
     "UI_EOC_BagItems": "Barra de espacio en bolsas y carritos",
     "UI_EOC_BagItems_tooltip": "En la lista del inventario, dibuja una barra en las mochilas, bolsas y carritos (también los de Unified Carts) con el espacio ocupado: verde con sitio, amarilla y naranja casi lleno, roja lleno. Los que están vacíos no llevan barra.",
     "UI_EOC_ReadAll": "Barra de leído en revistas, libros, mapas y discos",

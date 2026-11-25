@@ -19,6 +19,7 @@
 --       habilidad, revistas de recetas, libros, folletos, mapas, CD y VHS (azul claro sin
 --       leer, morado a medias, verde leido) y marca "Ya lo tengo" con icono, manual o
 --       automatica, propia o compartida con el servidor o la faccion (EstadoObjetos_Marks.lua).
+-- v1.13: sin barra en lo que ya lleva el check verde del juego (leido, visto, escuchado).
 -- Mod propio para el servidor de FiuRy. Solo dibuja: no cambia objetos ni guarda nada.
 -- Se engancha al final de renderdetails() de los dos modos de inventario de CleanUI
 -- (y del vanilla si se usa sin CleanUI), sin sustituir a otros mods que ya lo envuelvan.
@@ -199,8 +200,21 @@ local function pagesStatus(item, player, cfg, ex)
     return { 1, "unread", ex }
 end
 
+-- El juego ya pone su check verde en lo leido, visto, escuchado o en los mapas leidos
+-- (ISInventoryPane:isLiteratureRead + hasBeenSeen/hasBeenHeard/hasReadMap). En esos
+-- objetos no se dibuja barra: con el check ya se ve.
+local function vanillaTick(item, player, pane)
+    local ok, r = pcall(function()
+        if pane and pane.isLiteratureRead and pane:isLiteratureRead(player, item) then return true end
+        if item:hasBeenSeen(player) or item:hasBeenHeard(player) then return true end
+        return player:hasReadMap(item) == true
+    end)
+    return ok and r == true
+end
+
 local function readStatus(item, player, cfg)
     if not player then return nil end
+    if vanillaTick(item, player, cfg.pane) then return nil end
     if instanceof(item, "MapItem") then
         if not cfg.readAll or not call(item, "getMapID") then return nil end
         local ok, r = pcall(function() return player:hasReadMap(item) end)
@@ -706,6 +720,7 @@ local function drawBars(pane, doDragged)
 
     local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true), booksDone = opt("booksDone", true), bagItems = opt("bagItems", true), readAll = opt("readAll", true), marks = opt("marks", true) }
     cfg.player = getSpecificPlayer(pane.player or 0)
+    cfg.pane = pane
     local scroll = pane:getYScroll()
     local first = math.max(0, math.floor(-scroll / rowH) - 1)
     local last = math.max(first, math.ceil((pane:getHeight() - scroll) / rowH) + 1)
