@@ -14,6 +14,11 @@
 --       mochilas, muebles, maleteros...). Verde con sitio, roja llena. Con su opcion.
 -- v1.9: barra de lectura en los libros de habilidad (paginas leidas por el jugador).
 --       Solo sale si se ha empezado a leer; verde cuando esta terminado.
+-- v1.10: opcion "barra en lo ya leido".  v1.11: barra de espacio en bolsas y carritos.
+-- v1.12: sustituye a Has Been Read: barras de lectura (de cada jugador) en libros de
+--       habilidad, revistas de recetas, libros, folletos, mapas, CD y VHS (azul claro sin
+--       leer, morado a medias, verde leido) y marca "Ya lo tengo" con icono, manual o
+--       automatica, propia o compartida con el servidor o la faccion (EstadoObjetos_Marks.lua).
 -- Mod propio para el servidor de FiuRy. Solo dibuja: no cambia objetos ni guarda nada.
 -- Se engancha al final de renderdetails() de los dos modos de inventario de CleanUI
 -- (y del vanilla si se usa sin CleanUI), sin sustituir a otros mods que ya lo envuelvan.
@@ -37,7 +42,14 @@ local function setupOptions()
     o:addTickBox("contents", getText("UI_EOC_Contents"), true, getText("UI_EOC_Contents_tooltip"))
     o:addTickBox("containers", getText("UI_EOC_Containers"), true, getText("UI_EOC_Containers_tooltip"))
     o:addTickBox("books", getText("UI_EOC_Books"), true, getText("UI_EOC_Books_tooltip"))
+    o:addTickBox("readAll", getText("UI_EOC_ReadAll"), true, getText("UI_EOC_ReadAll_tooltip"))
     o:addTickBox("booksDone", getText("UI_EOC_BooksDone"), true, getText("UI_EOC_BooksDone_tooltip"))
+    o:addTickBox("marks", getText("UI_EOC_Marks"), true, getText("UI_EOC_Marks_tooltip"))
+    o:addTickBox("autoMark", getText("UI_EOC_AutoMark"), true, getText("UI_EOC_AutoMark_tooltip"))
+    local ms = o:addComboBox("marksShared", getText("UI_EOC_MarksShared"), getText("UI_EOC_MarksShared_tooltip"))
+    ms:addItem(getText("UI_EOC_MarksShared_Own"), true)
+    ms:addItem(getText("UI_EOC_MarksShared_Server"), false)
+    ms:addItem(getText("UI_EOC_MarksShared_Faction"), false)
     o:addTickBox("bagItems", getText("UI_EOC_BagItems"), true, getText("UI_EOC_BagItems_tooltip"))
     o:addTickBox("fresh", getText("UI_EOC_Fresh"), true, getText("UI_EOC_Fresh_tooltip"))
     o:addTickBox("stacks", getText("UI_EOC_Stacks"), true, getText("UI_EOC_Stacks_tooltip"))
@@ -165,24 +177,100 @@ end
 -- Devuelve la lista de barras a dibujar: { {ratio, tipo}, ... }
 -- tipo: "cond" (estado), "head" (cabeza del arma), "fill" (contenido),
 --       "fresh"/"stale"/"rot"/"frozen" (frescura de la comida)
--- Libros con paginas (los de habilidad): paginas leidas por el jugador local.
--- El juego lo guarda en el personaje (getAlreadyReadPages(tipo)) y en el libro.
-local function getReadProgress(item, showDone)
-    if not instanceof(item, "Literature") then return nil end
-    local pages = call(item, "getNumberOfPages")
-    if not pages or pages <= 0 then return nil end
-    local read = call(item, "getAlreadyReadPages") or 0
-    local player = getSpecificPlayer(0)
-    if player then
-        local ok, p = pcall(function() return player:getAlreadyReadPages(item:getFullType()) end)
-        if ok and p and p > read then read = p end
+-- Estado de lectura, siempre del jugador que mira (nunca del ejemplar: el juego guarda
+-- tambien en el libro las paginas leidas, y eso lo compartiria entre jugadores).
+--   { ratio, "unread" }  azul claro: sin leer / sin ver
+--   { ratio, "read" }    morado a medias (ratio = progreso), verde terminado (ratio 1)
+-- El tercer valor lleva los datos para el recuadro de informacion.
+local function doneBar(ex, cfg)
+    ex.done = true
+    if not cfg.booksDone then return nil end
+    return { 1, "read", ex }
+end
+
+local function pagesStatus(item, player, cfg, ex)
+    local pages = call(item, "getNumberOfPages") or 0
+    if pages <= 0 then return nil end
+    local read = 0
+    pcall(function() read = player:getAlreadyReadPages(item:getFullType()) or 0 end)
+    ex.read, ex.pages = math.min(read, pages), pages
+    if read >= pages then return doneBar(ex, cfg) end
+    if read > 0 then return { read / pages, "read", ex } end
+    return { 1, "unread", ex }
+end
+
+local function readStatus(item, player, cfg)
+    if not player then return nil end
+    if instanceof(item, "MapItem") then
+        if not cfg.readAll or not call(item, "getMapID") then return nil end
+        local ok, r = pcall(function() return player:hasReadMap(item) end)
+        if not ok then return nil end
+        local ex = { t = "map" }
+        if r then return doneBar(ex, cfg) end
+        return { 1, "unread", ex }
     end
-    if read <= 0 then return nil end       -- sin empezar: no se muestra
-    if read >= pages then
-        if not showDone then return nil end  -- opcion: ocultar los libros ya terminados
-        read = pages
+    local media = call(item, "getMediaData")
+    if media then
+        if not cfg.readAll then return nil end
+        local cat = call(media, "getCategory")
+        if cat ~= "CDs" and cat ~= "Retail-VHS" and cat ~= "Home-VHS" then return nil end
+        local ok, r = pcall(function()
+            return getZomboidRadio():getRecordedMedia():hasListenedToAll(player, media)
+        end)
+        if not ok then return nil end
+        local ex = { t = "media" }
+        if r then return doneBar(ex, cfg) end
+        return { 1, "unread", ex }
     end
-    return { read / pages, "read", { read, pages } }
+    if call(item, "getCategory") ~= "Literature" then return nil end
+
+    -- libros de habilidad
+    local skill = call(item, "getSkillTrained")
+    local sb = skill and SkillBook and SkillBook[skill]
+    if sb then
+        if not cfg.books then return nil end
+        local ex = { t = "skill", lmin = call(item, "getLvlSkillTrained") or 0, lmax = call(item, "getMaxLevelTrained") or 0 }
+        pcall(function() ex.lvl = player:getPerkLevel(sb.perk) end)
+        if ex.lvl and ex.lmax > 0 and ex.lvl >= ex.lmax then
+            ex.nothing = true
+            pcall(function()
+                ex.pages = item:getNumberOfPages()
+                ex.read = math.min(player:getAlreadyReadPages(item:getFullType()) or 0, ex.pages)
+            end)
+            return doneBar(ex, cfg)
+        end
+        return pagesStatus(item, player, cfg, ex)
+    end
+    if not cfg.readAll then return nil end
+
+    -- revistas y recortes de recetas
+    local learned = call(item, "getLearnedRecipes")
+    if learned and not learned:isEmpty() then
+        local known = nil
+        pcall(function() known = player:getKnownRecipes() end)
+        if not known then return nil end
+        local n, k = learned:size(), 0
+        for i = 0, n - 1 do if known:contains(learned:get(i)) then k = k + 1 end end
+        local ex = { t = "recipes", k = k, n = n }
+        if k >= n then return doneBar(ex, cfg) end
+        if k > 0 then return { k / n, "read", ex } end
+        return { 1, "unread", ex }
+    end
+
+    -- libros con titulo, folletos, panfletos y otros con paginas
+    local md = call(item, "getModData")
+    local ok, r = nil, nil
+    if md and md.literatureTitle then
+        ok, r = pcall(function() return player:getReadLiterature():containsKey(md.literatureTitle) end)
+    elseif md and md.printMedia and md.printMedia.id then
+        ok, r = pcall(function() return player:isPrintMediaRead(md.printMedia.id) end)
+    else
+        return pagesStatus(item, player, cfg, { t = "pages" })
+    end
+    if not ok then return nil end
+    local ex = { t = "lit" }
+    if r then return doneBar(ex, cfg) end
+    return { 1, "unread", ex }
 end
 
 -- Espacio ocupado de un contenedor que esta en la lista (mochilas, bolsas, carritos de
@@ -238,9 +326,9 @@ local function getBars(item, cfg)
         local bs = getBagSpace(item)
         if bs then table.insert(bars, bs) end
     end
-    if cfg.books then
-        local rp = getReadProgress(item, cfg.booksDone)
-        if rp then table.insert(bars, rp) end
+    if cfg.books or cfg.readAll then
+        local ok, rp = pcall(readStatus, item, cfg.player, cfg)
+        if ok and rp then table.insert(bars, rp) end
     end
     return bars
 end
@@ -308,6 +396,7 @@ local ICON_FILES = {
     dirt = "media/ui/EstadoObjetosCleanUI/eoc_dirt.png",
     wet = "media/ui/EstadoObjetosCleanUI/eoc_wet.png",
     soiled = "media/ui/EstadoObjetosCleanUI/eoc_soiled.png",
+    owned = "media/ui/EstadoObjetosCleanUI/eoc_owned.png",
 }
 local iconTex = {}
 local function texFor(kind)
@@ -324,6 +413,7 @@ local function colorFor(r, kind)
         if r >= 1.0 then return 0.20, 0.80, 0.20 end    -- verde: terminado
         return 0.60, 0.45, 0.95                          -- morado: leyendo
     end
+    if kind == "unread" then return 0.45, 0.78, 1.00 end -- azul claro: sin leer
     if kind == "capacity" then
         if r >= 1.0 then return 0.90, 0.15, 0.15 end    -- rojo: lleno
         if r >= 0.85 then return 0.95, 0.55, 0.10 end   -- naranja
@@ -446,9 +536,32 @@ local function tipLines(info)
         if ok and name then table.insert(lines, getText("UI_EOC_Tip_Stack", name)) end
     end
     local kind = info.kind
-    if kind == "read" and info.extra then
-        table.insert(lines, getText("UI_EOC_Tip_Read") .. ": " .. getText("UI_EOC_Tip_Pages", tostring(info.extra[1]), tostring(info.extra[2]))
-            .. " (" .. pctText(info.ratio * 100) .. ")")
+    if (kind == "read" or kind == "unread") and info.extra then
+        local ex = info.extra
+        local media = ex.t == "media"
+        if ex.done then
+            table.insert(lines, getText(media and "UI_EOC_Tip_MediaDone" or "UI_EOC_Tip_ReadDone"))
+        elseif kind == "unread" then
+            table.insert(lines, getText(media and "UI_EOC_Tip_MediaNew" or "UI_EOC_Tip_Unread"))
+        else
+            table.insert(lines, getText("UI_EOC_Tip_Reading"))
+        end
+        if ex.pages then
+            table.insert(lines, getText("UI_EOC_Tip_Read") .. ": " .. getText("UI_EOC_Tip_Pages", tostring(ex.read or 0), tostring(ex.pages))
+                .. " (" .. pctText((ex.read or 0) / ex.pages * 100) .. ")")
+        end
+        if ex.t == "skill" and ex.lvl then
+            table.insert(lines, getText("UI_EOC_Tip_Levels", tostring(ex.lmin), tostring(ex.lmax), tostring(ex.lvl)))
+            if ex.nothing then table.insert(lines, getText("UI_EOC_Tip_NothingToLearn")) end
+        end
+        if ex.t == "recipes" then
+            table.insert(lines, getText("UI_EOC_Tip_Recipes", tostring(ex.k), tostring(ex.n)))
+        end
+        if info.owned then table.insert(lines, getText("UI_EOC_Tip_Owned")) end
+        return lines
+    end
+    if kind == "owned" then
+        table.insert(lines, getText("UI_EOC_Tip_Owned"))
         return lines
     end
     if kind == "capacity" then
@@ -563,6 +676,24 @@ local function drawFlags(pane, x, y, iconSize, pos, flags, item, stack)
     end
 end
 
+-- Marca "Ya lo tengo": icono en la esquina libre del icono del objeto (la contraria a
+-- la de los iconos de estado y lejos de las barras).
+local function drawOwned(pane, x, y, iconSize, pos, item, stack)
+    local tex = texFor("owned")
+    if not tex then return end
+    local s = math.max(8, math.floor(iconSize * 0.45))
+    local cx, cy
+    if pos == POS_TOP or pos == POS_RIGHT then
+        cx, cy = x, y + iconSize - s                 -- abajo a la izquierda
+    elseif pos == POS_LEFT then
+        cx, cy = x + iconSize - s, y + iconSize - s  -- abajo a la derecha
+    else
+        cx, cy = x, y                                -- arriba a la izquierda
+    end
+    pane:drawTextureScaled(tex, cx, cy, s, s, 1, 1, 1, 1)
+    if probe then hit(cx, cy, s, s, { kind = "owned", item = item, stack = stack }) end
+end
+
 ----------------------------------------------------------------------
 -- Dibujo de las filas visibles
 ----------------------------------------------------------------------
@@ -573,7 +704,8 @@ local function drawBars(pane, doDragged)
     local rowH = pane.itemHgt
     if not map or not rowH or rowH <= 0 then return end
 
-    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true), booksDone = opt("booksDone", true), bagItems = opt("bagItems", true) }
+    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true), booksDone = opt("booksDone", true), bagItems = opt("bagItems", true), readAll = opt("readAll", true), marks = opt("marks", true) }
+    cfg.player = getSpecificPlayer(pane.player or 0)
     local scroll = pane:getYScroll()
     local first = math.max(0, math.floor(-scroll / rowH) - 1)
     local last = math.max(first, math.ceil((pane:getHeight() - scroll) / rowH) + 1)
@@ -633,6 +765,17 @@ local function drawBars(pane, doDragged)
                         if doDragged then pane:suspendStencil() end
                         drawFlags(pane, iconX + dx, iconY, iconSize, pos, flags, item, stacked)
                         if doDragged then pane:resumeStencil() end
+                    end
+                    if cfg.marks and EOCMarks and cfg.player then
+                        local okM, marked = pcall(function()
+                            local key = EOCMarks.keyFor(grouped and data.items[1] or item)
+                            return key and EOCMarks.isMarked(cfg.player, key)
+                        end)
+                        if okM and marked then
+                            if doDragged then pane:suspendStencil() end
+                            drawOwned(pane, iconX + dx, iconY, iconSize, pos, item, stacked)
+                            if doDragged then pane:resumeStencil() end
+                        end
                     end
                     if n > 0 then
                         local x = iconX + dx
