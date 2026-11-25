@@ -1,4 +1,5 @@
 version=1
+id=3845657678
 title=Server Item Name Fix (B42)
 description=[h1]Server Item Name Fix (B42)[/h1]
 description=On dedicated servers some item names are built by the server, which cannot look up item names in each player's language. Cooked dishes then show the internal code of an ingredient instead of its name, for example [b]"Bowl of Base.RicePot"[/b] instead of [b]"Bowl of Rice"[/b].
