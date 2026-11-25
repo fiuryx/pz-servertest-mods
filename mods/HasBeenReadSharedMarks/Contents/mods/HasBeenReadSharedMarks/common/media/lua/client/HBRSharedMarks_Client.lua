@@ -154,3 +154,38 @@ end
 Events.OnTick.Add(function() pcall(onTick) end)
 Events.OnServerCommand.Add(onServerCommand)
 Events.OnGameStart.Add(onGameStart)
+
+-- ---------------------------------------------------------------------------------------------
+-- Auto-mark is turned on and off only in the options ("Auto-Mark Items"), never from the
+-- right-click menu. Has Been Read's own option "allow pausing from the context menu" is kept off,
+-- and any pause left from before is cleared, so nobody ends up with auto-mark stuck paused.
+-- ---------------------------------------------------------------------------------------------
+local function noMenuToggle()
+    local api = PZAPI and PZAPI.ModOptions
+    local opts = api and api.getOptions and api:getOptions("P4HasBeenRead")
+    local o = opts and opts.getOption and opts:getOption("AllowAutoMarkToggle")
+    if o then
+        if o.value ~= false then
+            o.value = false
+            if o.setValue then pcall(function() o:setValue(false) end) end
+        end
+    end
+end
+
+local function clearPause()
+    noMenuToggle()
+    for i = 0, getNumActivePlayers() - 1 do
+        local player = getSpecificPlayer(i)
+        local md = player and player:getModData()
+        if md and md.P4HasBeenRead and md.P4HasBeenRead.doNotAutoMark then
+            md.P4HasBeenRead.doNotAutoMark = false
+            player:transmitModData()
+        end
+    end
+end
+
+Events.OnGameStart.Add(function() pcall(clearPause) end)
+-- before Has Been Read builds its part of the right-click menu
+if Events.OnPreFillWorldObjectContextMenu then
+    Events.OnPreFillWorldObjectContextMenu.Add(function() pcall(noMenuToggle) end)
+end

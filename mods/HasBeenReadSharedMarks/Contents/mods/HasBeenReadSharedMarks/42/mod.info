@@ -2,6 +2,6 @@ name=Has Been Read - Shared Marks (B42)
 id=HasBeenReadSharedMarks
 require=\P4HasBeenRead
 loadModAfter=\P4HasBeenRead
-description=Share Has Been Read item marks with the whole server or with your faction. Each player chooses in the Has Been Read options. Requires Has Been Read.
+description=Share Has Been Read item marks with the whole server or with your faction. Each player chooses in the Has Been Read options. Auto-mark is switched only from the options, not from the right-click menu. Requires Has Been Read.
 poster=poster.png
 versionMin=42.15
