@@ -20,6 +20,7 @@
 --       leer, morado a medias, verde leido) y marca "Ya lo tengo" con icono, manual o
 --       automatica, propia o compartida con el servidor o la faccion (EstadoObjetos_Marks.lua).
 -- v1.13: sin barra en lo que ya lleva el check verde del juego (leido, visto, escuchado).
+--        Barras pegadas al borde de la fila para tapar menos los iconos del juego.
 -- Mod propio para el servidor de FiuRy. Solo dibuja: no cambia objetos ni guarda nada.
 -- Se engancha al final de renderdetails() de los dos modos de inventario de CleanUI
 -- (y del vanilla si se usa sin CleanUI), sin sustituir a otros mods que ya lo envuelvan.
@@ -796,18 +797,21 @@ local function drawBars(pane, doDragged)
                         local x = iconX + dx
                         local y = iconY
                         local span = n * barH - (n - 1)   -- grosor total de las barras juntas
+                        -- pegadas al borde de la fila (fuera del dibujo del objeto en lo posible),
+                        -- para tapar menos los iconos del juego en las esquinas (check, receta favorita)
+                        local edge = math.max(0, math.floor(inset))
                         if doDragged then pane:suspendStencil() end
                         for i = 1, n do
                             local off = (i - 1) * (barH - 1)
                             local bx, by, bw, bh, vert
                             if pos == POS_TOP then
-                                bx, by, bw, bh, vert = x, y + off, iconSize, barH, false
+                                bx, by, bw, bh, vert = x, y - edge + off, iconSize, barH, false
                             elseif pos == POS_LEFT then
-                                bx, by, bw, bh, vert = x + off, y, barH, iconSize, true
+                                bx, by, bw, bh, vert = x - edge + off, y, barH, iconSize, true
                             elseif pos == POS_RIGHT then
-                                bx, by, bw, bh, vert = x + iconSize - span + off, y, barH, iconSize, true
+                                bx, by, bw, bh, vert = x + iconSize - span + edge + off, y, barH, iconSize, true
                             else
-                                bx, by, bw, bh, vert = x, y + iconSize - span + off, iconSize, barH, false
+                                bx, by, bw, bh, vert = x, y + iconSize - span + edge + off, iconSize, barH, false
                             end
                             drawBar(pane, bx, by, bw, bh, bars[i][1], bars[i][2], vert)
                             if probe then
