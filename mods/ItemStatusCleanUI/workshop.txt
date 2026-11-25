@@ -41,6 +41,7 @@ description=[*]1.10: new option "Bar on finished books" (on by default). Turn it
 description=[*]1.11: space bar on backpacks, bags and carts (Unified Carts too) in the inventory list, with its own option.
 description=[*]1.12: replaces Has Been Read: reading status bars (light blue unread, purple half, green read) on skill books, magazines, books, fliers, maps, CDs and VHS, always per player; "I have it" mark with icon, manual or automatic, own or shared with the server or the faction. Imports Has Been Read marks.
 description=[*]1.13: no reading bar on items that already show the game's own green check (read, watched, listened to, map read). Bars sit closer to the edge of the row so they cover less of the game's own icons (read check, favourite recipe input).
+description=[*]1.14: gear icon (instead of the game's green check) on items used by your favourite recipes, placed before the "I have it" bookmark, with its own option.
 description=[/list]
 tags=Build 42;Food;Interface;Multiplayer;Weapons
 visibility=public

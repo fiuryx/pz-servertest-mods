@@ -21,6 +21,8 @@
 --       automatica, propia o compartida con el servidor o la faccion (EstadoObjetos_Marks.lua).
 -- v1.13: sin barra en lo que ya lleva el check verde del juego (leido, visto, escuchado).
 --        Barras pegadas al borde de la fila para tapar menos los iconos del juego.
+-- v1.14: engranaje propio (en vez del check verde del juego) en los ingredientes de
+--        recetas favoritas, delante del marcapaginas "Ya lo tengo".
 -- Mod propio para el servidor de FiuRy. Solo dibuja: no cambia objetos ni guarda nada.
 -- Se engancha al final de renderdetails() de los dos modos de inventario de CleanUI
 -- (y del vanilla si se usa sin CleanUI), sin sustituir a otros mods que ya lo envuelvan.
@@ -47,6 +49,7 @@ local function setupOptions()
     o:addTickBox("readAll", getText("UI_EOC_ReadAll"), true, getText("UI_EOC_ReadAll_tooltip"))
     o:addTickBox("booksDone", getText("UI_EOC_BooksDone"), true, getText("UI_EOC_BooksDone_tooltip"))
     o:addTickBox("marks", getText("UI_EOC_Marks"), true, getText("UI_EOC_Marks_tooltip"))
+    o:addTickBox("craftGear", getText("UI_EOC_CraftGear"), true, getText("UI_EOC_CraftGear_tooltip"))
     o:addTickBox("autoMark", getText("UI_EOC_AutoMark"), true, getText("UI_EOC_AutoMark_tooltip"))
     local ms = o:addComboBox("marksShared", getText("UI_EOC_MarksShared"), getText("UI_EOC_MarksShared_tooltip"))
     ms:addItem(getText("UI_EOC_MarksShared_Own"), true)
@@ -412,6 +415,7 @@ local ICON_FILES = {
     wet = "media/ui/EstadoObjetosCleanUI/eoc_wet.png",
     soiled = "media/ui/EstadoObjetosCleanUI/eoc_soiled.png",
     owned = "media/ui/EstadoObjetosCleanUI/eoc_owned.png",
+    craft = "media/ui/EstadoObjetosCleanUI/eoc_craft.png",
 }
 local iconTex = {}
 local function texFor(kind)
@@ -579,6 +583,10 @@ local function tipLines(info)
         table.insert(lines, getText("UI_EOC_Tip_Owned"))
         return lines
     end
+    if kind == "craft" then
+        table.insert(lines, getText("UI_EOC_Tip_Craft"))
+        return lines
+    end
     if kind == "capacity" then
         local w, cap = info.w, info.cap
         if info.extra then w, cap = info.extra[1], info.extra[2] end
@@ -693,20 +701,27 @@ end
 
 -- Marca "Ya lo tengo": icono en la esquina libre del icono del objeto (la contraria a
 -- la de los iconos de estado y lejos de las barras).
-local function drawOwned(pane, x, y, iconSize, pos, item, stack)
-    local tex = texFor("owned")
-    if not tex then return end
+-- Iconos de esquina: engranaje (ingrediente de una receta favorita, sustituye al check
+-- del juego) y marcapaginas "Ya lo tengo", en fila desde la esquina libre (la contraria
+-- a los iconos de estado y lejos de las barras). El engranaje va primero.
+local function drawCorner(pane, x, y, iconSize, pos, list, item, stack)
     local s = math.max(8, math.floor(iconSize * 0.45))
-    local cx, cy
+    local cx, cy, dir
     if pos == POS_TOP or pos == POS_RIGHT then
-        cx, cy = x, y + iconSize - s                 -- abajo a la izquierda
+        cx, cy, dir = x, y + iconSize - s, 1                 -- abajo a la izquierda
     elseif pos == POS_LEFT then
-        cx, cy = x + iconSize - s, y + iconSize - s  -- abajo a la derecha
+        cx, cy, dir = x + iconSize - s, y + iconSize - s, -1 -- abajo a la derecha
     else
-        cx, cy = x, y                                -- arriba a la izquierda
+        cx, cy, dir = x, y, 1                                -- arriba a la izquierda
     end
-    pane:drawTextureScaled(tex, cx, cy, s, s, 1, 1, 1, 1)
-    if probe then hit(cx, cy, s, s, { kind = "owned", item = item, stack = stack }) end
+    for _, kind in ipairs(list) do
+        local tex = texFor(kind)
+        if tex then
+            pane:drawTextureScaled(tex, cx, cy, s, s, 1, 1, 1, 1)
+            if probe then hit(cx, cy, s, s, { kind = kind, item = item, stack = stack }) end
+            cx = cx + dir * (s - 1)
+        end
+    end
 end
 
 ----------------------------------------------------------------------
@@ -719,7 +734,7 @@ local function drawBars(pane, doDragged)
     local rowH = pane.itemHgt
     if not map or not rowH or rowH <= 0 then return end
 
-    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true), booksDone = opt("booksDone", true), bagItems = opt("bagItems", true), readAll = opt("readAll", true), marks = opt("marks", true) }
+    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true), booksDone = opt("booksDone", true), bagItems = opt("bagItems", true), readAll = opt("readAll", true), marks = opt("marks", true), craftGear = opt("craftGear", true) }
     cfg.player = getSpecificPlayer(pane.player or 0)
     cfg.pane = pane
     local scroll = pane:getYScroll()
@@ -782,16 +797,24 @@ local function drawBars(pane, doDragged)
                         drawFlags(pane, iconX + dx, iconY, iconSize, pos, flags, item, stacked)
                         if doDragged then pane:resumeStencil() end
                     end
+                    local corner = {}
+                    if cfg.craftGear and cfg.player then
+                        local okC, fav = pcall(function()
+                            return (not item:isNoRecipes(cfg.player)) and item:isFavouriteRecipeInput(cfg.player)
+                        end)
+                        if okC and fav then corner[#corner + 1] = "craft" end
+                    end
                     if cfg.marks and EOCMarks and cfg.player then
                         local okM, marked = pcall(function()
                             local key = EOCMarks.keyFor(grouped and data.items[1] or item)
                             return key and EOCMarks.isMarked(cfg.player, key)
                         end)
-                        if okM and marked then
-                            if doDragged then pane:suspendStencil() end
-                            drawOwned(pane, iconX + dx, iconY, iconSize, pos, item, stacked)
-                            if doDragged then pane:resumeStencil() end
-                        end
+                        if okM and marked then corner[#corner + 1] = "owned" end
+                    end
+                    if #corner > 0 then
+                        if doDragged then pane:suspendStencil() end
+                        drawCorner(pane, iconX + dx, iconY, iconSize, pos, corner, item, stacked)
+                        if doDragged then pane:resumeStencil() end
                     end
                     if n > 0 then
                         local x = iconX + dx
@@ -919,6 +942,17 @@ local function wrap(paneClass)
     local original = paneClass.renderdetails
     if type(original) ~= "function" then return end
     paneClass.renderdetails = function(self, doDragged, ...)
+        -- Engranaje propio en vez del check verde del juego para los ingredientes de
+        -- recetas favoritas: se cambia la textura del juego por una transparente.
+        pcall(function()
+            if self._EOC_favTex == nil then self._EOC_favTex = self.favoriteRecipeInputStar or false end
+            local want = opt("enabled", true) and opt("craftGear", true)
+            if want then
+                self.favoriteRecipeInputStar = getTexture("media/ui/EstadoObjetosCleanUI/eoc_blank.png") or self._EOC_favTex
+            elseif self._EOC_favTex then
+                self.favoriteRecipeInputStar = self._EOC_favTex
+            end
+        end)
         local r = original(self, doDragged, ...)
         local ok, err = pcall(drawBars, self, doDragged)
         probe = nil

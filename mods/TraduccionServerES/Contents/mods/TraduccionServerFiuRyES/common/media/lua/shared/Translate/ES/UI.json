@@ -8098,5 +8098,8 @@
     "UI_EOC_Tip_Levels": "Enseña los niveles %1 a %2 (tu nivel: %3)",
     "UI_EOC_Tip_NothingToLearn": "Ya no te enseña nada",
     "UI_EOC_Tip_Recipes": "Recetas que ya conoces: %1 / %2",
-    "UI_EOC_Tip_Owned": "Marcado: ya lo tengo"
+    "UI_EOC_Tip_Owned": "Marcado: ya lo tengo",
+    "UI_EOC_CraftGear": "Engranaje en ingredientes de recetas favoritas",
+    "UI_EOC_CraftGear_tooltip": "Cambia el check verde que pone el juego en los objetos que sirven para tus recetas favoritas por un engranaje, junto al marcapáginas «Ya lo tengo», para no confundirlo con el check de leído.",
+    "UI_EOC_Tip_Craft": "Ingrediente de una receta favorita"
 }

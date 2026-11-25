@@ -84,5 +84,8 @@
     "UI_EOC_Tip_Levels": "Teaches levels %1 to %2 (your level: %3)",
     "UI_EOC_Tip_NothingToLearn": "Nothing left to teach you",
     "UI_EOC_Tip_Recipes": "Recipes you already know: %1 / %2",
-    "UI_EOC_Tip_Owned": "Marked: I have it"
+    "UI_EOC_Tip_Owned": "Marked: I have it",
+    "UI_EOC_CraftGear": "Gear on favourite recipe inputs",
+    "UI_EOC_CraftGear_tooltip": "Replaces the game's green check on items used by your favourite recipes with a gear, next to the \"I have it\" bookmark, so it is not mistaken for the read check.",
+    "UI_EOC_Tip_Craft": "Input for a favourite recipe"
 }
