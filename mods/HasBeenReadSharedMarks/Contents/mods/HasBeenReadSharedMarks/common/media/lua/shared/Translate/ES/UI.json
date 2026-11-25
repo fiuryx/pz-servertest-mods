@@ -1,0 +1,7 @@
+{
+    "UI_HBRShared_Option_Name": "Marcas compartidas",
+    "UI_HBRShared_Option_Tooltip": "Qué marcas de objeto ves. Solo las mías: tus propias marcas, como en el mod original. Todo el servidor: tus marcas más la lista que comparten todos los jugadores. Mi facción: tus marcas más la lista de tu facción. En los modos compartidos, al marcar o desmarcar un objeto (también con el marcado automático) se actualiza esa lista para todos. Tus propias marcas se guardan siempre, así que puedes volver a Solo las mías cuando quieras.",
+    "UI_HBRShared_Option_Own": "Solo las mías",
+    "UI_HBRShared_Option_Server": "Todo el servidor",
+    "UI_HBRShared_Option_Faction": "Mi facción"
+}

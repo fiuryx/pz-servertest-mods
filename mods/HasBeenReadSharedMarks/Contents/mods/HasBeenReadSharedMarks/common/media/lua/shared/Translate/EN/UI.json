@@ -1,0 +1,7 @@
+{
+    "UI_HBRShared_Option_Name": "Shared item marks",
+    "UI_HBRShared_Option_Tooltip": "Which item marks you see. Only mine: your own marks, like the original mod. Whole server: your marks plus the list shared by all players. My faction: your marks plus your faction's list. In the shared modes, marking or unmarking an item (also with auto-mark) updates that list for everyone. Your own marks are always kept, so you can go back to Only mine at any time.",
+    "UI_HBRShared_Option_Own": "Only mine",
+    "UI_HBRShared_Option_Server": "Whole server",
+    "UI_HBRShared_Option_Faction": "My faction"
+}

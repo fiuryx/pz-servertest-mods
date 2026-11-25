@@ -32,6 +32,7 @@ Cada carpeta de `mods/` es una carpeta de subida al Workshop tal cual (`workshop
 | AnimalTransportVehicles | Animal Transport in Vehicles (B42) | AnimalTransportVehicles | [3845282147](https://steamcommunity.com/sharedfiles/filedetails/?id=3845282147) |
 | CarryVisibleBoxes | Carry Visible Boxes and Bags (B42) | CarryVisibleBoxes | [3845324410](https://steamcommunity.com/sharedfiles/filedetails/?id=3845324410) |
 | ServerItemNameFix | Server Item Name Fix (B42) | ServerItemNameFix | (pendiente) |
+| HasBeenReadSharedMarks | Has Been Read - Shared Marks (B42) | HasBeenReadSharedMarks | (pendiente) |
 
 KeyRingPlusReborn, LightSwitchBacklightFixed y BCMIExtension parten del código de sus autores originales; el crédito está en su `workshop.txt`.
 
