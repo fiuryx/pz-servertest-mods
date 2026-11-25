@@ -3563,5 +3563,7 @@
     "ContextMenu_WearNormally2": "Vestir máscara y cubrezapatos",
     "ContextMenu_AC_PutIn": "Meter en: %1",
     "ContextMenu_AC_Release": "Sacar: %1",
-    "ContextMenu_AC_Catch": "Atrapar %1 con: %2"
+    "ContextMenu_AC_Catch": "Atrapar %1 con: %2",
+    "ContextMenu_Pour_into": "Agrupar en",
+    "ContextMenu_MergeAll": "Agrupar todos"
 }
