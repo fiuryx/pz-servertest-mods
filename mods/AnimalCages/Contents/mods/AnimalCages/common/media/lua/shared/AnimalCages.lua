@@ -54,8 +54,7 @@ end
 
 -- Cage name with the animal and, when it matters, how it is doing.
 function AC.cageName(cage, animal)
-    local md = cage:getModData()
-    local base = md.AC_name or (cage:getScriptItem() and cage:getScriptItem():getDisplayName()) or cage:getName()
+    local base = (cage:getScriptItem() and cage:getScriptItem():getDisplayName()) or cage:getName()
     if not animal then return base end
     local share = AC.timeShare(cage, animal)
     if share >= AC.WARN_WEAK then

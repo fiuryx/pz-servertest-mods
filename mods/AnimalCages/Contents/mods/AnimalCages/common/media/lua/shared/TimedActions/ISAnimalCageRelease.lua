@@ -47,10 +47,13 @@ function ISAnimalCageRelease:complete()
             end)
         end
     end
-    if md.AC_name then self.cage:setName(md.AC_name) end
     md.AC_time = nil
     md.AC_name = nil
-    self.cage:setCustomName(false)
+    if self.cage:isCustomName() then
+        local script = self.cage:getScriptItem()
+        if script then self.cage:setName(script:getDisplayName()) end
+        self.cage:setCustomName(false)
+    end
     AnimalCages.syncItem(self.character, self.cage)
 
     forceDropHeavyItems(self.character)

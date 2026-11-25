@@ -135,20 +135,27 @@ function ISInventoryTransferAction:isValid()
     return vanillaValid(self)
 end
 
--- Keep the name of the cages you carry up to date ("thirsty", "very weak"). Display only: the real
--- effects are applied by the server when the animal comes out.
+-- Show the name of the cages you carry in your language, with the animal inside and its state
+-- ("thirsty", "very weak"). Display only, on this client: a dedicated server cannot translate it,
+-- and the real effects are applied by the server when the animal comes out.
 local function refreshNames()
     for i = 0, getNumActivePlayers() - 1 do
         local player = getSpecificPlayer(i)
         if player and not player:isDead() then
             for _, cage in ipairs(playerCages(player)) do
                 local inside = AC.getAnimalItem(cage)
+                local name
                 if inside and inside:getAnimal() then
-                    local name = AC.cageName(cage, inside:getAnimal())
-                    if cage:getName() ~= name then cage:setName(name) end
+                    name = AC.cageName(cage, inside:getAnimal())
+                else
+                    -- empty: back to the plain name (also fixes names left by older versions)
+                    local script = cage:getScriptItem()
+                    name = script and script:getDisplayName()
                 end
+                if name and cage:getName() ~= name then cage:setName(name) end
             end
         end
     end
 end
 Events.EveryTenMinutes.Add(function() pcall(refreshNames) end)
+Events.OnRefreshInventoryWindowContainers.Add(function() pcall(refreshNames) end)

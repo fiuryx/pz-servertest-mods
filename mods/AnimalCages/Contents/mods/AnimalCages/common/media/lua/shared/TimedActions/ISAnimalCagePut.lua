@@ -74,9 +74,8 @@ function ISAnimalCagePut:complete()
 
     local md = self.cage:getModData()
     md.AC_time = getGameTime():getWorldAgeHours()
-    md.AC_name = md.AC_name or self.cage:getName()
-    self.cage:setName(AnimalCages.cageName(self.cage, item:getAnimal()))
-    self.cage:setCustomName(true)
+    -- The name ("Cage (Hen)") is shown by each client in its own language (AnimalCagesMenu.lua):
+    -- a dedicated server cannot translate it.
     AnimalCages.syncItem(self.character, self.cage)
     AnimalCages.log("put complete: done", AnimalCages.describe(self.cage))
     return true

@@ -1,0 +1,5 @@
+name=Server Item Name Fix (B42)
+id=ServerItemNameFix
+description=On dedicated servers some item names (like cooked dishes) show an internal code such as "Base.RicePot". This client-side patch shows the item name in your language instead.
+poster=poster.png
+versionMin=42.0

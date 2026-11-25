@@ -1,0 +1,15 @@
+version=1
+title=Server Item Name Fix (B42)
+description=[h1]Server Item Name Fix (B42)[/h1]
+description=On dedicated servers some item names are built by the server, which cannot look up item names in each player's language. Cooked dishes then show the internal code of an ingredient instead of its name, for example [b]"Bowl of Base.RicePot"[/b] instead of [b]"Bowl of Rice"[/b].
+description=
+description=[list]
+description=[*]Replaces those codes with the item name in your language.
+description=[*]Works on your inventory, your bags and the containers you have open.
+description=[*]Display only: nothing is sent to the server and no item is changed for other players.
+description=[*]Only touches names that contain a real item code, so normal names are left alone.
+description=[/list]
+description=
+description=Client-side, multiplayer safe, can be added or removed at any time.
+tags=Build 42;Interface;Multiplayer
+visibility=public
