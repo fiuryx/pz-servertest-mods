@@ -8063,12 +8063,14 @@
     "UI_EOC_Containers_tooltip": "Dibuja una barra en los botones de la columna de contenedores (tu inventario, mochilas, muebles, maleteros...) con lo llenos que están: verde con sitio, amarilla y naranja según se llenan, roja cuando están llenos. El suelo no lleva barra.",
     "UI_EOC_Tip_Capacity": "Capacidad",
     "UI_EOC_Books": "Mostrar el progreso de lectura en los libros",
-    "UI_EOC_Books_tooltip": "Dibuja una barra en los libros de habilidad con las páginas que llevas leídas mientras los estás leyendo. Los libros sin empezar o ya terminados no llevan barra.",
+    "UI_EOC_Books_tooltip": "Dibuja una barra en los libros de habilidad con las páginas que llevas leídas: morada mientras lo lees, verde cuando lo has terminado. Los libros sin empezar no llevan barra.",
     "UI_EOC_Tip_Read": "Leído",
     "UI_EOC_Tip_Pages": "%1 / %2 páginas",
     "UI_HBRShared_Option_Name": "Marcas compartidas",
     "UI_HBRShared_Option_Tooltip": "Qué marcas de objeto ves. Solo las mías: tus propias marcas, como en el mod original. Todo el servidor: tus marcas más la lista que comparten todos los jugadores. Mi facción: tus marcas más la lista de tu facción. En los modos compartidos, al marcar o desmarcar un objeto (también con el marcado automático) se actualiza esa lista para todos. Tus propias marcas se guardan siempre, así que puedes volver a Solo las mías cuando quieras.",
     "UI_HBRShared_Option_Own": "Solo las mías",
     "UI_HBRShared_Option_Server": "Todo el servidor",
-    "UI_HBRShared_Option_Faction": "Mi facción"
+    "UI_HBRShared_Option_Faction": "Mi facción",
+    "UI_EOC_BooksDone": "Barra en libros terminados",
+    "UI_EOC_BooksDone_tooltip": "Muestra la barra verde también en los libros que ya has terminado. Desactívala si usas otro mod que ya marca los libros leídos (por ejemplo Has Been Read) y solo quieres ver la barra mientras lees."
 }

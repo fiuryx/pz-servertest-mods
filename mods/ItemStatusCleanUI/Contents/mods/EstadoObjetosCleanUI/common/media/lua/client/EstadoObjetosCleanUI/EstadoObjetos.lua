@@ -37,6 +37,7 @@ local function setupOptions()
     o:addTickBox("contents", getText("UI_EOC_Contents"), true, getText("UI_EOC_Contents_tooltip"))
     o:addTickBox("containers", getText("UI_EOC_Containers"), true, getText("UI_EOC_Containers_tooltip"))
     o:addTickBox("books", getText("UI_EOC_Books"), true, getText("UI_EOC_Books_tooltip"))
+    o:addTickBox("booksDone", getText("UI_EOC_BooksDone"), true, getText("UI_EOC_BooksDone_tooltip"))
     o:addTickBox("fresh", getText("UI_EOC_Fresh"), true, getText("UI_EOC_Fresh_tooltip"))
     o:addTickBox("stacks", getText("UI_EOC_Stacks"), true, getText("UI_EOC_Stacks_tooltip"))
     o:addTickBox("hideFull", getText("UI_EOC_HideFull"), false, getText("UI_EOC_HideFull_tooltip"))
@@ -165,7 +166,7 @@ end
 --       "fresh"/"stale"/"rot"/"frozen" (frescura de la comida)
 -- Libros con paginas (los de habilidad): paginas leidas por el jugador local.
 -- El juego lo guarda en el personaje (getAlreadyReadPages(tipo)) y en el libro.
-local function getReadProgress(item)
+local function getReadProgress(item, showDone)
     if not instanceof(item, "Literature") then return nil end
     local pages = call(item, "getNumberOfPages")
     if not pages or pages <= 0 then return nil end
@@ -176,7 +177,10 @@ local function getReadProgress(item)
         if ok and p and p > read then read = p end
     end
     if read <= 0 then return nil end       -- sin empezar: no se muestra
-    if read >= pages then return nil end   -- ya leido: tampoco (solo se ve mientras se lee)
+    if read >= pages then
+        if not showDone then return nil end  -- opcion: ocultar los libros ya terminados
+        read = pages
+    end
     return { read / pages, "read", { read, pages } }
 end
 
@@ -214,7 +218,7 @@ local function getBars(item, cfg)
         if fill ~= nil then table.insert(bars, { fill, "fill" }) end
     end
     if cfg.books then
-        local rp = getReadProgress(item)
+        local rp = getReadProgress(item, cfg.booksDone)
         if rp then table.insert(bars, rp) end
     end
     return bars
@@ -546,7 +550,7 @@ local function drawBars(pane, doDragged)
     local rowH = pane.itemHgt
     if not map or not rowH or rowH <= 0 then return end
 
-    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true) }
+    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true), booksDone = opt("booksDone", true) }
     local scroll = pane:getYScroll()
     local first = math.max(0, math.floor(-scroll / rowH) - 1)
     local last = math.max(first, math.ceil((pane:getHeight() - scroll) / rowH) + 1)
