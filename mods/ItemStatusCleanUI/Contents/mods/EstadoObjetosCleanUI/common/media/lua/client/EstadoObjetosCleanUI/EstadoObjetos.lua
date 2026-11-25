@@ -175,8 +175,8 @@ local function getReadProgress(item)
         local ok, p = pcall(function() return player:getAlreadyReadPages(item:getFullType()) end)
         if ok and p and p > read then read = p end
     end
-    if read <= 0 then return nil end   -- sin empezar: no se muestra
-    if read > pages then read = pages end
+    if read <= 0 then return nil end       -- sin empezar: no se muestra
+    if read >= pages then return nil end   -- ya leido: tampoco (solo se ve mientras se lee)
     return { read / pages, "read", { read, pages } }
 end
 

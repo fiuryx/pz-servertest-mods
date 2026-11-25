@@ -54,7 +54,7 @@
     "UI_EOC_Containers_tooltip": "Draws a bar on the buttons of the container column (your inventory, bags, furniture, car trunks...) with how full each one is: green with room, yellow and orange as it fills, red when full. The floor has no bar.",
     "UI_EOC_Tip_Capacity": "Capacity",
     "UI_EOC_Books": "Show reading progress on books",
-    "UI_EOC_Books_tooltip": "Draws a bar on skill books with how many pages you have read: purple while reading, green when finished. Books you have not started have no bar.",
+    "UI_EOC_Books_tooltip": "Draws a bar on skill books with how many pages you have read while you are reading them. Books you have not started or have already finished have no bar.",
     "UI_EOC_Tip_Read": "Read",
     "UI_EOC_Tip_Pages": "%1 / %2 pages"
 }

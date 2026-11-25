@@ -8063,7 +8063,7 @@
     "UI_EOC_Containers_tooltip": "Dibuja una barra en los botones de la columna de contenedores (tu inventario, mochilas, muebles, maleteros...) con lo llenos que están: verde con sitio, amarilla y naranja según se llenan, roja cuando están llenos. El suelo no lleva barra.",
     "UI_EOC_Tip_Capacity": "Capacidad",
     "UI_EOC_Books": "Mostrar el progreso de lectura en los libros",
-    "UI_EOC_Books_tooltip": "Dibuja una barra en los libros de habilidad con las páginas que llevas leídas: morada mientras lo lees, verde cuando lo has terminado. Los libros sin empezar no llevan barra.",
+    "UI_EOC_Books_tooltip": "Dibuja una barra en los libros de habilidad con las páginas que llevas leídas mientras los estás leyendo. Los libros sin empezar o ya terminados no llevan barra.",
     "UI_EOC_Tip_Read": "Leído",
     "UI_EOC_Tip_Pages": "%1 / %2 páginas",
     "UI_HBRShared_Option_Name": "Marcas compartidas",
