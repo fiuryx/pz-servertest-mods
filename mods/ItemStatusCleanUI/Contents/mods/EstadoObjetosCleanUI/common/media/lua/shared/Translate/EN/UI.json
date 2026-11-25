@@ -58,5 +58,7 @@
     "UI_EOC_Tip_Read": "Read",
     "UI_EOC_Tip_Pages": "%1 / %2 pages",
     "UI_EOC_BooksDone": "Bar on finished books",
-    "UI_EOC_BooksDone_tooltip": "Also shows the green bar on books you have already finished. Turn it off if another mod already marks read books (for example Has Been Read) and you only want the bar while reading."
+    "UI_EOC_BooksDone_tooltip": "Also shows the green bar on books you have already finished. Turn it off if another mod already marks read books (for example Has Been Read) and you only want the bar while reading.",
+    "UI_EOC_BagItems": "Space bar on bags and carts",
+    "UI_EOC_BagItems_tooltip": "In the inventory list, draws a bar on backpacks, bags and carts (Unified Carts too) with the space used: green with room, yellow and orange nearly full, red full. Empty ones have no bar."
 }

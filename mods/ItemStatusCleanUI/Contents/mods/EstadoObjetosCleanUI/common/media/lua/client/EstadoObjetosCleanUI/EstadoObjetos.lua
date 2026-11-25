@@ -38,6 +38,7 @@ local function setupOptions()
     o:addTickBox("containers", getText("UI_EOC_Containers"), true, getText("UI_EOC_Containers_tooltip"))
     o:addTickBox("books", getText("UI_EOC_Books"), true, getText("UI_EOC_Books_tooltip"))
     o:addTickBox("booksDone", getText("UI_EOC_BooksDone"), true, getText("UI_EOC_BooksDone_tooltip"))
+    o:addTickBox("bagItems", getText("UI_EOC_BagItems"), true, getText("UI_EOC_BagItems_tooltip"))
     o:addTickBox("fresh", getText("UI_EOC_Fresh"), true, getText("UI_EOC_Fresh_tooltip"))
     o:addTickBox("stacks", getText("UI_EOC_Stacks"), true, getText("UI_EOC_Stacks_tooltip"))
     o:addTickBox("hideFull", getText("UI_EOC_HideFull"), false, getText("UI_EOC_HideFull_tooltip"))
@@ -184,6 +185,22 @@ local function getReadProgress(item, showDone)
     return { read / pages, "read", { read, pages } }
 end
 
+-- Espacio ocupado de un contenedor que esta en la lista (mochilas, bolsas, carritos de
+-- Unified Carts...): { ratio, "capacity", { peso, capacidad } }. Vacio: sin barra.
+local function getBagSpace(item)
+    if not instanceof(item, "InventoryContainer") then return nil end
+    local c = call(item, "getItemContainer")
+    if not c then return nil end
+    local okW, w = pcall(function() return c:getCapacityWeight() end)
+    if not okW or not w or w <= 0 then return nil end
+    local cap = nil
+    local player = getSpecificPlayer(0)
+    pcall(function() cap = c:getEffectiveCapacity(player) end)
+    if not cap or cap <= 0 then cap = call(c, "getCapacity") end
+    if not cap or cap <= 0 then return nil end
+    return { math.min(1, w / cap), "capacity", { w, cap } }
+end
+
 local function getBars(item, cfg)
     local bars = {}
     local isWeapon = instanceof(item, "HandWeapon")
@@ -216,6 +233,10 @@ local function getBars(item, cfg)
     if cfg.contents and not isClothing then
         local fill = getContents(item)
         if fill ~= nil then table.insert(bars, { fill, "fill" }) end
+    end
+    if cfg.bagItems then
+        local bs = getBagSpace(item)
+        if bs then table.insert(bars, bs) end
     end
     if cfg.books then
         local rp = getReadProgress(item, cfg.booksDone)
@@ -431,9 +452,11 @@ local function tipLines(info)
         return lines
     end
     if kind == "capacity" then
+        local w, cap = info.w, info.cap
+        if info.extra then w, cap = info.extra[1], info.extra[2] end
         if info.name then table.insert(lines, info.name) end
-        table.insert(lines, getText("UI_EOC_Tip_Capacity") .. ": " .. numText(info.w) .. " / " .. numText(info.cap)
-            .. " (" .. pctText(info.w / info.cap * 100) .. ")")
+        table.insert(lines, getText("UI_EOC_Tip_Capacity") .. ": " .. numText(w) .. " / " .. numText(cap)
+            .. " (" .. pctText(w / cap * 100) .. ")")
         return lines
     end
     local label = getText(KIND_TEXT[kind] or "UI_EOC_Tip_Condition")
@@ -550,7 +573,7 @@ local function drawBars(pane, doDragged)
     local rowH = pane.itemHgt
     if not map or not rowH or rowH <= 0 then return end
 
-    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true), booksDone = opt("booksDone", true) }
+    local cfg = { weapons = opt("weapons", true), clothing = opt("clothing", true), soiled = opt("soiled", true), head = opt("head", true), hideFull = opt("hideFull", false), contents = opt("contents", true), stacks = opt("stacks", true), fresh = opt("fresh", true), blood = opt("blood", true), dirt = opt("dirt", true), wet = opt("wet", true), books = opt("books", true), booksDone = opt("booksDone", true), bagItems = opt("bagItems", true) }
     local scroll = pane:getYScroll()
     local first = math.max(0, math.floor(-scroll / rowH) - 1)
     local last = math.max(first, math.ceil((pane:getHeight() - scroll) / rowH) + 1)
