@@ -1,4 +1,5 @@
 version=1
+id=3846166847
 title=Manage Containers - Wider Category List (B42)
 description=[h1]Manage Containers - Wider Category List (B42)[/h1]
 description=Patch for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2650547917]Manage Containers[/url]. The configure window has a fixed width, so with mods that add long category names (for example [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3650035249]Extended categories[/url]) the names are cut off and you can't tell what you are selecting.

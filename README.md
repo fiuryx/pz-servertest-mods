@@ -33,7 +33,7 @@ Cada carpeta de `mods/` es una carpeta de subida al Workshop tal cual (`workshop
 | CarryVisibleBoxes | Carry Visible Boxes and Bags (B42) | CarryVisibleBoxes | [3845324410](https://steamcommunity.com/sharedfiles/filedetails/?id=3845324410) |
 | ServerItemNameFix | Server Item Name Fix (B42) | ServerItemNameFix | [3845657678](https://steamcommunity.com/sharedfiles/filedetails/?id=3845657678) |
 | ServerTranslationsFix | Server Translations Fix (B42) (retirado: unificado en Server Item Name Fix 1.2) | ServerTranslationsFix | [3846021510](https://steamcommunity.com/sharedfiles/filedetails/?id=3846021510) |
-| ManageContainersWidthFix | Manage Containers - Wider Category List (B42) | ManageContainersWidthFix | |
+| ManageContainersWidthFix | Manage Containers - Wider Category List (B42) | ManageContainersWidthFix | [3846166847](https://steamcommunity.com/sharedfiles/filedetails/?id=3846166847) |
 | HasBeenReadSharedMarks | Has Been Read - Shared Marks (B42) (retirado: sustituido por Item Status CleanUI 1.12) | HasBeenReadSharedMarks | [3845658046](https://steamcommunity.com/sharedfiles/filedetails/?id=3845658046) |
 
 KeyRingPlusReborn, LightSwitchBacklightFixed y BCMIExtension parten del código de sus autores originales; el crédito está en su `workshop.txt`.
