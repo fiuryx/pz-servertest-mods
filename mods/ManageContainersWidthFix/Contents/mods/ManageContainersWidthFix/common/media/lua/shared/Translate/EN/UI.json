@@ -1,0 +1,7 @@
+{
+    "UI_MCWF_Title": "Manage Containers - Wider Category List",
+    "UI_MCWF_Width": "Category list width",
+    "UI_MCWF_Width_tooltip": "Width of the Manage Containers window. Automatic fits the longest category name (up to 45 percent of the screen). The change applies the next time you open the window.",
+    "UI_MCWF_Auto": "Automatic",
+    "UI_MCWF_Original": "Original"
+}

@@ -8101,5 +8101,10 @@
     "UI_EOC_Tip_Owned": "Marcado: ya lo tengo",
     "UI_EOC_CraftGear": "Engranaje en ingredientes de recetas favoritas",
     "UI_EOC_CraftGear_tooltip": "Cambia el check verde que pone el juego en los objetos que sirven para tus recetas favoritas por un engranaje, junto al marcapáginas «Ya lo tengo», para no confundirlo con el check de leído.",
-    "UI_EOC_Tip_Craft": "Ingrediente de una receta favorita"
+    "UI_EOC_Tip_Craft": "Ingrediente de una receta favorita",
+    "UI_MCWF_Title": "Gestionar contenedores - Lista de categorías más ancha",
+    "UI_MCWF_Width": "Ancho de la lista de categorías",
+    "UI_MCWF_Width_tooltip": "Ancho de la ventana de gestionar contenedores. Automático se ajusta a la categoría con el nombre más largo (hasta el 45 por ciento de la pantalla). El cambio se aplica la próxima vez que abras la ventana.",
+    "UI_MCWF_Auto": "Automático",
+    "UI_MCWF_Original": "Original"
 }

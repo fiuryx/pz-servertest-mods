@@ -1,0 +1,6 @@
+name=Manage Containers - Wider Category List (B42)
+id=ManageContainersWidthFix
+require=\manageContainers
+description=Makes the Manage Containers window wide enough to read the full category names (long names from mods like Extended categories were cut off). Width is chosen in the mod options: automatic, original or a fixed size.
+poster=poster.png
+versionMin=42.0

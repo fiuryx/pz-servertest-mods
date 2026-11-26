@@ -1,0 +1,15 @@
+version=1
+title=Manage Containers - Wider Category List (B42)
+description=[h1]Manage Containers - Wider Category List (B42)[/h1]
+description=Patch for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2650547917]Manage Containers[/url]. The configure window has a fixed width, so with mods that add long category names (for example [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3650035249]Extended categories[/url]) the names are cut off and you can't tell what you are selecting.
+description=
+description=[list]
+description=[*]The window widens to fit the longest category name (up to 45 percent of the screen).
+description=[*]Mod option [b]Category list width[/b]: Automatic, Original, or a fixed 300 to 700 px.
+description=[*]The search box, the tabs and the advanced view follow the new width.
+description=[*]The window is kept inside the screen.
+description=[/list]
+description=
+description=Client-side only, safe to add or remove at any time. Requires Manage Containers.
+tags=Build 42;Interface;Multiplayer
+visibility=public

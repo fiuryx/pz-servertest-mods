@@ -1,0 +1,7 @@
+{
+    "UI_MCWF_Title": "Gestionar contenedores - Lista de categorías más ancha",
+    "UI_MCWF_Width": "Ancho de la lista de categorías",
+    "UI_MCWF_Width_tooltip": "Ancho de la ventana de gestionar contenedores. Automático se ajusta a la categoría con el nombre más largo (hasta el 45 por ciento de la pantalla). El cambio se aplica la próxima vez que abras la ventana.",
+    "UI_MCWF_Auto": "Automático",
+    "UI_MCWF_Original": "Original"
+}
