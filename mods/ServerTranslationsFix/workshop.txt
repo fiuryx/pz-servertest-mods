@@ -1,4 +1,5 @@
 version=1
+id=3846021510
 title=Server Translations Fix (B42)
 description=[h1]Server Translations Fix (B42)[/h1]
 description=A dedicated server loads its translations before the mods are active. Every text the server builds from a mod key then stays as the raw key, for example the note that rises over your head when a modded skill levels up shows [b]"IGUI_perks_Dancing"[/b] instead of the skill name.
