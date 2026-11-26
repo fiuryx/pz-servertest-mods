@@ -1,0 +1,5 @@
+name=Zombie Corpse Loot Fix (B42)
+id=ZombieCorpseLootFix
+description=Multiplayer fix: when a mod adds items to a zombie as it dies (for example the army zombies of PZ More Tailoring), the corpse only showed those items and lost its clothes and the rest of its loot. This server-side patch stops that early sync so the corpse shows everything.
+poster=poster.png
+versionMin=42.0

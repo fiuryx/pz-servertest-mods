@@ -1,0 +1,18 @@
+version=1
+title=Zombie Corpse Loot Fix (B42)
+description=[h1]Zombie Corpse Loot Fix (B42)[/h1]
+description=Multiplayer fix. When a mod adds items to a zombie as it dies (for example the army zombies of [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2879667197]PZ More Tailoring[/url], which get ammo or a cigarette), the corpse only showed those items: no clothes, no backpack contents, nothing else.
+description=
+description=[b]Why it happens[/b]
+description=A client asks the server for a corpse's contents the first time it opens it, but only while that container is still unexplored. The mod sends the new item to the clients right away, the client marks the container as explored with only that item inside, and never asks for the rest.
+description=
+description=[b]What this does[/b]
+description=[list]
+description=[*]On the server, skips that early item packet when the container belongs to a zombie (its inventory or a bag it carries).
+description=[*]The added items are not lost: they stay on the server and appear with the rest of the corpse when you open it.
+description=[*]Works for any mod that adds loot to dying zombies, not just PZ More Tailoring.
+description=[/list]
+description=
+description=Server-side only. Corpses already affected keep the wrong view until the server restarts; new ones are fine.
+tags=Build 42;Multiplayer;Misc
+visibility=public
