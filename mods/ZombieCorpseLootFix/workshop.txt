@@ -1,4 +1,5 @@
 version=1
+id=3846328367
 title=Zombie Corpse Loot Fix (B42)
 description=[h1]Zombie Corpse Loot Fix (B42)[/h1]
 description=Multiplayer fix. When a mod adds items to a zombie as it dies (for example the army zombies of [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2879667197]PZ More Tailoring[/url], which get ammo or a cigarette), the corpse only showed those items: no clothes, no backpack contents, nothing else.
