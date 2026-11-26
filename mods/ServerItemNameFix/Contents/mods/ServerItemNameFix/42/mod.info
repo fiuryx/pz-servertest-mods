@@ -1,5 +1,5 @@
 name=Server Item Name Fix (B42)
 id=ServerItemNameFix
-description=On dedicated servers some item names (like cooked dishes) show an internal code such as "Base.RicePot". This client-side patch shows the item name in your language instead.
+description=Fixes texts that a dedicated server builds without translations: item names with codes like "Base.RicePot" and skill level-up notes like "IGUI_perks_Dancing". Server part reloads the translations once the mods are active; client part cleans names already saved with codes.
 poster=poster.png
 versionMin=42.0
