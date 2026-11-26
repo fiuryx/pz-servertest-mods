@@ -1,0 +1,15 @@
+version=1
+title=Server Translations Fix (B42)
+description=[h1]Server Translations Fix (B42)[/h1]
+description=A dedicated server loads its translations before the mods are active. Every text the server builds from a mod key then stays as the raw key, for example the note that rises over your head when a modded skill levels up shows [b]"IGUI_perks_Dancing"[/b] instead of the skill name.
+description=
+description=[list]
+description=[*]Reloads the translations once the server has started, so they include every active mod.
+description=[*]Refreshes the skill names, so level-up and XP notes from modded skills (Lifestyle, etc.) show the real name.
+description=[*]Item names built by the server use the translated names too.
+description=[*]Optional sandbox setting [b]Server language[/b] (a code such as ES, EN, FR, DE) to choose the language of those texts. Empty keeps the server's own language.
+description=[/list]
+description=
+description=Server-side only. Clients don't need anything else, and it can be added or removed at any time.
+tags=Build 42;Multiplayer;Misc
+visibility=public

@@ -7517,5 +7517,8 @@
     "Sandbox_FastForward_ForceAdminOnly_tooltip": "Solo los administradores pueden usar el botón de forzar.",
     "Sandbox_FastForward_IconStyle": "Estilo de iconos",
     "Sandbox_FastForward_IconStyle_option1": "Build 41",
-    "Sandbox_FastForward_IconStyle_option2": "Build 42"
+    "Sandbox_FastForward_IconStyle_option2": "Build 42",
+    "Sandbox_ServerTranslationsFix": "Server Translations Fix",
+    "Sandbox_ServerTranslationsFix_Language": "Idioma del servidor",
+    "Sandbox_ServerTranslationsFix_Language_tooltip": "Código del idioma de los textos que genera el servidor (avisos de subida de nivel, algunos nombres de objetos), por ejemplo ES, EN, FR o DE. Déjalo vacío para mantener el idioma propio del servidor."
 }

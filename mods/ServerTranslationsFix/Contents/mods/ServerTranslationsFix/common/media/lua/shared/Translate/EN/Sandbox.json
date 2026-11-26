@@ -1,0 +1,5 @@
+{
+    "Sandbox_ServerTranslationsFix": "Server Translations Fix",
+    "Sandbox_ServerTranslationsFix_Language": "Server language",
+    "Sandbox_ServerTranslationsFix_Language_tooltip": "Language code for the texts the server builds (level-up notes, some item names), for example ES, EN, FR or DE. Leave it empty to keep the server's own language."
+}

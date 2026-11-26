@@ -1,0 +1,4 @@
+VERSION = 1,
+
+option ServerTranslationsFix.Language
+{type = string, default = , page = ServerTranslationsFix, translation = ServerTranslationsFix_Language,}

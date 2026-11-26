@@ -1,0 +1,5 @@
+{
+    "Sandbox_ServerTranslationsFix": "Server Translations Fix",
+    "Sandbox_ServerTranslationsFix_Language": "Idioma del servidor",
+    "Sandbox_ServerTranslationsFix_Language_tooltip": "Código del idioma de los textos que genera el servidor (avisos de subida de nivel, algunos nombres de objetos), por ejemplo ES, EN, FR o DE. Déjalo vacío para mantener el idioma propio del servidor."
+}

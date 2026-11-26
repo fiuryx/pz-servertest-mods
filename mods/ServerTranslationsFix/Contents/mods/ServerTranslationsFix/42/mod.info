@@ -1,0 +1,5 @@
+name=Server Translations Fix (B42)
+id=ServerTranslationsFix
+description=Dedicated servers load translations before the mods are active, so texts built by the server (skill level-up notes, some item names) show codes like IGUI_perks_Dancing. This server-side patch reloads the translations once the mods are loaded.
+poster=poster.png
+versionMin=42.0
