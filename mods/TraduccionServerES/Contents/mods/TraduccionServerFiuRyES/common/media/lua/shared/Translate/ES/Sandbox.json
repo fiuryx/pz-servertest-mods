@@ -7520,5 +7520,14 @@
     "Sandbox_FastForward_IconStyle_option2": "Build 42",
     "Sandbox_ServerItemNameFix": "Server Item Name Fix",
     "Sandbox_ServerItemNameFix_Language": "Idioma del servidor",
-    "Sandbox_ServerItemNameFix_Language_tooltip": "Código del idioma de los textos que genera el servidor (avisos de subida de nivel, algunos nombres de objetos), por ejemplo ES, EN, FR o DE. Déjalo vacío para mantener el idioma propio del servidor."
+    "Sandbox_ServerItemNameFix_Language_tooltip": "Código del idioma de los textos que genera el servidor (avisos de subida de nivel, algunos nombres de objetos), por ejemplo ES, EN, FR o DE. Déjalo vacío para mantener el idioma propio del servidor.",
+    "Sandbox_CAExtendedCategories": "Extended Categories",
+    "Sandbox_CAExtendedCategories_ItemCategoryOverrides": "Categorías forzadas de objetos",
+    "Sandbox_CAExtendedCategories_ItemCategoryOverrides_tooltip": "Fuerza objetos concretos en una categoría. Separa las entradas con comas, con el nombre completo del objeto y el ID de la categoría, por ejemplo Base.Zipties=MaterialMaintenance, Base.Notebook=Literature__Junk",
+    "Sandbox_CAExtendedCategories_LogVerbosity": "Nivel de registro",
+    "Sandbox_CAExtendedCategories_LogVerbosity_option1": "Depuración",
+    "Sandbox_CAExtendedCategories_LogVerbosity_option2": "Información",
+    "Sandbox_CAExtendedCategories_LogVerbosity_option3": "Advertencia",
+    "Sandbox_CAExtendedCategories_LogVerbosity_option4": "Error",
+    "Sandbox_CAExtendedCategories_LogVerbosity_tooltip": "Controla cuánta información se escribe en la consola. Ponerlo en Depuración ayuda si quieres informar de un fallo o pedir compatibilidad con otro mod."
 }

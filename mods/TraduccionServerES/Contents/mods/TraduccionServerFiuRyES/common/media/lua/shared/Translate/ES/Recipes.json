@@ -7923,5 +7923,11 @@
     "Recipe_Open_Medical_Coat": "Abrir bata médica",
     "Recipe_Open_Sealed_Medkit": "Abrir botiquín sellado",
     "Recipe_Wear_Satchel_With_Bag": "Usar maletín como bolsa",
-    "MakeAnimalCageSmall": "Fabricar jaula pequeña para animales"
+    "MakeAnimalCageSmall": "Fabricar jaula pequeña para animales",
+    "87chevySuburbanMakeTire3500": "Fabricar neumático Chevrolet K3500",
+    "87chevySuburbanMakeTires3500": "Fabricar neumáticos dobles Chevrolet K3500",
+    "70gmAbodyMakeFrontWindshield": "Fabricar parabrisas GM A-body (1970)",
+    "70gmAbodyMakeFrontSideWindow": "Fabricar ventanilla lateral delantera GM A-body (1970)",
+    "70gmAbodyMakeRearSideWindow": "Fabricar ventanilla lateral trasera GM A-body (1970)",
+    "70gmAbodyMakeRearWindshield": "Fabricar luneta trasera GM A-body (1970)"
 }

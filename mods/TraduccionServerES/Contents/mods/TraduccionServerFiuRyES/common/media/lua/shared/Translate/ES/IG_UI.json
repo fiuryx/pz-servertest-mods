@@ -13723,5 +13723,8 @@
     "IGUI_perks_Carpintería_Description": "Permite construir estructuras de madera.",
     "IGUI_ExcludeRotten": "Excluir podridos",
     "IGUI_CraftingWindow_RequiresRecipe": "Requiere aprender la receta",
-    "IGUI_ThisWayShouldBeThePreferredWay": "Esta debería ser la forma preferida"
+    "IGUI_ThisWayShouldBeThePreferredWay": "Esta debería ser la forma preferida",
+    "IGUI_VehicleName87chevySuburbanDually": "Chevrolet Suburban Dually (1987)",
+    "IGUI_VehiclePartDAMNFrontLip": "Labio delantero",
+    "IGUI_ChamberOpen": "La recámara está abierta; ciérrala antes de disparar."
 }
