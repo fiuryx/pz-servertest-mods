@@ -13720,5 +13720,8 @@
     "IGUI_perks_Sastrería_Description": "Aumenta la calidad de las reparaciones de ropa y el acolchado defensivo de las prendas.",
     "IGUI_perks_Rastreo_Description": "Aumenta la información disponible sobre los rastros de animales salvajes encontrados con el modo búsqueda, y permite encontrar rastros más pequeños.",
     "IGUI_perks_Trampas_Description": "Aumenta las probabilidades de atrapar un animal en una trampa y permite fabricar trampas mejores.",
-    "IGUI_perks_Carpintería_Description": "Permite construir estructuras de madera."
+    "IGUI_perks_Carpintería_Description": "Permite construir estructuras de madera.",
+    "IGUI_ExcludeRotten": "Excluir podridos",
+    "IGUI_CraftingWindow_RequiresRecipe": "Requiere aprender la receta",
+    "IGUI_ThisWayShouldBeThePreferredWay": "Esta debería ser la forma preferida"
 }
