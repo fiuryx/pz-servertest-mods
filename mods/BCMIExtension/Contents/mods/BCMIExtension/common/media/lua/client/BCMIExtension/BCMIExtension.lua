@@ -440,6 +440,66 @@ local MAP = {
     ContextMenu_UnifiedCarts_HoseWashBandages = { "i:Base.Bandage", "o:Clean" },
     ContextMenu_UnifiedCarts_HitchTravois = { "i:UnifiedCarts.Travois", "b:Attach" },
     ContextMenu_UnifiedCarts_UnhitchTravois = { "b:Detach" },
+    -- Animal Cages and Carriers
+    ContextMenu_AC_Catch = { "i:Base.AnimalCageSmall", "b:Pickup" },
+    ContextMenu_AC_PutIn = { "i:Base.AnimalCageSmall", "b:PutInContainer" },
+    ContextMenu_AC_Release = { "b:Drop" },
+    -- Item Status CleanUI: ownership marks
+    UI_EOC_Mark = { "t:media/ui/EstadoObjetosCleanUI/eoc_owned.png", "b:Wanted" },
+    UI_EOC_MarkAll = { "t:media/ui/EstadoObjetosCleanUI/eoc_owned.png", "b:Wanted" },
+    UI_EOC_Unmark = { "b:Unwanted" },
+    UI_EOC_UnmarkAll = { "b:Unwanted" },
+    -- Repair Wall / Show Wall Health
+    ContextMenu_Kamer_RepairWall_Repair = { "i:Base.Hammer", "t:Item_Wrench" },
+    ContextMenu_Kamer_RepairWall_RepairOption = { "i:Base.Hammer", "t:Item_Wrench" },
+    ContextMenu_Kamer_ShowWallHealth_Check = { "b:Info" },
+    -- Cooler Backpack (oven bag and cooler)
+    IGUI_OvenBag_Start = { "b:TurnOn" },
+    IGUI_OvenBag_Stop = { "b:TurnOff" },
+    IGUI_OvenBag_SelectTemp = { "o:Thermo", "b:Settings" },
+    IGUI_OvenBag_SelectTimer = { "b:SetAlarm", "b:Settings" },
+    IGUI_TCM_SelectMode = { "o:Thermo", "b:Settings" },
+    IGUI_TCM_Mode = { "o:Thermo", "b:Settings" },
+    IGUI_Recharge_FromCarBattery = { "i:Base.CarBattery1", "b:InsertBattery" },
+    IGUI_Recharge_TCM = { "b:InsertBattery" },
+    IGUI_Upgrade_OvenBag = { "i:Base.Screwdriver", "t:Item_Wrench" },
+    IGUI_Upgrade_TCM = { "i:Base.Screwdriver", "t:Item_Wrench" },
+    IGUI_Upgrade_TCM_BatteryCapacity = { "b:InsertBattery" },
+    -- Bring Out Your Dead
+    UI_JB_MoveCorpses_Main_Menu = { "b:Pickup" },
+    UI_JB_MoveCorpses_Move = { "b:Pickup" },
+    UI_JB_MoveCorpses_Out_The_Window = { "b:ClimbWindow" },
+    UI_JB_MoveCorpses_Toggle_Safety_On = { "b:Settings" },
+    UI_JB_MoveCorpses_Toggle_Safety_Off = { "b:Settings" },
+    UI_JB_MoveCorpses_Change_Highlight_Color = { "b:Settings" },
+    -- Gunworks
+    IGUI_ContextMenu_InsertAltBulletsInMagazine = { "b:LoadMagazine" },
+    IGUI_LoadAmmo = { "b:LoadMagazine" },
+    -- Authentic Z backpack upgrade
+    IGUI_AZ_UpgradeBackpackTier = { "i:Base.Needle", "t:Item_Needle" },
+    -- Skill Recovery Journal
+    IGUI_TranscribeIntoJournal = { "t:Item_Pencil", "b:Read" },
+    IGUI_Rename = { "t:Item_Pencil" },
+    -- Livestock Panel Plus
+    UI_LPP_WalkTo = { "b:WalkTo" },
+    -- Repairable Windows
+    IGUI_RepairableWindows_AddWindow = { "i:Base.GlassPane", "b:CloseWindow" },
+    IGUI_RepairableWindows_RemoveWindow = { "b:Pickup" },
+    -- Misc
+    IGUI_EER_RebuildEngine = { "i:Base.Wrench", "t:Item_Wrench" },
+    UI_equipment_unequip_all = { "b:Equip" },
+    Tooltip_DefecateBurnFeces = { "b:LightFire" },
+    UI_NM_MoreActions = { "b:More" },
+    UI_investigate_area_window_show = { "b:Info" },
+    IGUI_SmarterStorage_Gear = { "b:Settings" },
+    IGUI_SmarterStorage_Storage = { "b:PutInContainer" },
+    ContextMenu_LSMP_InvitePlay = { "o:Music" },
+    ContextMenu_Painting_AddCanvas_Small = { "b:PlaceItem" },
+    ContextMenu_Painting_AddCanvas_Medium = { "b:PlaceItem" },
+    ContextMenu_Painting_AddCanvas_Large = { "b:PlaceItem" },
+    ContextMenu_PlayerPlaylist_ImportTo = { "o:Music" },
+    ContextMenu_Toy_Interact = { "b:Info" },
+    ContextMenu_H_PepTalk = { "b:Info" },
 }
 
 ----------------------------------------------------------------------
