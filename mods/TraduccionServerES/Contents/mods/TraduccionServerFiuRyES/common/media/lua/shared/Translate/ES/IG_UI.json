@@ -13726,5 +13726,9 @@
     "IGUI_ThisWayShouldBeThePreferredWay": "Esta debería ser la forma preferida",
     "IGUI_VehicleName87chevySuburbanDually": "Chevrolet Suburban Dually (1987)",
     "IGUI_VehiclePartDAMNFrontLip": "Labio delantero",
-    "IGUI_ChamberOpen": "La recámara está abierta; ciérrala antes de disparar."
+    "IGUI_ChamberOpen": "La recámara está abierta; ciérrala antes de disparar.",
+    "IGUI_GeneratorRange_ShowRange": "Mostrar alcance del generador",
+    "IGUI_GeneratorRange_HideRange": "Ocultar alcance del generador",
+    "IGUI_GeneratorRange_ShowElectronics": "Mostrar aparatos dentro del alcance",
+    "IGUI_GeneratorRange_HideElectronics": "Ocultar aparatos dentro del alcance"
 }
