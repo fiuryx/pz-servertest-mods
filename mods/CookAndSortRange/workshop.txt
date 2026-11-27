@@ -1,0 +1,23 @@
+version=1
+title=AutoCook & Manage Containers - Range (B42)
+description=[h1]AutoCook & Manage Containers - Range (B42)[/h1]
+description=Patch for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3388721641]AutoCook[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2650547917]Manage Containers[/url]. Both only used the containers next to you. Now they use every container within a radius (8 tiles by default, same floor) and the character walks to each one.
+description=
+description=[b]AutoCook[/b]
+description=[list]
+description=[*]Ingredients are taken from the fridges, cupboards and other containers within the radius.
+description=[*]The character walks to each container to take the ingredient, and at the end walks back to put the unused items where they were.
+description=[*]The AutoCook option is enabled when the ingredients are within the radius, not only next to you.
+description=[/list]
+description=
+description=[b]Manage Containers[/b]
+description=[list]
+description=[*]"Put in assigned containers" uses the configured containers within the radius.
+description=[*]The character walks to each container, nearest first, and puts its items in.
+description=[/list]
+description=
+description=[b]Sandbox options[/b]: radius (1 to 20 tiles) and on/off for each mod.
+description=
+description=Requires AutoCook and Manage Containers. Client-side logic, multiplayer safe.
+tags=Build 42;Multiplayer;Misc
+visibility=public

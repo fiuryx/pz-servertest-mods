@@ -1,0 +1,10 @@
+VERSION = 1,
+
+option CookAndSortRange.Radius
+{type = integer, min = 1, max = 20, default = 8, page = CookAndSortRange, translation = CookAndSortRange_Radius,}
+
+option CookAndSortRange.AutoCook
+{type = boolean, default = true, page = CookAndSortRange, translation = CookAndSortRange_AutoCook,}
+
+option CookAndSortRange.ManageContainers
+{type = boolean, default = true, page = CookAndSortRange, translation = CookAndSortRange_ManageContainers,}

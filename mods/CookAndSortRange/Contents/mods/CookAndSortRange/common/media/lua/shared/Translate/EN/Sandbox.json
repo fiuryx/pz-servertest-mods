@@ -1,0 +1,9 @@
+{
+    "Sandbox_CookAndSortRange": "AutoCook & Manage Containers Range",
+    "Sandbox_CookAndSortRange_Radius": "Container radius (tiles)",
+    "Sandbox_CookAndSortRange_Radius_tooltip": "AutoCook and Manage Containers use the containers within this distance on the same floor. The character walks to each one to take or put away the items.",
+    "Sandbox_CookAndSortRange_AutoCook": "Extended range for AutoCook",
+    "Sandbox_CookAndSortRange_AutoCook_tooltip": "AutoCook takes ingredients from the containers within the radius and puts the unused ones back.",
+    "Sandbox_CookAndSortRange_ManageContainers": "Extended range for Manage Containers",
+    "Sandbox_CookAndSortRange_ManageContainers_tooltip": "Put in assigned containers uses the configured containers within the radius."
+}

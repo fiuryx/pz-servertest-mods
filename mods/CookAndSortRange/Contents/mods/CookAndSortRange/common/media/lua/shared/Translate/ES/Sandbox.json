@@ -1,0 +1,9 @@
+{
+    "Sandbox_CookAndSortRange": "Alcance de AutoCook y Manage Containers",
+    "Sandbox_CookAndSortRange_Radius": "Radio de contenedores (baldosas)",
+    "Sandbox_CookAndSortRange_Radius_tooltip": "AutoCook y Manage Containers usan los contenedores que estén a esta distancia en la misma planta. El personaje camina hasta cada uno para coger o guardar los objetos.",
+    "Sandbox_CookAndSortRange_AutoCook": "Alcance ampliado para AutoCook",
+    "Sandbox_CookAndSortRange_AutoCook_tooltip": "AutoCook coge ingredientes de los contenedores dentro del radio y devuelve los que no usa.",
+    "Sandbox_CookAndSortRange_ManageContainers": "Alcance ampliado para Manage Containers",
+    "Sandbox_CookAndSortRange_ManageContainers_tooltip": "Guardar en contenedores asignados usa los contenedores configurados dentro del radio."
+}
