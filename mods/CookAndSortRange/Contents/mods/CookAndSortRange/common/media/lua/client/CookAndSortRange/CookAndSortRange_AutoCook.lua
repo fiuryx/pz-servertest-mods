@@ -1,9 +1,17 @@
 -- AutoCook: ingredients from containers within the radius, walking to take them and to put
 -- the unused ones back.
 require "CookAndSortRange/CookAndSortRange_Core"
-local ok = pcall(require, "AutoCook")
-if not ok or not AutoCook or not AutoCook.continue then return end
 local R = CookAndSortRange
+
+-- installed on game start, once every mod's Lua is loaded
+local function install()
+if not AutoCook or not AutoCook.continue then pcall(require, "AutoCook") end
+if not AutoCook or not AutoCook.continue then
+    print("[CookAndSortRange] AutoCook not found, hooks not installed")
+    return
+end
+if R.acInstalled then return end
+R.acInstalled = true
 
 -- containers used while AutoCook is choosing: reachable ones plus the ones within the radius
 local function extendedContainers(player)
@@ -105,3 +113,7 @@ Events.OnFillInventoryObjectContextMenu.Add(function(playerNum, context, items)
     local okf, err = pcall(fixMenu, playerNum, context)
     if not okf then print("[CookAndSortRange] " .. tostring(err)) end
 end)
+print("[CookAndSortRange] AutoCook hooks installed")
+end
+
+Events.OnGameStart.Add(install)

@@ -1,9 +1,19 @@
 -- Manage Containers: "put in assigned containers" uses the configured containers within the
 -- radius, and the character walks to each one (nearest first) to put the items away.
 require "CookAndSortRange/CookAndSortRange_Core"
-local ok = pcall(require, "ManageContainers/ISInventoryPaneContextMenu")
-if not ok or not ISInventoryPaneContextMenu.TransferItems or not ISConfigureContainerWindow then return end
 local R = CookAndSortRange
+
+-- installed on game start, once every mod's Lua is loaded (our files load before Manage Containers')
+local function install()
+pcall(require, "ManageContainers/ISInventoryPaneContextMenu")
+pcall(require, "ManageContainers/ConfigureContainer/ISConfigureContainerWindow")
+if not ISInventoryPaneContextMenu or not ISInventoryPaneContextMenu.TransferItems or not ISConfigureContainerWindow
+    or not ISConfigureContainerWindow.getContainerData then
+    print("[CookAndSortRange] Manage Containers not found, hooks not installed")
+    return
+end
+if R.mcInstalled then return end
+R.mcInstalled = true
 
 local origValid = ISInventoryPaneContextMenu.ValidNearbyContainers
 local origTransfer = ISInventoryPaneContextMenu.TransferItems
@@ -103,3 +113,7 @@ ISInventoryPaneContextMenu.TransferItems = function(items, playerNum, unrestrict
         return origTransfer(items, playerNum, unrestricted)
     end
 end
+print("[CookAndSortRange] Manage Containers hooks installed")
+end
+
+Events.OnGameStart.Add(install)

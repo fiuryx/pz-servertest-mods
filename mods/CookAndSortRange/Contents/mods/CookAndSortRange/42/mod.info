@@ -1,6 +1,6 @@
 name=AutoCook & Manage Containers - Range (B42)
 id=CookAndSortRange
-require=\AutoCook;\manageContainers
+require=\AutoCook,\manageContainers
 description=AutoCook and Manage Containers use the containers within a configurable radius (8 tiles by default) instead of only the adjacent ones, and the character walks to each container to take or put away the items.
 poster=poster.png
 versionMin=42.0
