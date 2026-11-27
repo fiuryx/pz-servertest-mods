@@ -35,7 +35,7 @@ Cada carpeta de `mods/` es una carpeta de subida al Workshop tal cual (`workshop
 | ServerTranslationsFix | Server Translations Fix (B42) (retirado: unificado en Server Item Name Fix 1.2) | ServerTranslationsFix | [3846021510](https://steamcommunity.com/sharedfiles/filedetails/?id=3846021510) |
 | ManageContainersWidthFix | Manage Containers - Wider Category List (B42) | ManageContainersWidthFix | [3846166847](https://steamcommunity.com/sharedfiles/filedetails/?id=3846166847) |
 | ZombieCorpseLootFix | Zombie Corpse Loot Fix (B42) | ZombieCorpseLootFix | [3846328367](https://steamcommunity.com/sharedfiles/filedetails/?id=3846328367) |
-| CookAndSortRange | AutoCook & Manage Containers - Range (B42) | CookAndSortRange | |
+| CookAndSortRange | AutoCook & Manage Containers - Range (B42) | CookAndSortRange | [3846802651](https://steamcommunity.com/sharedfiles/filedetails/?id=3846802651) |
 | HasBeenReadSharedMarks | Has Been Read - Shared Marks (B42) (retirado: sustituido por Item Status CleanUI 1.12) | HasBeenReadSharedMarks | [3845658046](https://steamcommunity.com/sharedfiles/filedetails/?id=3845658046) |
 
 KeyRingPlusReborn, LightSwitchBacklightFixed y BCMIExtension parten del código de sus autores originales; el crédito está en su `workshop.txt`.

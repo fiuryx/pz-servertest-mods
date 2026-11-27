@@ -1,4 +1,5 @@
 version=1
+id=3846802651
 title=AutoCook & Manage Containers - Range (B42)
 description=[h1]AutoCook & Manage Containers - Range (B42)[/h1]
 description=Patch for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3388721641]AutoCook[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2650547917]Manage Containers[/url]. Both only used the containers next to you. Now they use every container within a radius (8 tiles by default, same floor) and the character walks to each one.
