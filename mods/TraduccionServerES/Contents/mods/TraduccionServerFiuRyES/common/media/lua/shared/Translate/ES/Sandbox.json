@@ -7536,5 +7536,19 @@
     "Sandbox_CookAndSortRange_AutoCook": "Alcance ampliado para AutoCook",
     "Sandbox_CookAndSortRange_AutoCook_tooltip": "AutoCook coge ingredientes de los contenedores dentro del radio y devuelve los que no usa.",
     "Sandbox_CookAndSortRange_ManageContainers": "Alcance ampliado para Manage Containers",
-    "Sandbox_CookAndSortRange_ManageContainers_tooltip": "Guardar en contenedores asignados usa los contenedores configurados dentro del radio."
+    "Sandbox_CookAndSortRange_ManageContainers_tooltip": "Guardar en contenedores asignados usa los contenedores configurados dentro del radio.",
+    "Sandbox_IH": "Puente inmersivo",
+    "Sandbox_IH_Screwdrivers": "Herramientas para desatornillar | Objetos",
+    "Sandbox_IH_Screwdrivers_tooltip": "Lista de objetos separados por comas o punto y coma",
+    "Sandbox_IH_ScrewdriversTags": "| Etiquetas",
+    "Sandbox_IH_ScrewdriversTags_tooltip": "Lista de etiquetas de objetos separadas por comas o punto y coma",
+    "Sandbox_IH_Pliers": "Herramientas para cortar cables | Objetos",
+    "Sandbox_IH_Pliers_tooltip": "Lista de objetos separados por comas o punto y coma",
+    "Sandbox_IH_PliersTags": "| Etiquetas",
+    "Sandbox_IH_PliersTags_tooltip": "Lista de etiquetas de objetos separadas por comas o punto y coma",
+    "Sandbox_IH_HotwireEveryTime": "Hacer el puente siempre",
+    "Sandbox_IH_HotwireEveryTime_tooltip": "Abre siempre la ventana del puente al intentar arrancar un vehículo al que ya se le ha hecho el puente",
+    "Sandbox_IH_DucttapeNeededToUnhotwire": "Necesitas cinta americana para deshacer el puente",
+    "Sandbox_IH_ShowDragLine": "Mostrar línea de arrastre",
+    "Sandbox_IH_ShowDragLine_tooltip": "Muestra la línea discontinua mientras arrastras un cable"
 }
