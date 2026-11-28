@@ -13752,5 +13752,6 @@
     "IGUI_IH_Role_Battery": "batería",
     "IGUI_IH_Role_Ignition": "encendido",
     "IGUI_IH_Role_Starter": "arranque",
-    "IGUI_IH_Role_Accessory": "accesorios"
+    "IGUI_IH_Role_Accessory": "accesorios",
+    "IGUI_HotwireTools_Need": "Necesitas un destornillador y unos alicates, o una multiherramienta"
 }

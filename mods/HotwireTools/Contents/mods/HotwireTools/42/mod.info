@@ -1,0 +1,5 @@
+name=Hotwire Requires Tools (B42)
+id=HotwireTools
+description=Hotwiring a vehicle needs a screwdriver and pliers, or a multitool, on top of the vanilla skill requirements. Burglars don't need tools. Tool lists configurable in the sandbox options.
+poster=poster.png
+versionMin=42.0

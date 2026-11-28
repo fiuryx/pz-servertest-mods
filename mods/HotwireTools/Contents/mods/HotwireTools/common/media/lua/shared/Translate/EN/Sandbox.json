@@ -1,0 +1,9 @@
+{
+    "Sandbox_HotwireTools": "Hotwire Requires Tools",
+    "Sandbox_HotwireTools_Screwdrivers": "Screwdrivers",
+    "Sandbox_HotwireTools_Screwdrivers_tooltip": "Items that count as a screwdriver, separated by semicolons. The multitool counts as both tools.",
+    "Sandbox_HotwireTools_Pliers": "Pliers",
+    "Sandbox_HotwireTools_Pliers_tooltip": "Items that count as pliers, separated by semicolons. The multitool counts as both tools.",
+    "Sandbox_HotwireTools_BurglarNoTools": "Burglars don't need tools",
+    "Sandbox_HotwireTools_BurglarNoTools_tooltip": "Characters with the Burglar occupation can hotwire without a screwdriver or pliers."
+}

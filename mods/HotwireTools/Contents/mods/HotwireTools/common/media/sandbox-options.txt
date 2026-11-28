@@ -1,0 +1,25 @@
+VERSION = 1,
+
+option HotwireTools.Screwdrivers
+{
+    type = string,
+    default = Base.Screwdriver;Base.Screwdriver_Old;Base.Screwdriver_Improvised;Base.Multitool,
+    page = HotwireTools,
+    translation = HotwireTools_Screwdrivers,
+}
+
+option HotwireTools.Pliers
+{
+    type = string,
+    default = Base.Pliers;Base.Multitool,
+    page = HotwireTools,
+    translation = HotwireTools_Pliers,
+}
+
+option HotwireTools.BurglarNoTools
+{
+    type = boolean,
+    default = true,
+    page = HotwireTools,
+    translation = HotwireTools_BurglarNoTools,
+}

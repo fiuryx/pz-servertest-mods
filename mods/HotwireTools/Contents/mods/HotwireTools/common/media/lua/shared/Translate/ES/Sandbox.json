@@ -1,0 +1,9 @@
+{
+    "Sandbox_HotwireTools": "Puente con herramientas",
+    "Sandbox_HotwireTools_Screwdrivers": "Destornilladores",
+    "Sandbox_HotwireTools_Screwdrivers_tooltip": "Objetos que sirven como destornillador, separados por punto y coma. La multiherramienta sirve como las dos herramientas.",
+    "Sandbox_HotwireTools_Pliers": "Alicates",
+    "Sandbox_HotwireTools_Pliers_tooltip": "Objetos que sirven como alicates, separados por punto y coma. La multiherramienta sirve como las dos herramientas.",
+    "Sandbox_HotwireTools_BurglarNoTools": "Los ladrones no necesitan herramientas",
+    "Sandbox_HotwireTools_BurglarNoTools_tooltip": "Los personajes con la profesión Ladrón pueden hacer el puente sin destornillador ni alicates."
+}
