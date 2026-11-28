@@ -5,5 +5,7 @@
     "Sandbox_CookAndSortRange_AutoCook": "Alcance ampliado para AutoCook",
     "Sandbox_CookAndSortRange_AutoCook_tooltip": "AutoCook coge ingredientes de los contenedores dentro del radio y devuelve los que no usa.",
     "Sandbox_CookAndSortRange_ManageContainers": "Alcance ampliado para Manage Containers",
-    "Sandbox_CookAndSortRange_ManageContainers_tooltip": "Guardar en contenedores asignados usa los contenedores configurados dentro del radio."
+    "Sandbox_CookAndSortRange_ManageContainers_tooltip": "Guardar en contenedores asignados usa los contenedores configurados dentro del radio.",
+    "Sandbox_CookAndSortRange_Appliance": "AutoCook cocina en el horno o microondas",
+    "Sandbox_CookAndSortRange_Appliance_tooltip": "Cuando AutoCook termina un plato que hay que cocinar, el personaje lo mete en el horno libre y con corriente más cercano dentro del radio (o en el microondas, si no lleva metal) y lo enciende. Se apaga solo en cuanto el plato está hecho."
 }

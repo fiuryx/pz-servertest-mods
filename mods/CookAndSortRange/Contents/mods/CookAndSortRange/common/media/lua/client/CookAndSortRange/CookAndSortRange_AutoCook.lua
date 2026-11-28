@@ -1,6 +1,7 @@
 -- AutoCook: ingredients from containers within the radius, walking to take them and to put
 -- the unused ones back.
 require "CookAndSortRange/CookAndSortRange_Core"
+require "CookAndSortRange/CookAndSortRange_Cook"
 local R = CookAndSortRange
 
 -- installed on game start, once every mod's Lua is loaded
@@ -118,6 +119,16 @@ Events.OnFillInventoryObjectContextMenu.Add(function(playerNum, context, items)
     local okf, err = pcall(fixMenu, playerNum, context)
     if not okf then print("[CookAndSortRange] " .. tostring(err)) end
 end)
+-- when the dish is finished, cook it in the nearest free oven/microwave
+local origStop = AutoCook.stopAutoCook
+function AutoCook:stopAutoCook()
+    local r = origStop(self)
+    if R.enabled("Appliance") then
+        local okc, err = pcall(R.cookInAppliance, self.playerObj, self.baseItem)
+        if not okc then print("[CookAndSortRange] " .. tostring(err)) end
+    end
+    return r
+end
 print("[CookAndSortRange] AutoCook hooks installed")
 end
 

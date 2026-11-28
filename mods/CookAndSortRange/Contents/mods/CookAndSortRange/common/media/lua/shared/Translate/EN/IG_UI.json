@@ -1,0 +1,5 @@
+{
+    "IGUI_CSR_CookingOven": "Cooking in the oven",
+    "IGUI_CSR_CookingMicrowave": "Cooking in the microwave",
+    "IGUI_CSR_NoAppliance": "No free oven or microwave with power nearby"
+}

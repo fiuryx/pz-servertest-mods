@@ -13757,5 +13757,8 @@
     "IGUI_CAEC_Options_categoryColorsHueVariation": "Variación de tono de subcategorías (%%)",
     "IGUI_CAEC_Options_categoryColorsLevelFalloff": "Variación por nivel más profundo (%%)",
     "IGUI_CAEC_Options_categoryColorsTintStrength": "Intensidad del color (%%)",
-    "IGUI_CAEC_Options_categoryColorsValueVariation": "Variación de brillo de subcategorías (%%)"
+    "IGUI_CAEC_Options_categoryColorsValueVariation": "Variación de brillo de subcategorías (%%)",
+    "IGUI_CSR_CookingOven": "Cocinando en el horno",
+    "IGUI_CSR_CookingMicrowave": "Cocinando en el microondas",
+    "IGUI_CSR_NoAppliance": "No hay ningún horno ni microondas libre y con corriente cerca"
 }

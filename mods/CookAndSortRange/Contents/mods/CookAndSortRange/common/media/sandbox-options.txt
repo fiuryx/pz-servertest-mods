@@ -8,3 +8,6 @@ option CookAndSortRange.AutoCook
 
 option CookAndSortRange.ManageContainers
 {type = boolean, default = true, page = CookAndSortRange, translation = CookAndSortRange_ManageContainers,}
+
+option CookAndSortRange.Appliance
+{type = boolean, default = true, page = CookAndSortRange, translation = CookAndSortRange_Appliance,}

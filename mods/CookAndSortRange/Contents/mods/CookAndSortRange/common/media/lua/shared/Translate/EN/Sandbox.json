@@ -5,5 +5,7 @@
     "Sandbox_CookAndSortRange_AutoCook": "Extended range for AutoCook",
     "Sandbox_CookAndSortRange_AutoCook_tooltip": "AutoCook takes ingredients from the containers within the radius and puts the unused ones back.",
     "Sandbox_CookAndSortRange_ManageContainers": "Extended range for Manage Containers",
-    "Sandbox_CookAndSortRange_ManageContainers_tooltip": "Put in assigned containers uses the configured containers within the radius."
+    "Sandbox_CookAndSortRange_ManageContainers_tooltip": "Put in assigned containers uses the configured containers within the radius.",
+    "Sandbox_CookAndSortRange_Appliance": "AutoCook cooks in the oven or microwave",
+    "Sandbox_CookAndSortRange_Appliance_tooltip": "When AutoCook finishes a dish that needs cooking, the character puts it in the nearest free and powered oven (or microwave, if it has no metal) within the radius and turns it on. It turns off by itself as soon as the dish is cooked."
 }

@@ -7557,5 +7557,7 @@
     "Sandbox_HotwireTools_Pliers": "Alicates",
     "Sandbox_HotwireTools_Pliers_tooltip": "Objetos que sirven como alicates, separados por punto y coma. La multiherramienta sirve como las dos herramientas.",
     "Sandbox_HotwireTools_BurglarNoTools": "Los ladrones no necesitan herramientas",
-    "Sandbox_HotwireTools_BurglarNoTools_tooltip": "Los personajes con la profesión Ladrón pueden hacer el puente sin destornillador ni alicates."
+    "Sandbox_HotwireTools_BurglarNoTools_tooltip": "Los personajes con la profesión Ladrón pueden hacer el puente sin destornillador ni alicates.",
+    "Sandbox_CookAndSortRange_Appliance": "AutoCook cocina en el horno o microondas",
+    "Sandbox_CookAndSortRange_Appliance_tooltip": "Cuando AutoCook termina un plato que hay que cocinar, el personaje lo mete en el horno libre y con corriente más cercano dentro del radio (o en el microondas, si no lleva metal) y lo enciende. Se apaga solo en cuanto el plato está hecho."
 }
