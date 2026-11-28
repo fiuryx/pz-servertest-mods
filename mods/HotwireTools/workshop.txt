@@ -1,4 +1,5 @@
 version=1
+id=3847030276
 title=Hotwire Requires Tools (B42)
 description=[h1]Hotwire Requires Tools (B42)[/h1]
 description=Hotwiring a vehicle now needs tools, on top of the vanilla requirements (Electrical 1 and Mechanics 2, or the Burglar occupation).
