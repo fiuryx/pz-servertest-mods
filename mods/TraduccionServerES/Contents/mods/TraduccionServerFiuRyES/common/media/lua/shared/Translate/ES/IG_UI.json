@@ -13753,5 +13753,9 @@
     "IGUI_IH_Role_Ignition": "encendido",
     "IGUI_IH_Role_Starter": "arranque",
     "IGUI_IH_Role_Accessory": "accesorios",
-    "IGUI_HotwireTools_Need": "Necesitas un destornillador y unos alicates, o una multiherramienta"
+    "IGUI_HotwireTools_Need": "Necesitas un destornillador y unos alicates, o una multiherramienta",
+    "IGUI_CAEC_Options_categoryColorsHueVariation": "Variación de tono de subcategorías (%%)",
+    "IGUI_CAEC_Options_categoryColorsLevelFalloff": "Variación por nivel más profundo (%%)",
+    "IGUI_CAEC_Options_categoryColorsTintStrength": "Intensidad del color (%%)",
+    "IGUI_CAEC_Options_categoryColorsValueVariation": "Variación de brillo de subcategorías (%%)"
 }
