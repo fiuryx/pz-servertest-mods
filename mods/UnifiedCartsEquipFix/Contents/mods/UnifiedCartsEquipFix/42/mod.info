@@ -1,0 +1,6 @@
+name=Unified Carts - Equip Fix (B42 MP)
+id=UnifiedCartsEquipFix
+require=\UnifiedCarts
+description=On a dedicated server, putting a cart into or out of the hands could throw an engine error halfway through the action, leaving the cart both on the floor and in the inventory (duplicated). The hand changes are now protected and the action always finishes.
+poster=poster.png
+versionMin=42.0

@@ -1,0 +1,18 @@
+version=1
+title=Unified Carts - Equip Fix (B42 MP)
+description=[h1]Unified Carts - Equip Fix (B42 MP)[/h1]
+description=Patch for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3841311674]Unified Carts[/url] on dedicated servers.
+description=
+description=[b]The bug[/b]: on the server, changing what a character holds can throw an engine error ("Cannot assign field callFrame") in the middle of a timed action. The action is reported as failed after it already moved the item, so the client and the server disagree about where the cart is. Result: the cart is duplicated (one on the floor, one in the inventory), or picking something up turns into a cart.
+description=
+description=[b]The fix[/b]: every hand change in these actions is protected, checked and retried, and the action always finishes:
+description=[list]
+description=[*]Taking a cart from the floor into the hands.
+description=[*]Putting a cart down.
+description=[*]The vanilla unequip action (it failed the same way when letting go of a cart).
+description=[/list]
+description=Errors that are caught are written to the log as [UnifiedCartsEquipFix].
+description=
+description=Requires Unified Carts. Load it after Unified Carts. Safe to add to existing saves.
+tags=Build 42;Multiplayer;Misc
+visibility=public
