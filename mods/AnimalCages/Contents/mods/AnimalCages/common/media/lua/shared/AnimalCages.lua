@@ -107,7 +107,9 @@ function AC.findAnimalItem(inv, animalId)
 end
 
 -- Diagnostics: one line per cage action in the console / DebugLog ("[AnimalCages] ...").
+-- Only in debug mode (-debug): the multiplayer issue they tracked is fixed (1.1.4).
 function AC.log(...)
+    if not (getDebug and getDebug()) then return end
     local parts = {}
     for i = 1, select("#", ...) do parts[#parts + 1] = tostring(select(i, ...)) end
     print("[AnimalCages] " .. (isServer() and "server " or (isClient() and "client " or "sp ")) .. table.concat(parts, " "))

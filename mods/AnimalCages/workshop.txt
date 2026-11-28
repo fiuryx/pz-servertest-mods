@@ -29,6 +29,7 @@ description=[*]1.1.2: cages and carriers are held in the hand like a bag.
 description=[*]1.1.3: diagnostic log lines ("[AnimalCages] ...") to track a multiplayer issue when putting an animal in a cage.
 description=[*]1.1.4: fixed "Catch" in multiplayer: the animal stayed in your hands instead of going into the cage.
 description=[*]1.1.5: on dedicated servers the cage name showed a text code (IGUI_AC_CageWith). The name is now shown by each player's game, in their own language.
+description=[*]1.1.6: the diagnostic log lines are only written in debug mode.
 description=[/list]
 description=English and Spanish. Multiplayer: the actions run on the server like vanilla animal actions.
 tags=Build 42;Items;Multiplayer;Realistic
