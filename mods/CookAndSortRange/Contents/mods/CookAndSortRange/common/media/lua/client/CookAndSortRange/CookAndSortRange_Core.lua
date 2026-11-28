@@ -64,9 +64,10 @@ function R.nearbyContainers(player, explore)
 end
 
 -- Containers the player reaches without walking (inventory, bags, adjacent loot).
-function R.reachable(player)
+-- getFn: the unwrapped getContainers (AutoCook swaps it while choosing ingredients)
+function R.reachable(player, getFn)
     local set = {}
-    local list = ISInventoryPaneContextMenu.getContainers(player)
+    local list = (getFn or R.origGetContainers or ISInventoryPaneContextMenu.getContainers)(player)
     if list then
         for i = 0, list:size() - 1 do set[list:get(i)] = true end
     end

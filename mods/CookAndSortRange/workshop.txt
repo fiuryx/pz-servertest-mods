@@ -24,6 +24,7 @@ description=
 description=[b]Changelog[/b]
 description=[list]
 description=[*]1.1: fixed the mod not loading at all (dependency list in mod.info) and the hooks being installed before Manage Containers was loaded.
+description=[*]1.2: fixed a stack overflow (infinite loop) when using AutoCook.
 description=[/list]
 tags=Build 42;Multiplayer;Misc
 visibility=public

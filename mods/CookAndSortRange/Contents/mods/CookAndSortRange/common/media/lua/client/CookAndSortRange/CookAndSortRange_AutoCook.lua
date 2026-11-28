@@ -12,10 +12,11 @@ if not AutoCook or not AutoCook.continue then
 end
 if R.acInstalled then return end
 R.acInstalled = true
+R.origGetContainers = R.origGetContainers or ISInventoryPaneContextMenu.getContainers
 
 -- containers used while AutoCook is choosing: reachable ones plus the ones within the radius
-local function extendedContainers(player)
-    local set, list = R.reachable(player)
+local function extendedContainers(player, getFn)
+    local set, list = R.reachable(player, getFn)
     local out = ArrayList.new()
     if list then for i = 0, list:size() - 1 do out:add(list:get(i)) end end
     for _, c in ipairs(R.nearbyContainers(player, true)) do
@@ -24,14 +25,18 @@ local function extendedContainers(player)
     return out
 end
 
+local extending = false
 local function withExtended(player, fn, ...)
-    if not R.enabled("AutoCook") then return fn(...) end
+    -- already inside (AutoCook calling itself): the extended list is in place
+    if extending or not R.enabled("AutoCook") then return fn(...) end
     local orig = ISInventoryPaneContextMenu.getContainers
     ISInventoryPaneContextMenu.getContainers = function(character)
-        if character == player then return extendedContainers(character) end
+        if character == player then return extendedContainers(character, orig) end
         return orig(character)
     end
+    extending = true
     local res = { pcall(fn, ...) }
+    extending = false
     ISInventoryPaneContextMenu.getContainers = orig
     if not res[1] then print("[CookAndSortRange] " .. tostring(res[2])); return end
     return unpack(res, 2)
